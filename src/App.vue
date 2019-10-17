@@ -5,11 +5,37 @@
 </template>
 
 <script>
-  export default {
+  import { mapMutations } from 'vuex'
+  import userApi from '@/api/user'
 
+  export default {
+    methods: {
+      ...mapMutations(['storeData'])
+    },
+    async created() {
+      const data = (await userApi.getUserInfo(1)).data
+      console.log(data)
+      this.storeData(data)
+    }
   }
 </script>
 
-<style scoped>
+<style>
+  body,
+  html {
+    margin: 0;
+    padding: 0;
+  }
 
+  a {
+    color: unset
+  }
+
+  a:active {
+    color: unset
+  }
+
+  a:hover {
+    color: unset;
+  }
 </style>
