@@ -1,14 +1,15 @@
 <template>
-    <swiper :options="swiperOption" class="swiper">
-      <!--      <card-slide :isActive="true" :data="data.data[0]" :date="parseDate(data.data[0].createdTime)"></card-slide>-->
-      <card-slide v-for="item in data.data"
-                  :key="item._id"
-                  :data="item"
-                  :date="parseDate(item.createdTime)"
-                  @click.native="log"
-                  class="slide"
-      ></card-slide>
-    </swiper>
+  <swiper :options="swiperOption" class="swiper">
+    <!--      <card-slide :isActive="true" :data="data.data[0]" :date="parseDate(data.data[0].createdTime)"></card-slide>-->
+    <card-slide v-for="item in data.data"
+                :key="item._id"
+                :data="item"
+                :isActive="isActive"
+                :date="parseDate(item.createdTime)"
+                @click.native="log(item)"
+                class="slide"
+    ></card-slide>
+  </swiper>
 </template>
 
 <script>
@@ -26,9 +27,16 @@
     },
     data() {
       return {
+        isActive: false,
         swiperOption: {
           slidesPerView: 5,
           spaceBetween: 16,
+          on: {
+            click(e) {
+              // alert('你点了Swiper')
+              console.log(e)
+            },
+          }
           // freeMode: true,
         },
         data: {}
@@ -44,7 +52,6 @@
     },
     methods: {
       parseDate(date) {
-
         const d = new Date(date)
         const dateObj = {
           date: d.getDate(),
@@ -52,8 +59,7 @@
         }
         return dateObj
       },
-      log(e) {
-        console.log(e)
+      log() {
       }
     }
   }

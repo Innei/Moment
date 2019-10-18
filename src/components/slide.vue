@@ -59,8 +59,9 @@
       height: 18rem;
 
       .header {
-
-
+        .date {
+          color: #fff;
+        }
         .type {
           .top {
             color: #c7caff
