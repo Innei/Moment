@@ -25,6 +25,7 @@
   html {
     margin: 0;
     padding: 0;
+    background-color: #fafafa;
   }
 
   a {
@@ -38,4 +39,5 @@
   a:hover {
     color: unset;
   }
+
 </style>

@@ -43,12 +43,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: rgb(210, 213, 215);
+    color: #d0d3d6;
   }
 
   .header .username {
     margin-right: 1rem;
-    color: rgb(17, 35, 49);
+    color: #363c42;
   }
 
   .left,
@@ -62,7 +62,7 @@
 
   .left .btn {
     padding: 0.5rem 1rem;
-    background-color: rgb(234, 235, 240);
+    background-color: #e9ebf0;
     border-radius: 24px;
   }
 
@@ -93,6 +93,6 @@
     top: 0;
     transform: translateY(-50%);
     height: 0.8rem;
-    border-left: 1px solid rgb(210, 213, 215);
+    border-left: 1px solid #d0d3d6;
   }
 </style>
