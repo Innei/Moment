@@ -16,7 +16,10 @@
     </main>
     <!--    for responsive design  -->
     <main v-if="viewport.is768 || viewport.is568">
-      <info-res :toSec="toSec" :skill="information.skill" :content="moments.data[activeItem]" :intro="information.introduce">
+      <info-res :toSec="toSec"
+                :skill="information.skill"
+                :content="moments.data[activeItem]"
+                :intro="information.introduce">
         <div class="content">
           <showContent :content="moments.data[activeItem]" v-if="moments.data"/>
         </div>
@@ -47,15 +50,7 @@
       return {
         moments: {},
         information: {},
-        viewport: {
-          w: window.innerWidth,
-          h: window.innerHeight,
-          is568: window.innerWidth <= 568,
-          is768: window.innerWidth <= 768 && window.innerWidth > 568,
-          is1024: window.innerWidth <= 1024 && window.innerWidth > 768,
-          isDesktop: window.innerWidth > 1024 && window.innerWidth < 1600,
-          is1600: window.innerWidth >= 1600
-        },
+        viewport: {},
         activeItem: 0,
         toSec: false
       }
