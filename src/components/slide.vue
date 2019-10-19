@@ -52,6 +52,7 @@
     transition: background-color ease-in-out .5s, color .5s, height .5s;
     color: #989fa7;
     padding: 2rem;
+    user-select: none;
 
     &.active {
       background-color: #6467f6;
