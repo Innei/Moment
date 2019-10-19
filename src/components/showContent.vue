@@ -1,6 +1,6 @@
 <template>
   <transition name="ease-in" mode="out-in">
-    <div class="content" v-show="show">
+    <div class="container" v-show="show">
       <div class="date">
         <div class="year">{{ createdTime.year }}</div>
         <div class="md">
@@ -28,7 +28,17 @@
       <!--      if type is idea  -->
       <div class="moment idea" v-else-if="data.type === 'idea'">
         <p>{{ user.username }} posted a idea.</p>
-
+        <div class="moment-inner idea-inner">
+          <div class="body">{{ data.content.body }}</div>
+        </div>
+      </div>
+      <!--      if type is picture  -->
+      <div class="moment pic" v-else-if="data.type === 'picture'">
+        <p>{{ user.username }} posted a picture.</p>
+        <div class="moment-inner pic-inner">
+          <img :src="data.content.src"/>
+          <p>{{ data.content.comment }}</p>
+        </div>
       </div>
     </div>
   </transition>
@@ -88,8 +98,10 @@
 </script>
 
 <style lang="scss" scoped>
-  .content {
+  .container {
     padding-left: 5rem;
+    height: 100%;
+    position: relative;
 
     .date {
       color: #043046;
@@ -156,6 +168,29 @@
         content: '-- '
       }
     }
+
+    .pic .pic-inner {
+      animation: fade-up 1s ease-in forwards;
+      position: relative;
+
+      img[src] {
+        max-width: 90%;
+        max-height: 90%;
+        margin-left: 3rem;
+        padding: 6px;
+        background: #e9ecee;
+        border: 3px solid #ecf0f1;
+        box-sizing: border-box;
+        box-shadow: 1px 4px 7px #D2D7D9
+      }
+
+      p {
+        z-index: 99;
+        position: absolute;
+        right: 10%;
+        top: 3rem;
+      }
+    }
   }
 
   .ease-in-enter-active, .ease-in-leave-active {
@@ -166,5 +201,18 @@
   {
     transform: translateX(20%);
     opacity: 0;
+  }
+
+  @keyframes fade-up {
+    0% {
+      bottom: -5px;
+      transform: rotate(0);
+      opacity: 0;
+    }
+    100% {
+      bottom: 0;
+      transform: rotate(-1deg);
+      opacity: 1;
+    }
   }
 </style>

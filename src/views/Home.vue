@@ -102,8 +102,8 @@
     .content {
       flex: .72;
       height: 100%;
-      overflow: hidden;
       position: relative;
+      overflow: hidden;
       background: url("./../assets/0.svg") fixed no-repeat;
       background-size: 25% 25%;
       background-position: right;
