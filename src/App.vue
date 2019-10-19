@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <router-view></router-view>
-  </div>
+  <router-view></router-view>
 </template>
 
 <script>
@@ -14,7 +12,6 @@
     },
     async created() {
       const data = (await userApi.getUserInfo(1)).data
-      console.log(data)
       this.storeData(data)
     }
   }
@@ -26,6 +23,10 @@
     margin: 0;
     padding: 0;
     background-color: #fafafa;
+  }
+
+  body {
+    min-height: 100vh;
   }
 
   a {
@@ -43,5 +44,14 @@
   ::-webkit-scrollbar {
     width: 0;
     height: 0;
+  }
+
+  html {
+    font-size: 16px;
+  }
+  @media (max-width: 500px) {
+    html {
+      font-size: .8rem;
+    }
   }
 </style>

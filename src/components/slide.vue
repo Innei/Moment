@@ -46,10 +46,10 @@
     box-sizing: border-box;
     width: 15rem;
     height: 12rem;
-    border-radius: 24px;
+    border-radius: 48px;
     background-color: #fff;
     will-change: backgroud;
-    transition: background-color ease-in-out .5s, color .5s, height .5s;
+    transition: background-color ease-in-out .8s, height .8s;
     color: #989fa7;
     padding: 2rem;
     user-select: none;
@@ -110,6 +110,4 @@
       color: #9599a0
     }
   }
-
-
 </style>

@@ -1,0 +1,10 @@
+{
+  "ok": 1,
+  "userId": 1,
+  "introduce": "我是一个练习时长两年半的个人练习生, 蔡训坤",
+  "skill": {
+    "Java": 70,
+    "JavaScript": 50,
+    "Vue": 90
+  }
+}

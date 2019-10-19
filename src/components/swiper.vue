@@ -5,7 +5,7 @@
         v-for="item in data.data"
         :key="item._id"
         :data="item"
-        :isActive="item.index === activeItem"
+        :isActive="item.index === activeItem % data.size"
         :date="parseDate(item.createdTime)"
         @click.native="handleClick(item.index)"
         class="slide"
@@ -29,6 +29,12 @@
       data: {
         type: Object,
         required: true
+      },
+      swiperOptions: {
+        type: Object
+      },
+      viewport: {
+        type: Object
       }
     },
     data() {
@@ -40,17 +46,13 @@
           slideToClickedSlide: true,
           centeredSlides: true,
           observer: true,
-          observeParents: true
+          observeParents: true,
+          autoplay: false,
+          delay: 3000,
+          ...this.swiperOptions
           // freeMode: true,
         },
-        viewport: {
-          w: window.innerWidth,
-          h: window.innerHeight,
-          is568: window.innerWidth <= 568,
-          is768: window.innerWidth <= 768 && window.innerWidth > 568,
-          is1024: window.innerWidth <= 1024 && window.innerWidth > 768,
-          is1600: window.innerWidth >= 1600
-        },
+        interval: null
       }
     },
     created() {
@@ -59,12 +61,12 @@
         this.data.data.map(item => {
           item.index = index++
         })
-    },
-    mounted() {
-      // update viewport
-      this.updateViewport()
-      // add resize listener
-      window.addEventListener('resize', this.updateViewport)
+
+      if (this.swiperOption.autoplay) {
+        this.interval = setInterval(() => {
+          this.activeItem++
+        }, this.swiperOption.delay || 3000)
+      }
     },
     watch: {
       data(n) {
@@ -95,18 +97,13 @@
       },
       handleClick(index) {
         this.activeItem = index
+        clearInterval(this.interval)
       },
-      updateViewport() {
-        // update
-        this.viewport = {
-          w: window.innerWidth,
-          h: window.innerHeight,
-          is568: window.innerWidth <= 568,
-          is768: window.innerWidth <= 768 && window.innerWidth > 568,
-          is1024: window.innerWidth <= 1024 && window.innerWidth > 768,
-          is1600: window.innerWidth >= 1600
-        }
-      },
+
+    },
+    destroyed() {
+      clearInterval(this.interval)
+      this.interval = null
     }
   }
 </script>
