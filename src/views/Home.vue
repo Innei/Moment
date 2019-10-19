@@ -1,16 +1,20 @@
 <template>
   <div class="wrap">
     <header>
-      <header-nav></header-nav>
+      <header-nav/>
     </header>
     <main>
       <information class="i" :skill="information.skill">
         <template v-slot:introduce>
-         <p>{{ information.introduce }}</p>
+          <p>{{ information.introduce }}</p>
         </template>
       </information>
+
+      <div class="content">
+        <showContent :content="moments.data[activeItem]" v-if="moments.data"/>
+      </div>
     </main>
-    <swiper :data="moments" :viewport="viewport"></swiper>
+    <swiper :data="moments" :viewport="viewport" @switch="handleSwitch"></swiper>
   </div>
 </template>
 
@@ -18,6 +22,7 @@
   import headerNav from '@/components/headerNav.vue'
   import swiper from '@/components/swiper.vue'
   import information from '@/components/information'
+  import showContent from '@/components/showContent.vue'
 
   import momentApi from '@/api/moment'
   import UserApi from '@/api/user'
@@ -26,7 +31,8 @@
     components: {
       headerNav,
       swiper,
-      information
+      information,
+      showContent
     },
     data() {
       return {
@@ -40,6 +46,7 @@
           is1024: window.innerWidth <= 1024 && window.innerWidth > 768,
           is1600: window.innerWidth >= 1600
         },
+        activeItem: 0
       }
     },
     async created() {
@@ -68,6 +75,9 @@
           is1024: window.innerWidth <= 1024 && window.innerWidth > 768,
           is1600: window.innerWidth >= 1600
         }
+      },
+      handleSwitch(e = 0) {
+        this.activeItem = e
       }
     }
   }
@@ -88,6 +98,10 @@
     .i {
       flex: .28
     }
+
+    .content {
+      flex: .72;
+    }
   }
 
   .wrap {
@@ -95,13 +109,16 @@
     position: relative;
   }
 
-  .wrap::before {
-    content: '';
-    position: absolute;
-    width: 1px;
-    top: 0;
-    bottom: 0;
-    border-left: 1px solid #eee;
-    left: 28%
+  @media (min-width: 1024px) {
+    .wrap::before {
+      content: '';
+      position: absolute;
+      width: 1px;
+      top: 0;
+      bottom: 0;
+      border-left: 1px solid #eee;
+      left: 28%
+    }
   }
+
 </style>

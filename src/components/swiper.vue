@@ -65,6 +65,7 @@
       if (this.swiperOption.autoplay) {
         this.interval = setInterval(() => {
           this.activeItem++
+          this.$emit('switch', this.activeItem)
         }, this.swiperOption.delay || 3000)
       }
     },
@@ -97,6 +98,7 @@
       },
       handleClick(index) {
         this.activeItem = index
+        this.$emit('switch', this.activeItem)
         clearInterval(this.interval)
       },
 
