@@ -78,8 +78,8 @@
         this.data = n
       },
       viewport(n) {
-        if (n.is568) this.swiperOption.slidesPerView = 1
-        else if (n.is768) this.swiperOption.slidesPerView = 2
+        if (n.is568) this.swiperOption.slidesPerView = 2
+        else if (n.is768) this.swiperOption.slidesPerView = 3
         else if (n.is1024) this.swiperOption.slidesPerView = 4
         else if (n.is1600) this.swiperOption.slidesPerView = 8
         else this.swiperOption.slidesPerView = 6

@@ -104,7 +104,7 @@
 
       @media (max-width: 756px) {
         .link {
-          right: 0;
+          /*right: 0;*/
           top: 30%;
         }
       }

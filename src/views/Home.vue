@@ -3,7 +3,7 @@
     <header>
       <header-nav/>
     </header>
-    <main>
+    <main v-if="viewport.is1024 || viewport.isDesktop || viewport.is1600 ">
       <information class="i" :skill="information.skill">
         <template v-slot:introduce>
           <p>{{ information.introduce }}</p>
@@ -14,6 +14,14 @@
         <showContent :content="moments.data[activeItem]" v-if="moments.data"/>
       </div>
     </main>
+    <!--    for responsive design  -->
+    <main v-if="viewport.is768 || viewport.is568">
+      <info-res :toSec="toSec" :skill="information.skill" :content="moments.data[activeItem]" :intro="information.introduce">
+        <div class="content">
+          <showContent :content="moments.data[activeItem]" v-if="moments.data"/>
+        </div>
+      </info-res>
+    </main>
     <swiper :data="moments" :viewport="viewport" @switch="handleSwitch"></swiper>
   </div>
 </template>
@@ -23,7 +31,7 @@
   import swiper from '@/components/swiper.vue'
   import information from '@/components/information'
   import showContent from '@/components/showContent.vue'
-
+  import infoRes from '@/components/responsive/swiper-page.vue'
   import momentApi from '@/api/moment'
   import UserApi from '@/api/user'
 
@@ -32,7 +40,8 @@
       headerNav,
       swiper,
       information,
-      showContent
+      showContent,
+      infoRes
     },
     data() {
       return {
@@ -44,9 +53,11 @@
           is568: window.innerWidth <= 568,
           is768: window.innerWidth <= 768 && window.innerWidth > 568,
           is1024: window.innerWidth <= 1024 && window.innerWidth > 768,
+          isDesktop: window.innerWidth > 1024 && window.innerWidth < 1600,
           is1600: window.innerWidth >= 1600
         },
-        activeItem: 0
+        activeItem: 0,
+        toSec: false
       }
     },
     async created() {
@@ -73,11 +84,19 @@
           is568: window.innerWidth <= 568,
           is768: window.innerWidth <= 768 && window.innerWidth > 568,
           is1024: window.innerWidth <= 1024 && window.innerWidth > 768,
+          isDesktop: window.innerWidth > 1024 && window.innerWidth < 1600,
           is1600: window.innerWidth >= 1600
         }
       },
       handleSwitch(e = 0) {
         this.activeItem = e
+
+        if (this.viewport.is768 || this.viewport.is568) {
+          this.toSec = true
+          setTimeout(() => {
+            this.toSec = false
+          })
+        }
       }
     }
   }

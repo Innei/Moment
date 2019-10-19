@@ -183,7 +183,11 @@
         box-sizing: border-box;
         box-shadow: 1px 4px 7px #D2D7D9
       }
-
+      @media (max-width: 768px) {
+        img[src] {
+          margin-left: .3rems;
+        }
+      }
       p {
         z-index: 99;
         position: absolute;
