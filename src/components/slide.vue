@@ -57,7 +57,7 @@
     &.active {
       background-color: #6467f6;
       color: #fff;
-      height: 18rem;
+      height: 15rem;
 
       .header {
         .date {

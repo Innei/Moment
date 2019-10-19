@@ -35,7 +35,7 @@
       return {
         activeItem: 0,
         swiperOption: {
-          slidesPerView: 5,
+          slidesPerView: 6,
           spaceBetween: 16,
           slideToClickedSlide: true,
           centeredSlides: true,
@@ -78,8 +78,8 @@
         if (n.is568) this.swiperOption.slidesPerView = 1
         else if (n.is768) this.swiperOption.slidesPerView = 2
         else if (n.is1024) this.swiperOption.slidesPerView = 4
-        else if (n.is1600) this.swiperOption.slidesPerView = 6
-        else this.swiperOption.slidesPerView = 5
+        else if (n.is1600) this.swiperOption.slidesPerView = 8
+        else this.swiperOption.slidesPerView = 6
         this.$refs.swiper.swiper.destroy()   //先销毁
         this.$refs.swiper.mountInstance()   //后在加载
       }

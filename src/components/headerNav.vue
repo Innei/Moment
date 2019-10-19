@@ -74,6 +74,15 @@
     margin-right: 1rem;
   }
 
+  @media (max-width: 500px) {
+    .left .btn span:nth-child(1) {
+      margin-right: 0;
+    }
+
+    .left .btn span:nth-child(2) {
+      display: none;
+    }
+  }
   .right img {
     border-radius: 88%;
     max-width: 30px;

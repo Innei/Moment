@@ -3,7 +3,9 @@
     <header>
       <header-nav></header-nav>
     </header>
-    <main></main>
+    <main>
+      <router-view></router-view>
+    </main>
     <swiper :data="data"></swiper>
   </div>
 </template>
@@ -33,4 +35,7 @@ export default {
 </script>
 
 <style scoped>
+  main {
+    min-height: calc(100vh - 26rem)
+  }
 </style>
