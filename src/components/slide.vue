@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="body">
-      {{ data.content.title || user.username + ' posted a ' + data.type }}
+      {{ user.username + ' posted a ' + data.type }}
       <slot></slot>
     </div>
     <div class="btn">

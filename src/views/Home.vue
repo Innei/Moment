@@ -92,7 +92,7 @@
 </style>
 <style lang="scss" scoped>
   main {
-    min-height: calc(100vh - 26rem);
+    height: calc(100vh - 26rem);
     display: flex;
 
     .i {
@@ -101,6 +101,12 @@
 
     .content {
       flex: .72;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+      background: url("./../assets/0.svg") fixed no-repeat;
+      background-size: 25% 25%;
+      background-position: right;
     }
   }
 
