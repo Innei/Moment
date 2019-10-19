@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="body">
-      {{ data.content.body }}
+      {{ data.content.title || user.username + ' posted a ' + data.type }}
       <slot></slot>
     </div>
     <div class="btn">
@@ -19,6 +19,7 @@
 
 <script>
   import { swiperSlide } from 'vue-awesome-swiper'
+  import { mapState } from 'vuex'
 
   export default {
     props: {
@@ -37,6 +38,9 @@
     },
     components: {
       swiperSlide
+    },
+    computed: {
+      ...mapState({ user: state => state.user })
     }
   }
 </script>
@@ -63,6 +67,7 @@
         .date {
           color: #fff;
         }
+
         .type {
           .top {
             color: #c7caff
@@ -107,6 +112,7 @@
 
     .body {
       margin-top: 1.3rem;
+      line-height: 1.8;
       color: #9599a0
     }
   }

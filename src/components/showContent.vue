@@ -14,7 +14,6 @@
           <div class="title">{{ data.content.title }}</div>
           <div class="body">{{ data.content.body }}</div>
         </div>
-
       </div>
     </div>
   </transition>
