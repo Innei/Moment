@@ -17,7 +17,7 @@
     </div>
     <!--    end header  -->
     <div class="body">
-      <p class="title" v-if="!$slots.introduce">introduce</p>
+      <p class="title" v-if="$slots.introduce">introduce</p>
       <slot name="introduce"></slot>
       <div class="skill" v-if="!ObjectIsEmpty(skill)">
         <p class="title">Skill</p>
@@ -60,6 +60,7 @@
 <style lang="scss" scoped>
   .title {
     text-align: center;
+    user-select: none;
   }
  .skill {
    margin-top: 4rem;
@@ -84,7 +85,7 @@
           color: #4c5f6a;
           font-size: 2.1rem;
           margin-bottom: 1rem;
-          margin-left: .5rem;
+          /*margin-left: .5rem;*/
         }
 
         .username {

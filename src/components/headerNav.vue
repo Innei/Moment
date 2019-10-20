@@ -2,14 +2,31 @@
   <div class="header" v-if="data.username">
     <div class="left">
       <span class="username">{{ data.username }}</span>
-      <a class="btn" href="#">
+      <div class="btn" style="padding: .2rem 1rem;display: inline-block;" @click="handleShowItems">
         <span>
           <font-awesome-icon :icon="['fas','sliders-h']"/>
         </span>
+
         <span>
-          <font-awesome-icon :icon="['fas','chevron-down']"/>
+          <font-awesome-icon :icon="['fas','chevron-down']" v-if="!showItems"/>
+           <font-awesome-icon :icon="['fas','chevron-up']" v-else/>
         </span>
-      </a>
+        <transition name="slide">
+          <div class="items" v-if="showItems">
+            <div class="item" @click.stop="handleClickItem">
+              信息
+            </div>
+            <div class="item" @click.stop="handleClickItem">
+              瞬间
+            </div>
+            <div class="item" @click.stop="handleClickItem">
+              etc
+            </div>
+          </div>
+        </transition>
+      </div>
+
+
     </div>
     <div class="right">
       <input type="text" class="search-bar" v-if="showSearchBar"/>
@@ -17,12 +34,21 @@
         <font-awesome-icon :icon="['fas','search']"/>
       </span>
       <span class="line"></span>
-      <a href="#">
+
+      <div class="btn" style="display: flex; align-items: center">
         <img :src="data.avatar"/>
-      </a>
-      <span class="btn">
-        <font-awesome-icon :icon="['fas','chevron-down']"/>
-      </span>
+        <div class="btn" style="display: inline-block">
+          <font-awesome-icon :icon="['fas','chevron-down']"/>
+
+<!--          <transition name="slide">-->
+<!--            <div class="items" v-if="!showUser">-->
+<!--              <div class="item" @click.stop="handleClickItem">-->
+<!--                退出-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </transition>-->
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -38,18 +64,29 @@
     },
     data() {
       return {
-        showSearchBar: false
+        showSearchBar: false,
+        showItems: false,
+        showUser: false
       }
     },
     methods: {
       handleSearch() {
         this.showSearchBar = !this.showSearchBar
+      },
+      handleShowItems() {
+        this.showItems = !this.showItems
+      },
+      handleClickItem() {
+        this.showItems = !this.showItems
+        console.log('clicked')
       }
+
     }
   }
 </script>
 
 <style scoped>
+
   .header {
     display: flex;
     justify-content: space-between;
@@ -60,6 +97,7 @@
   .header .username {
     margin-right: 1rem;
     color: #363c42;
+    user-select: none;
   }
 
   .left,
@@ -79,7 +117,9 @@
 
   .btn {
     cursor: pointer;
+    position: relative;
   }
+
 
   .left .btn span:nth-child(1) {
     margin-right: 1rem;
@@ -137,5 +177,36 @@
     to {
       width: 10rem;
     }
+  }
+
+  .items {
+    position: absolute;
+  }
+
+  .items .item {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+
+  .items .item::before {
+    content: '';
+    bottom: 0;
+    left: 3px;
+    right: 3px;
+    position: absolute;
+    z-index: -1;
+    height: .2rem;
+    background: #eee;
+  }
+
+  .slide-enter-active, .slide-leave-active {
+    transition: .5s;
+    transform: translateY(0);
+  }
+
+  .slide-enter, .slide-leave-to {
+    opacity: 0;
+    transform: translateY(-10%);
   }
 </style>
