@@ -42,7 +42,8 @@ Mock.mock(/\/moment/, 'get', {
           "modifiedTime": 1571299777065,
           "type": "picture",
           "content": {
-            "src": "https://i.loli.net/2019/08/18/vGNB4oOepVA6lPQ.jpg"
+            "src": "https://i.loli.net/2019/08/18/vGNB4oOepVA6lPQ.jpg",
+            "comment": "@county(true)"
           }
         },
         {
@@ -81,7 +82,8 @@ Mock.mock(/\/moment/, 'get', {
           "modifiedTime": 1571299777065,
           "type": "picture",
           "content": {
-            "src": "https://i.loli.net/2019/08/18/vGNB4oOepVA6lPQ.jpg"
+            "src": "https://i.loli.net/2019/08/18/vGNB4oOepVA6lPQ.jpg",
+            "comment": "@ctitle(3,5)"
           }
         },
         {

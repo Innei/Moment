@@ -12,7 +12,8 @@
       </a>
     </div>
     <div class="right">
-      <span class="btn">
+      <input type="text" class="search-bar" v-if="showSearchBar"/>
+      <span class="btn" @click="handleSearch">
         <font-awesome-icon :icon="['fas','search']"/>
       </span>
       <span class="line"></span>
@@ -34,6 +35,16 @@
       ...mapState({
         data: state => state.user
       })
+    },
+    data() {
+      return {
+        showSearchBar: false
+      }
+    },
+    methods: {
+      handleSearch() {
+        this.showSearchBar = !this.showSearchBar
+      }
     }
   }
 </script>
@@ -83,10 +94,24 @@
       display: none;
     }
   }
+
   .right img {
     border-radius: 88%;
     max-width: 30px;
     margin-right: 1rem;
+    user-select: none;
+  }
+
+  .right .search-bar {
+    width: 10rem;
+    height: 1.5rem;
+    border-radius: 24px;
+    background: #fff;
+    border: 1px solid #d0d3d6;
+    margin-right: 1rem;
+    outline: none;
+    padding-left: 1rem;
+    animation: to-left 1s forwards ease-out;
   }
 
   .line {
@@ -103,5 +128,14 @@
     transform: translateY(-50%);
     height: 0.8rem;
     border-left: 1px solid #d0d3d6;
+  }
+
+  @keyframes to-left {
+    0% {
+      width: 0;
+    }
+    to {
+      width: 10rem;
+    }
   }
 </style>

@@ -111,7 +111,6 @@
     }
 
     .body {
-      margin-top: 1.3rem;
       line-height: 1.8;
       color: #9599a0
     }

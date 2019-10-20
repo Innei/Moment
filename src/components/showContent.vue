@@ -1,69 +1,75 @@
 <template>
-  <transition name="ease-in" mode="out-in">
-    <div class="container" v-show="show">
-      <div class="date">
-        <div class="year">{{ createdTime.year }}</div>
-        <div class="md">
-          {{ createdTime.month }} / {{ createdTime.day }}
+  <div>
+    <transition name="ease-in" mode="out-in">
+      <div class="container" v-show="show">
+        <div class="date">
+          <div class="year">{{ createdTime.year }}</div>
+          <div class="md">
+            {{ createdTime.month }} / {{ createdTime.day }}
+          </div>
         </div>
-      </div>
-      <!--    if type is moment  -->
-      <div class="moment" v-if="data.type === 'moment'">
-        <p>{{ user.username }} posted a moment.</p>
-        <div class="moment-inner">
-          <article>
-            <div class="title" v-if="data.content.title">
-              <div class="b">
-                <font-awesome-icon :icon="['fas','pen']" v-if="data.content.title"/>
-                {{ data.content.title }}
-              </div>
-              <div class="b">
-                <font-awesome-icon :icon="['fas','cloud']" v-if="data.content.weather"/>
-                {{ data.content.weather }}
-              </div>
-              <div class="b">
-                <font-awesome-icon :icon="['far','smile']" v-if="data.content.mood"/>
-                {{
-                data.content.mood }}
-              </div>
+        <!--    if type is moment  -->
+        <div class="moment" v-if="data.type === 'moment'">
+          <p>{{ user.username }} posted a moment.</p>
+          <div class="moment-inner">
+            <article>
+              <div class="title" v-if="data.content.title">
+                <div class="b">
+                  <font-awesome-icon :icon="['fas','pen']" v-if="data.content.title"/>
+                  {{ data.content.title }}
+                </div>
+                <div class="b">
+                  <font-awesome-icon :icon="['fas','cloud']" v-if="data.content.weather"/>
+                  {{ data.content.weather }}
+                </div>
+                <div class="b">
+                  <font-awesome-icon :icon="['far','smile']" v-if="data.content.mood"/>
+                  {{
+                  data.content.mood }}
+                </div>
 
-            </div>
-            {{ data.content.body }}
-          </article>
+              </div>
+              {{ data.content.body }}
+            </article>
+          </div>
+        </div>
+        <!--      if type is hitokoto  -->
+        <div class="moment hitokoto" v-else-if="data.type === 'hitokoto'">
+          <p>{{ user.username }} posted a hitokoto.</p>
+          <div class="moment-inner hitokoto-inner">
+            <div class="body">{{ data.content.body }}</div>
+            <div class="source">{{ data.content.source }}</div>
+          </div>
+        </div>
+        <!--      if type is idea  -->
+        <div class="moment idea" v-else-if="data.type === 'idea'">
+          <p>{{ user.username }} posted a idea.</p>
+          <div class="moment-inner idea-inner">
+            <div class="body">{{ data.content.body }}</div>
+          </div>
+        </div>
+        <!--      if type is picture  -->
+        <div class="moment pic" v-else-if="data.type === 'picture'">
+          <p>{{ user.username }} posted a picture.</p>
+          <div class="moment-inner pic-inner">
+            <img :src="data.content.src" :alt="data.content.comment" @click="handleDisplayImg(data.content.src)"/>
+          </div>
         </div>
       </div>
-      <!--      if type is hitokoto  -->
-      <div class="moment hitokoto" v-else-if="data.type === 'hitokoto'">
-        <p>{{ user.username }} posted a hitokoto.</p>
-        <div class="moment-inner hitokoto-inner">
-          <div class="body">{{ data.content.body }}</div>
-          <div class="source">{{ data.content.source }}</div>
-        </div>
-      </div>
-      <!--      if type is idea  -->
-      <div class="moment idea" v-else-if="data.type === 'idea'">
-        <p>{{ user.username }} posted a idea.</p>
-        <div class="moment-inner idea-inner">
-          <div class="body">{{ data.content.body }}</div>
-        </div>
-      </div>
-      <!--      if type is picture  -->
-      <div class="moment pic" v-else-if="data.type === 'picture'">
-        <p>{{ user.username }} posted a picture.</p>
-        <div class="moment-inner pic-inner">
-          <img :src="data.content.src"/>
-          <p>{{ data.content.comment }}</p>
-        </div>
-      </div>
-    </div>
-  </transition>
+    </transition>
+    <show-img :src="displayImg" :comment="data.content.comment" @zoomOut="handleZoomOut"/>
+  </div>
+
 </template>
 
 <script>
   import { mapState } from 'vuex'
+  import showImg from '@/components/showImg.vue'
 
   export default {
-
+    components: {
+      showImg
+    },
     props: {
       content: {
         type: Object,
@@ -73,7 +79,8 @@
     data() {
       return {
         show: true,
-        data: {}
+        data: {},
+        displayImg: ''
       }
     },
     created() {
@@ -100,6 +107,12 @@
           second: d.getSeconds()
         }
         return dateObj
+      },
+      handleDisplayImg(src) {
+        this.displayImg = src
+      },
+      handleZoomOut() {
+        this.displayImg = ''
       }
     },
     computed: {
@@ -216,7 +229,8 @@
         background: #e9ecee;
         border: 3px solid #ecf0f1;
         box-sizing: border-box;
-        box-shadow: 1px 4px 7px #D2D7D9
+        box-shadow: 1px 4px 7px #D2D7D9;
+        cursor: zoom-in;
       }
 
       @media (max-width: 768px) {
