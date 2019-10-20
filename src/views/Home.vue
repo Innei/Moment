@@ -1,49 +1,52 @@
 <template>
-  <transition name="fade">
-    <div class="wrap" v-if="moments.ok === 1" key="page1">
-      <header>
-        <header-nav/>
-      </header>
-      <main v-if="viewport.is1024 || viewport.isDesktop || viewport.is1600 ">
-        <information class="i" :skill="information.skill">
-          <template v-slot:introduce>
-            <p>{{ information.introduce }}</p>
-          </template>
-        </information>
+  <div>
+    <transition name="fade">
+      <div class="wrap" v-if="moments.ok === 1" key="page1">
+        <header>
+          <header-nav/>
+        </header>
+        <main v-if="viewport.is1024 || viewport.isDesktop || viewport.is1600 ">
+          <information class="i" :skill="information.skill">
+            <template v-slot:introduce>
+              <p>{{ information.introduce }}</p>
+            </template>
+          </information>
 
-        <div class="content">
-          <showContent :content="moments.data[activeItem]" v-if="moments.data"/>
-        </div>
-      </main>
-      <!--    for responsive design  -->
-      <main v-if="viewport.is768 || viewport.is568">
-        <info-res :toSec="toSec"
-                  :skill="information.skill"
-                  :content="moments.data[activeItem]"
-                  :intro="information.introduce">
           <div class="content">
-            <showContent :content="moments.data[activeItem]" v-if="moments.data"/>
+            <showContent :content="moments.data[activeItem]" v-if="moments.data" @showImg="handleImg"/>
           </div>
-        </info-res>
-      </main>
-      <swiper :data="moments" :viewport="viewport" @switch="handleSwitch"></swiper>
-    </div>
-
-    <div class="message" v-else key="page2">
-      <!--<div class="box">
-        <div class="msg">
-          数据正在加载中...
-        </div>
-      </div>-->
-      <div id="loader-wrapper">
-        <div id="loader"></div>
-        <div class="loader-section section-left"></div>
-        <div class="loader-section section-right"></div>
-        <div class="load_title">数据正在加载中...
+        </main>
+        <!--    for responsive design  -->
+        <main v-if="viewport.is768 || viewport.is568">
+          <info-res :toSec="toSec"
+                    :skill="information.skill"
+                    :content="moments.data[activeItem]"
+                    :intro="information.introduce">
+            <div class="content">
+              <showContent :content="moments.data[activeItem]" v-if="moments.data" @showImg="handleImg"/>
+            </div>
+          </info-res>
+        </main>
+        <swiper :data="moments" :viewport="viewport" @switch="handleSwitch"></swiper>
+      </div>
+      <!--    show img  -->
+      <div class="message" v-else key="page2">
+        <!--<div class="box">
+          <div class="msg">
+            数据正在加载中...
+          </div>
+        </div>-->
+        <div id="loader-wrapper">
+          <div id="loader"></div>
+          <div class="loader-section section-left"></div>
+          <div class="loader-section section-right"></div>
+          <div class="load_title">数据正在加载中...
+          </div>
         </div>
       </div>
-    </div>
-  </transition>
+    </transition>
+    <show-img :src="img.src" :comment="img.comment" @zoomOut="handleZoomOut" v-if="img.src"/>
+  </div>
 
 </template>
 
@@ -52,6 +55,8 @@
   import swiper from '@/components/swiper.vue'
   import information from '@/components/information'
   import showContent from '@/components/showContent.vue'
+  import showImg from '@/components/showImg.vue'
+
   import infoRes from '@/components/responsive/swiper-page.vue'
   import momentApi from '@/api/moment'
   import UserApi from '@/api/user'
@@ -62,7 +67,8 @@
       swiper,
       information,
       showContent,
-      infoRes
+      infoRes,
+      showImg
     },
     data() {
       return {
@@ -70,7 +76,12 @@
         information: {},
         viewport: {},
         activeItem: 0,
-        toSec: false
+        toSec: false,
+        img: {
+          displayImg: '',
+          comment: ''
+        }
+
       }
     },
     async created() {
@@ -87,6 +98,7 @@
       this.updateViewport()
       // add resize listener
       window.addEventListener('resize', this.updateViewport)
+
     },
     methods: {
       updateViewport() {
@@ -110,6 +122,14 @@
             this.toSec = false
           })
         }
+      },
+      handleImg(json) {
+        console.log(json)
+        const parse = JSON.parse(json)
+        this.img = parse
+      },
+      handleZoomOut() {
+        this.img = {}
       }
     }
   }

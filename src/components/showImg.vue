@@ -33,7 +33,7 @@
 <style scoped>
 
   .overlay {
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(8px);
     height: 100vh;
     width: 100vw;
     z-index: 50;

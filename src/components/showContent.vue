@@ -57,19 +57,15 @@
         </div>
       </div>
     </transition>
-    <show-img :src="displayImg" :comment="data.content.comment" @zoomOut="handleZoomOut"/>
   </div>
 
 </template>
 
 <script>
   import { mapState } from 'vuex'
-  import showImg from '@/components/showImg.vue'
+
 
   export default {
-    components: {
-      showImg
-    },
     props: {
       content: {
         type: Object,
@@ -79,8 +75,7 @@
     data() {
       return {
         show: true,
-        data: {},
-        displayImg: ''
+        data: {}
       }
     },
     created() {
@@ -109,10 +104,11 @@
         return dateObj
       },
       handleDisplayImg(src) {
-        this.displayImg = src
-      },
-      handleZoomOut() {
-        this.displayImg = ''
+        console.log(src)
+        this.$emit('showImg', JSON.stringify({
+          src,
+          comment: this.data.content.comment
+        }))
       }
     },
     computed: {

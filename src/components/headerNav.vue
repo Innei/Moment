@@ -35,18 +35,18 @@
       </span>
       <span class="line"></span>
 
-      <div class="btn" style="display: flex; align-items: center">
+      <div class="btn" style="display: flex; align-items: center" @click="handleClickUser">
         <img :src="data.avatar"/>
         <div class="btn" style="display: inline-block">
           <font-awesome-icon :icon="['fas','chevron-down']"/>
 
-<!--          <transition name="slide">-->
-<!--            <div class="items" v-if="!showUser">-->
-<!--              <div class="item" @click.stop="handleClickItem">-->
-<!--                退出-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </transition>-->
+          <transition name="slide">
+            <div class="items" v-if="showUser">
+              <div class="item" @click.stop="" style="display: inline-block">
+                <p>退出</p>
+              </div>
+            </div>
+          </transition>
         </div>
       </div>
     </div>
@@ -78,6 +78,10 @@
       },
       handleClickItem() {
         this.showItems = !this.showItems
+        console.log('clicked')
+      },
+      handleClickUser() {
+        this.showUser = !this.showUser
         console.log('clicked')
       }
 
@@ -151,6 +155,7 @@
     margin-right: 1rem;
     outline: none;
     padding-left: 1rem;
+    transition: width .5s;
     animation: to-left 1s forwards ease-out;
   }
 
@@ -209,4 +214,5 @@
     opacity: 0;
     transform: translateY(-10%);
   }
+
 </style>
