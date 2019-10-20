@@ -12,7 +12,22 @@
         <p>{{ user.username }} posted a moment.</p>
         <div class="moment-inner">
           <article>
-            <div class="title" v-if="data.content.title">{{ data.content.title }}</div>
+            <div class="title" v-if="data.content.title">
+              <div class="b">
+                <font-awesome-icon :icon="['fas','pen']" v-if="data.content.title"/>
+                {{ data.content.title }}
+              </div>
+              <div class="b">
+                <font-awesome-icon :icon="['fas','cloud']" v-if="data.content.weather"/>
+                {{ data.content.weather }}
+              </div>
+              <div class="b">
+                <font-awesome-icon :icon="['far','smile']" v-if="data.content.mood"/>
+                {{
+                data.content.mood }}
+              </div>
+
+            </div>
             {{ data.content.body }}
           </article>
         </div>
@@ -102,6 +117,9 @@
     padding-left: 5rem;
     height: 100%;
     position: relative;
+    @media (max-width: 468px) {
+      padding-left: 2rem;
+    }
 
     .date {
       color: #043046;
@@ -127,10 +145,27 @@
         height: calc(100% - 3rem);
 
         article {
+          .b {
+            display: inline-block;
+            margin-right: 3px;
+          }
+
           .title {
-            margin-left: 30%;
+            margin-left: 20%;
             font-size: 1.4rem;
             margin-bottom: 1.4rem;
+          }
+
+          @media (max-width: 768px) {
+            .title {
+
+            }
+          }
+
+          @media (max-width: 425px) {
+            .title {
+              margin-left: 0;
+            }
           }
         }
       }
@@ -183,11 +218,13 @@
         box-sizing: border-box;
         box-shadow: 1px 4px 7px #D2D7D9
       }
+
       @media (max-width: 768px) {
         img[src] {
-          margin-left: .3rems;
+          margin-left: .3rem;
         }
       }
+
       p {
         z-index: 99;
         position: absolute;

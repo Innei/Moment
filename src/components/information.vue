@@ -17,7 +17,7 @@
     </div>
     <!--    end header  -->
     <div class="body">
-      <p class="title">introduce</p>
+      <p class="title" v-if="!$slots.introduce">introduce</p>
       <slot name="introduce"></slot>
       <div class="skill" v-if="!ObjectIsEmpty(skill)">
         <p class="title">Skill</p>

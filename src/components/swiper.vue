@@ -68,6 +68,10 @@
           this.$emit('switch', this.activeItem)
         }, this.swiperOption.delay || 3000)
       }
+
+    },
+    mounted() {
+      this.updateSlidesPerview(this.viewport)
     },
     watch: {
       data(n) {
@@ -78,6 +82,11 @@
         this.data = n
       },
       viewport(n) {
+        this.updateSlidesPerview(n)
+      }
+    },
+    methods: {
+      updateSlidesPerview(n) {
         if (n.is568) this.swiperOption.slidesPerView = 2
         else if (n.is768) this.swiperOption.slidesPerView = 3
         else if (n.is1024) this.swiperOption.slidesPerView = 4
@@ -85,9 +94,7 @@
         else this.swiperOption.slidesPerView = 6
         this.$refs.swiper.swiper.destroy()   //先销毁
         this.$refs.swiper.mountInstance()   //后在加载
-      }
-    },
-    methods: {
+      },
       parseDate(date) {
         const d = new Date(date)
         const dateObj = {

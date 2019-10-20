@@ -1,32 +1,50 @@
 <template>
-  <div class="wrap">
-    <header>
-      <header-nav/>
-    </header>
-    <main v-if="viewport.is1024 || viewport.isDesktop || viewport.is1600 ">
-      <information class="i" :skill="information.skill">
-        <template v-slot:introduce>
-          <p>{{ information.introduce }}</p>
-        </template>
-      </information>
+  <transition name="fade">
+    <div class="wrap" v-if="moments.ok === 1" key="page1">
+      <header>
+        <header-nav/>
+      </header>
+      <main v-if="viewport.is1024 || viewport.isDesktop || viewport.is1600 ">
+        <information class="i" :skill="information.skill">
+          <template v-slot:introduce>
+            <p>{{ information.introduce }}</p>
+          </template>
+        </information>
 
-      <div class="content">
-        <showContent :content="moments.data[activeItem]" v-if="moments.data"/>
-      </div>
-    </main>
-    <!--    for responsive design  -->
-    <main v-if="viewport.is768 || viewport.is568">
-      <info-res :toSec="toSec"
-                :skill="information.skill"
-                :content="moments.data[activeItem]"
-                :intro="information.introduce">
         <div class="content">
           <showContent :content="moments.data[activeItem]" v-if="moments.data"/>
         </div>
-      </info-res>
-    </main>
-    <swiper :data="moments" :viewport="viewport" @switch="handleSwitch"></swiper>
-  </div>
+      </main>
+      <!--    for responsive design  -->
+      <main v-if="viewport.is768 || viewport.is568">
+        <info-res :toSec="toSec"
+                  :skill="information.skill"
+                  :content="moments.data[activeItem]"
+                  :intro="information.introduce">
+          <div class="content">
+            <showContent :content="moments.data[activeItem]" v-if="moments.data"/>
+          </div>
+        </info-res>
+      </main>
+      <swiper :data="moments" :viewport="viewport" @switch="handleSwitch"></swiper>
+    </div>
+
+    <div class="message" v-else key="page2">
+      <!--<div class="box">
+        <div class="msg">
+          数据正在加载中...
+        </div>
+      </div>-->
+      <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+        <div class="load_title">数据正在加载中...
+        </div>
+      </div>
+    </div>
+  </transition>
+
 </template>
 
 <script>
@@ -121,6 +139,13 @@
       background: url("./../assets/0.svg") fixed no-repeat;
       background-size: 25% 25%;
       background-position: right;
+
+      @media (max-width: 468px) {
+        .content {
+          background-size: 50% 50%;
+          background-position: bottom;
+        }
+      }
     }
   }
 
@@ -141,4 +166,35 @@
     }
   }
 
+  /*.message {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+
+    .box {
+      display: flex;
+      height: 6rem;
+      width: 12rem;
+      border-radius: 24px;
+      padding: 1rem 2rem;
+      justify-content: center;
+      align-items: center;
+
+      .msg {
+        font-weight: 100;
+        color: #797979;
+      }
+    }
+  }*/
+
+  @import "../assets/css/loading.css";
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
 </style>

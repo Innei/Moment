@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="header" v-if="data.username">
     <div class="left">
       <span class="username">{{ data.username }}</span>
       <a class="btn" href="#">
