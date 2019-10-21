@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="position: relative; height: 100%">
     <transition name="fade">
       <div class="wrap" v-if="moments.ok === 1" key="page1">
         <header>
@@ -27,7 +27,7 @@
             </div>
           </info-res>
         </main>
-        <swiper :data="moments" :viewport="viewport" @switch="handleSwitch"></swiper>
+        <swiper :data="moments" :viewport="viewport" @switch="handleSwitch"  class="swiper"></swiper>
       </div>
       <!--    show img  -->
       <div class="message" v-else key="page2">
@@ -124,7 +124,6 @@
         }
       },
       handleImg(json) {
-        console.log(json)
         const parse = JSON.parse(json)
         this.img = parse
       },
@@ -144,7 +143,7 @@
 </style>
 <style lang="scss" scoped>
   main {
-    height: calc(100vh - 26rem);
+    height: calc(100vh - 22rem);
     display: flex;
 
     .i {
@@ -217,4 +216,6 @@
   .fade-enter, .fade-leave-to {
     opacity: 0;
   }
+
+  
 </style>
