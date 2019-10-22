@@ -263,7 +263,7 @@ export default {
   transition: 0.5s;
 }
 
-.ease-in-enter, .ease-in-leave-to /* move-leave-active below version 2.1.8 */
+.ease-in-enter, .ease-in-leave-to
  {
   transform: translateX(20%);
   opacity: 0;

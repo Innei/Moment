@@ -37,11 +37,6 @@
       </div>
       <!--    show img  -->
       <div class="message" v-else key="page2">
-        <!--<div class="box">
-          <div class="msg">
-            数据正在加载中...
-          </div>
-        </div>-->
         <div id="loader-wrapper">
           <div id="loader"></div>
           <div class="loader-section section-left"></div>
@@ -100,15 +95,12 @@
       this.information = informations
     },
     mounted() {
-      // update viewport
       this.updateViewport()
-      // add resize listener
       window.addEventListener('resize', this.updateViewport)
 
     },
     methods: {
       updateViewport() {
-        // update
         this.viewport = {
           w: window.innerWidth,
           h: window.innerHeight,
@@ -137,7 +129,6 @@
         this.img = {}
       },
       handleHideSwiper() {
-        console.log('hide')
         this.hideSwiper = !this.hideSwiper
       }
     }
@@ -205,28 +196,6 @@
       left: 28%
     }
   }
-
-  /*.message {
-    display: flex;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-
-    .box {
-      display: flex;
-      height: 6rem;
-      width: 12rem;
-      border-radius: 24px;
-      padding: 1rem 2rem;
-      justify-content: center;
-      align-items: center;
-
-      .msg {
-        font-weight: 100;
-        color: #797979;
-      }
-    }
-  }*/
 
   @import "../assets/css/loading.css";
 
