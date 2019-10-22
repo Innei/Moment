@@ -133,7 +133,7 @@ export default {
   height: 100%;
   position: relative;
   @media (max-width: 468px) {
-    padding-left: 2rem;
+    padding: 0 2rem;
   }
 
   .date {
@@ -157,7 +157,7 @@ export default {
     .moment-inner {
       color: #c7cbca;
       overflow: scroll;
-      height: calc(100% - 3rem);
+      height: calc(100% - 6rem);
 
       &.moment-wrap::-webkit-scrollbar {
         width: 3px;

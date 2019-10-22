@@ -3,9 +3,11 @@
     <transition name="fade">
       <div class="wrap" v-if="moments.ok === 1" key="page1">
         <header>
-          <header-nav/>
+          <header-nav @hideSwiper="handleHideSwiper"/>
         </header>
-        <main v-if="viewport.is1024 || viewport.isDesktop || viewport.is1600 ">
+        <main
+            :style="hideSwiper ? 'height: calc(100vh - 8rem)' : ''"
+            v-if="viewport.is1024 || viewport.isDesktop || viewport.is1600 ">
           <information class="i" :skill="information.skill">
             <template v-slot:introduce>
               <p>{{ information.introduce }}</p>
@@ -27,7 +29,11 @@
             </div>
           </info-res>
         </main>
-        <swiper :data="moments" :viewport="viewport" @switch="handleSwitch"  class="swiper"></swiper>
+        <swiper :data="moments"
+                :viewport="viewport"
+                @switch="handleSwitch"
+                v-show="!hideSwiper"
+                class="swiper"/>
       </div>
       <!--    show img  -->
       <div class="message" v-else key="page2">
@@ -76,12 +82,12 @@
         information: {},
         viewport: {},
         activeItem: 0,
-        toSec: false,
+        toSec: false, // 前往第二页，响应式视图
         img: {
           displayImg: '',
           comment: ''
-        }
-
+        },
+        hideSwiper: false
       }
     },
     async created() {
@@ -129,6 +135,10 @@
       },
       handleZoomOut() {
         this.img = {}
+      },
+      handleHideSwiper() {
+        console.log('hide')
+        this.hideSwiper = !this.hideSwiper
       }
     }
   }
@@ -145,6 +155,7 @@
   main {
     height: calc(100vh - 22rem);
     display: flex;
+    transition: height .5s;
 
     .i {
       flex: .28
@@ -155,9 +166,19 @@
       height: 100%;
       position: relative;
       overflow: hidden;
-      background: url("./../assets/0.svg") fixed no-repeat;
-      background-size: 25% 25%;
-      background-position: right;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("./../assets/0.svg") fixed no-repeat;
+        background-size: 25% 25%;
+        background-position: right bottom;
+        opacity: .25;
+      }
 
       @media (max-width: 468px) {
         .content {
@@ -217,5 +238,4 @@
     opacity: 0;
   }
 
-  
 </style>

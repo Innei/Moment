@@ -5,7 +5,7 @@
         v-for="item in data.data"
         :key="item._id"
         :data="item"
-        :isActive="item.index === activeItem % data.size"
+        :isActive="activeItem === -1 ? false : item.index === activeItem % data.size"
         :date="parseDate(item.createdTime)"
         @click.native="handleClick(item.index)"
         class="slide"
@@ -39,7 +39,7 @@
     },
     data() {
       return {
-        activeItem: 0,
+        activeItem: this.viewport.is768 || this.viewport.is568 ? -1 : 0,
         swiperOption: {
           slidesPerView: 6,
           spaceBetween: 16,
@@ -120,5 +120,16 @@
 <style lang="scss" scoped>
   .swiper {
     padding: 0 1rem;
+    animation: slide-up 1s forwards;
   }
+
+  @keyframes slide-up {
+    0% {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
 </style>

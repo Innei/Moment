@@ -3,30 +3,30 @@
     <div class="left">
       <span class="username">{{ data.username }}</span>
       <div class="btn" style="padding: .2rem 1rem;display: inline-block;" @click="handleShowItems">
-        <span>
+        <div class="btn-flex">
+          <span>
           <font-awesome-icon :icon="['fas','sliders-h']"/>
-        </span>
-
-        <span>
+          </span>
+          <span>
           <font-awesome-icon :icon="['fas','chevron-down']" v-if="!showItems"/>
            <font-awesome-icon :icon="['fas','chevron-up']" v-else/>
-        </span>
+          </span>
+        </div>
+
         <transition name="slide">
           <div class="items" v-if="showItems">
-            <div class="item" @click.stop="handleClickItem">
+            <div class="item" >
               信息
             </div>
-            <div class="item" @click.stop="handleClickItem">
+            <div class="item" >
               瞬间
-            </div>
-            <div class="item" @click.stop="handleClickItem">
-              etc
             </div>
           </div>
         </transition>
       </div>
-
-
+    <div class="btn" style="background: none;margin-left: 1rem" @click="$emit('hideSwiper')">
+      <font-awesome-icon :icon="['fas','dot-circle']"/>
+    </div>
     </div>
     <div class="right">
       <input type="text" class="search-bar" v-if="showSearchBar"/>
@@ -35,19 +35,24 @@
       </span>
       <span class="line"></span>
 
-      <div class="btn" style="display: flex; align-items: center" @click="handleClickUser">
-        <img :src="data.avatar"/>
-        <div class="btn" style="display: inline-block">
-          <font-awesome-icon :icon="['fas','chevron-down']"/>
-
-          <transition name="slide">
-            <div class="items" v-if="showUser">
-              <div class="item" @click.stop="" style="display: inline-block">
-                <p>退出</p>
-              </div>
-            </div>
-          </transition>
+      <div class="btn" @click="handleClickUser">
+        <div class="btn-flex">
+          <img :src="data.avatar"/>
+          <div class="btn" style="display: inline-block">
+            <font-awesome-icon :icon="['fas','chevron-down']"/>
+          </div>
         </div>
+
+        <transition name="slide">
+          <div class="items" v-if="showUser">
+            <div class="item">
+              <a href="https://github.com/Innei/moment">GitHub</a>
+            </div>
+            <div class="item">
+              <a href="https://shizuri.net">Blog</a>
+            </div>
+          </div>
+        </transition>
       </div>
     </div>
   </div>
@@ -76,13 +81,8 @@
       handleShowItems() {
         this.showItems = !this.showItems
       },
-      handleClickItem() {
-        this.showItems = !this.showItems
-        console.log('clicked')
-      },
       handleClickUser() {
         this.showUser = !this.showUser
-        console.log('clicked')
       }
 
     }
@@ -114,7 +114,6 @@
   }
 
   .left .btn {
-    padding: 0.5rem 1rem;
     background-color: #e9ebf0;
     border-radius: 24px;
   }
@@ -122,8 +121,14 @@
   .btn {
     cursor: pointer;
     position: relative;
+    display: inline-block;
   }
 
+  .btn-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   .left .btn span:nth-child(1) {
     margin-right: 1rem;
@@ -192,6 +197,7 @@
     position: relative;
     z-index: 2;
     text-align: center;
+    padding: 1rem 0 ;
   }
 
   .items .item::before {
@@ -215,4 +221,11 @@
     transform: translateY(-10%);
   }
 
+  a {
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
 </style>
