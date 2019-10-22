@@ -19,7 +19,8 @@
           </div>
         </main>
         <!--    for responsive design  -->
-        <main v-if="viewport.is768 || viewport.is568">
+        <main v-if="viewport.is768 || viewport.is568"
+              :style="hideSwiper ? 'height: calc(100vh - 8rem)' : ''">
           <info-res :toSec="toSec"
                     :skill="information.skill"
                     :content="moments.data[activeItem]"

@@ -25,6 +25,9 @@
 </script>
 
 <style scoped>
+  * {
+    user-select: none;
+  }
   div {
     display: flex;
     position: relative;

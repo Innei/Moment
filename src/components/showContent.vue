@@ -138,6 +138,7 @@ export default {
 
   .date {
     color: #043046;
+    user-select: none;
 
     .year {
       font-size: 3rem;

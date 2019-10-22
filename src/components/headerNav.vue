@@ -122,6 +122,7 @@
     cursor: pointer;
     position: relative;
     display: inline-block;
+    user-select: none;
   }
 
   .btn-flex {
