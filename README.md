@@ -31,6 +31,97 @@ yarn serve
 
 所有接口格式位于 `mock` 目录中，更为详细的 `json` 位于 `@api`
 
-等待更新 api 文档ing.
+咕咕咕咕.
+
+### 获取主人信息
+
+基本信息:
+
+baseUrl: `/user`
+
+```jsonc
+// get /:id
+{
+  "username": "Innei", // 主人名
+  "userId": "1", // id
+  "avatar": "http://q1.qlogo.cn/g?b=qq&nk=1003521738&s=640", // 头像地址
+  "nickname": "Moment", // 别名
+  "githubUrl": "https://github.com/Innei" // 可选 GitHub 地址
+}
+```
+
+首页介绍:
+
+```jsonc
+// get /introduce/:id
+{
+  "ok": 1, // 状态
+  "userId": 1, // uid
+  "introduce": "我是一个练习时长两年半的个人练习生, xxx", // 介绍
+  "skill": { // 技能树 (0 - 100)
+    "Java": 70,
+    "JavaScript": 50,
+    "Vue": 90
+  }
+}
+```
+
+### 获取瞬间列表
+
+baseUrl: `/moment`
+
+请求方式为 `GET`
+
+携带参数可选 `size` `page`, 渲染未实现.
+
+```jsonc
+{
+  "ok": 1, // 状态
+  "size": 10, // 每页大小
+  "page": 1, // 翻页
+  "data": [ // 数据
+    {
+      "_id": 1, // MongoDB objectID
+      "createdTime": 1571299457065, // 13位时间截 创建时间
+      "modifiedTime": 1571299777065,
+      "type": "moment", // 类型 moment picture idea hitokoto 4选1, content 有所不同
+      "content": {
+        "title": "这是一条瞬间", 
+        "body": "今天的天气真好",
+        "mood": "开心",
+        "weather": "Sunny"
+      }
+    },
+    {
+      "_id": 2,
+      "createdTime": 1571399457065,
+      "modifiedTime": 1571399777065,
+      "type": "hitokoto",
+      "content": {
+        "source": "yiny",
+        "body": "今天的天气真好"
+      }
+    },
+    {
+      "_id": 3,
+      "createdTime": 1571299457065,
+      "modifiedTime": 1571299777065,
+      "type": "idea",
+      "content": {
+        "body": "今天的天气真好"
+      }
+    },
+    {
+      "_id": 4,
+      "createdTime": 1571299457065,
+      "modifiedTime": 1571299777065,
+      "type": "picture",
+      "content": {
+        "src": "https://i.loli.net/2019/08/18/vGNB4oOepVA6lPQ.jpg"
+      }
+    }]
+}
+
+```
 
 欢迎大佬们，能参与到一瞬的开发中去。
