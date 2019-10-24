@@ -97,10 +97,21 @@
     },
     mounted() {
       this.updateViewport()
-      window.addEventListener('resize', this.updateViewport)
+      window.addEventListener('resize', this.throttle(this.updateViewport, 100))
 
     },
     methods: {
+      throttle: function(func, delay) {
+        let timer = null;
+        return function() {
+          if (!timer) {
+            timer = setTimeout(function() {
+              func.apply(this, arguments);
+              timer = null;
+            }, delay);
+          }
+        };
+      },
       updateViewport() {
         this.viewport = {
           w: window.innerWidth,
