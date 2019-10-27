@@ -64,7 +64,7 @@
 
   import infoRes from '@/components/responsive/swiper-page.vue'
   import momentApi from '@/api/moment'
-  import UserApi from '@/api/user'
+  import masterApi from '@/api/master'
 
   export default {
     components: {
@@ -94,7 +94,7 @@
         size: 10,
         page: 1
       })).data
-      const informations = (await UserApi.getUserIntroduce(1)).data
+      const informations = (await masterApi.getUserIntroduce(1)).data
       this.moments = moments
       this.information = informations
     },

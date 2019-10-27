@@ -33,14 +33,16 @@ yarn serve
 
 咕咕咕咕.
 
+所有接口前缀统一为 `api`, 接口地址为 `api/` 加上 `baseUrl`
+
 ### 获取主人信息
 
 基本信息:
 
-baseUrl: `/user`
+baseUrl: `/master`
 
 ```jsonc
-// get /:id
+// get /
 {
   "username": "Innei", // 主人名
   "userId": "1", // id
@@ -53,7 +55,7 @@ baseUrl: `/user`
 首页介绍:
 
 ```jsonc
-// get /introduce/:id
+// get /introduce
 {
   "ok": 1, // 状态
   "userId": 1, // uid
@@ -68,11 +70,11 @@ baseUrl: `/user`
 
 ### 获取瞬间列表
 
-baseUrl: `/moment`
+baseUrl: `/moments`
 
 请求方式为 `GET`
 
-携带参数可选 `size` `page`, 渲染未实现.
+携带参数可选 `size` `page`, 渲染暂未实现.
 
 ```jsonc
 {

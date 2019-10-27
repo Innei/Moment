@@ -4,14 +4,14 @@
 
 <script>
   import { mapMutations } from 'vuex'
-  import userApi from '@/api/user'
+  import masterApi from '@/api/master'
 
   export default {
     methods: {
       ...mapMutations(['storeData'])
     },
     async created() {
-      const data = (await userApi.getUserInfo(1)).data
+      const data = (await masterApi.getUserInfo(1)).data
       this.storeData(data)
     }
   }

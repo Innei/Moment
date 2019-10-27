@@ -1,6 +1,5 @@
-require('./intro.js')
 require('./moment.js')
-require('./user.js')
+require('./master')
 
 
 const Mock = require('mockjs')

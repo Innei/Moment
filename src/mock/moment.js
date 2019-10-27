@@ -1,6 +1,6 @@
 const Mock = require('mockjs')
 
-Mock.mock(/\/moment/, 'get', {
+Mock.mock(/\/moments/, 'get', {
   ok: 1,
   size: 10,
   page: 1,

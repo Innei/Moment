@@ -1,6 +1,6 @@
 import http from '../plugins/axios.js'
 
-const baseUrl = 'moment'
+const baseUrl = 'moments'
 const api = {}
 
 api.getRecentlyMoment = function ({ size, page }) {
