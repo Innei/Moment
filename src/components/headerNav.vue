@@ -8,13 +8,13 @@
           <font-awesome-icon :icon="['fas','sliders-h']"/>
           </span>
           <span>
-          <font-awesome-icon :icon="['fas','chevron-down']" v-if="!showItems"/>
+          <font-awesome-icon :icon="['fas','chevron-down']" v-if="!options.showItems"/>
            <font-awesome-icon :icon="['fas','chevron-up']" v-else/>
           </span>
         </div>
 
         <transition name="slide">
-          <div class="items" v-if="showItems">
+          <div class="items" v-if="options.showItems">
             <div class="item" >
               信息
             </div>
@@ -29,7 +29,7 @@
     </div>
     </div>
     <div class="right">
-      <input type="text" class="search-bar" v-if="showSearchBar"/>
+      <input v-model="search" type="text" class="search-bar" :class="options.showSearchBar ? 'active' : ''"/>
       <span class="btn" @click="handleSearch">
         <font-awesome-icon :icon="['fas','search']"/>
       </span>
@@ -44,7 +44,7 @@
         </div>
 
         <transition name="slide">
-          <div class="items" v-if="showUser">
+          <div class="items" v-if="options.showUser">
             <div class="item">
               <a href="https://github.com/Innei/moment">GitHub</a>
             </div>
@@ -69,22 +69,25 @@
     },
     data() {
       return {
-        showSearchBar: false,
-        showItems: false,
-        showUser: false
+        options: {
+          showSearchBar: false,
+          showItems: false,
+          showUser: false
+        },
+        search: ''
       }
     },
     methods: {
       handleSearch() {
-        this.showSearchBar = !this.showSearchBar
+        this.options.showSearchBar = !this.options.showSearchBar
+        this.search = ''
       },
       handleShowItems() {
-        this.showItems = !this.showItems
+        this.options.showItems = !this.options.showItems
       },
       handleClickUser() {
-        this.showUser = !this.showUser
+        this.options.showUser = !this.options.showUser
       }
-
     }
   }
 </script>
@@ -153,7 +156,7 @@
   }
 
   .right .search-bar {
-    width: 10rem;
+    width: 0rem;
     height: 1.5rem;
     border-radius: 24px;
     background: #fff;
@@ -161,8 +164,13 @@
     margin-right: 1rem;
     outline: none;
     padding-left: 1rem;
-    transition: width .5s;
-    animation: to-left 1s forwards ease-out;
+    transition: width .5s, opacity .3s;
+    opacity: 0;
+  }
+
+  .right .search-bar.active {
+    width: 10rem;
+    opacity: 1;
   }
 
   .line {
@@ -179,15 +187,6 @@
     transform: translateY(-50%);
     height: 0.8rem;
     border-left: 1px solid #d0d3d6;
-  }
-
-  @keyframes to-left {
-    0% {
-      width: 0;
-    }
-    to {
-      width: 10rem;
-    }
   }
 
   .items {
