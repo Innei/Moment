@@ -106,7 +106,7 @@
       handleClick(index) {
         this.activeItem = index
         this.$emit('switch', this.activeItem)
-        clearInterval(this.interval)
+        this.interval = clearInterval(this.interval)
       },
 
     },
@@ -117,19 +117,28 @@
   }
 </script>
 
+<style lang="scss">
+  .swiper-wrapper {
+    @for $var from 0 to 6 {
+      & > div.card:nth-child(#{$var + 1}n) {
+        animation: scale .5s forwards;
+        animation-delay: $var * 0.1s;
+        transform: scale(0)
+      }
+    }
+  }
+  @keyframes scale {
+  0% {
+    transform: scale(0)
+  }
+  to {
+    transform: scale(1);
+  }
+}
+</style>
 <style lang="scss" scoped>
   .swiper {
     padding: 0 1rem;
-    animation: slide-up 1s forwards;
-  }
-
-  @keyframes slide-up {
-    0% {
-      transform: translateY(100%);
-    }
-    to {
-      transform: translateY(0);
-    }
   }
 
 </style>

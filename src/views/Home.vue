@@ -30,11 +30,14 @@
             </div>
           </info-res>
         </main>
-        <swiper :data="moments"
-                :viewport="viewport"
-                @switch="handleSwitch"
-                v-show="!hideSwiper"
-                class="swiper"/>
+        <transition name="slide-down">
+          <div id="swiper" style="position: relative" v-show="!hideSwiper">
+              <swiper :data="moments"
+                  :viewport="viewport"
+                  @switch="handleSwitch"
+                  class="swiper"/>
+          </div>
+        </transition>
       </div>
       <!--    show img  -->
       <div class="message" v-else key="page2">
@@ -217,6 +220,15 @@
 
   .fade-enter, .fade-leave-to {
     opacity: 0;
+  }
+
+  .slide-down-enter-active, .slide-down-leave-active {
+    transition: transform .5s;
+    transform: translateY(0)
+  }
+
+  .slide-down-enter, .slide-down-leave-to {
+    transform: translateY(100%)
   }
 
 </style>

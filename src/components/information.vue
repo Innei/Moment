@@ -69,6 +69,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    min-height: calc(100vh - 6.875rem);
 
     .header {
       display: flex;
