@@ -2,8 +2,13 @@ const Mock = require('mockjs')
 
 Mock.mock(/\/moments/, 'get', {
   ok: 1,
-  size: 10,
-  page: 1,
+  pageOptions: {
+    size: 10,
+    currentPage: 1,
+    totalPage: 2,
+    hasNextPage: false,
+    hasPrevPage: false
+  },
   data: [
     {
       _id: '@id',

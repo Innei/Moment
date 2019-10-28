@@ -157,8 +157,11 @@ export default {
 
     .moment-inner {
       color: #c7cbca;
-      overflow: scroll;
       height: calc(100% - 6rem);
+
+      &.moment-wrap {
+        overflow: scroll;
+      }
 
       &.moment-wrap::-webkit-scrollbar {
         width: 3px;
@@ -214,8 +217,8 @@ export default {
       font-weight: 800;
       position: absolute;
       font-family: -apple-system, "Microsoft Sans Serif";
-      left: 0;
-      top: 0;
+      left: -5px;
+      top: -5px;
     }
 
     .source {

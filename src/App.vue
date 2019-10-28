@@ -11,7 +11,7 @@
       ...mapMutations(['storeData'])
     },
     async created() {
-      const data = (await masterApi.getUserInfo(1)).data
+      const data = (await masterApi.getUserInfo()).data
       this.storeData(data)
     }
   }

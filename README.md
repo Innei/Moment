@@ -31,7 +31,7 @@ yarn serve
 
 所有接口格式位于 `mock` 目录中，更为详细的 `json` 位于 `@api`
 
-咕咕咕咕.
+<span style="color=red">接口格式可能有更新!!</span>
 
 所有接口前缀统一为 `api`, 接口地址为 `api/` 加上 `baseUrl`
 
@@ -78,12 +78,17 @@ baseUrl: `/moments`
 
 ```jsonc
 {
-  "ok": 1, // 状态
-  "size": 10, // 每页大小
-  "page": 1, // 翻页
+  "ok": 1,                               // 状态
+  "pageOptions": {
+    "size": 10,                          // 页大小
+    "currentPage": 1,                    // 当前页
+    "totalPage": 1,                      // 总页
+    "hasNextPage": false,                // 是否有下一页
+    "hasPrevPage": false,                // 是否有上一页
+  },
   "data": [ // 数据
     {
-      "_id": 1, // MongoDB objectID
+      "_id": 1, // MongoDB objectID 或者 其他 ID
       "createdTime": 1571299457065, // 13位时间截 创建时间
       "modifiedTime": 1571299777065,
       "type": "moment", // 类型 moment picture idea hitokoto 4选1, content 有所不同

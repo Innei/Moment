@@ -32,8 +32,9 @@
         </main>
         <transition name="slide-down">
           <div id="swiper" style="position: relative" v-show="!hideSwiper">
-              <swiper :data="moments"
+              <swiper :moments="moments"
                   :viewport="viewport"
+                  :pageOptions="pageOptions"
                   @switch="handleSwitch"
                   class="swiper"/>
           </div>
@@ -50,7 +51,9 @@
         </div>
       </div>
     </transition>
+    <transition name="fade">
     <show-img :src="img.src" :comment="img.comment" @zoomOut="handleZoomOut" v-if="img.src"/>
+    </transition>
   </div>
 
 </template>
@@ -78,6 +81,13 @@
     data() {
       return {
         moments: {},
+        pageOptions: {
+          size: 10,
+          currentPage: 1,
+          totalPage: 1,
+          hasNextPage: false,
+          hasPrevPage: false
+        },
         information: {},
         viewport: {},
         activeItem: 0,
@@ -92,24 +102,24 @@
     async created() {
       const moments = (await momentApi.getRecentlyMoment({
         size: 10,
-        page: 1
+        page: this.pageOptions.currentPage
       })).data
-      const informations = (await masterApi.getUserIntroduce(1)).data
+      this.pageOptions = moments.pageOptions
+      const informations = (await masterApi.getUserIntroduce()).data
       this.moments = moments
       this.information = informations
     },
     mounted() {
       this.updateViewport()
       window.addEventListener('resize', this.throttle(this.updateViewport, 100))
-
     },
     methods: {
-      throttle: function(func, delay) {
+      throttle(func, delay) {
         let timer = null;
-        return function() {
+        return function () {
           if (!timer) {
-            timer = setTimeout(function() {
-              func.apply(this, arguments);
+            timer = setTimeout(() => {
+              func.apply(this, arguments)
               timer = null;
             }, delay);
           }
