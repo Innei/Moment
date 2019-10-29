@@ -74,7 +74,7 @@ baseUrl: `/moments`
 
 请求方式为 `GET`
 
-携带参数可选 `size` `page`, 渲染暂未实现.
+携带参数可选 `size` `page`
 
 ```jsonc
 {
