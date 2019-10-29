@@ -1,7 +1,11 @@
 <template>
   <swiper :options="swiperOption" class="swiper" ref="swiper">
     <!--      <card-slide :isActive="true" :data="data.data[0]" :date="parseDate(data.data[0].createdTime)"></card-slide>-->
-    <card-slide :moments="{ icon: ['fas','arrow-left'] }" v-if="pageOptions.hasPrevPage" />
+    <card-slide
+      :data="{ icon: ['fas','arrow-left'] }"
+      v-if="pageOptions.hasPrevPage"
+      @click.native="$emit('slide_btn-clicked', 'prev')"
+    />
     <card-slide
       v-for="item in moments.data"
       :key="item._id"
@@ -11,7 +15,11 @@
       @click.native="handleClick(item.index)"
       class="slide"
     ></card-slide>
-    <card-slide :moments="{ icon: ['fas','arrow-right'] }" v-if="pageOptions.hasNextPage" />
+    <card-slide
+      :data="{ icon: ['fas','arrow-right'] }"
+      v-if="pageOptions.hasNextPage"
+      @click.native="$emit('slide_btn-clicked', 'next')"
+    />
   </swiper>
 </template>
 
@@ -39,7 +47,7 @@ export default {
     },
     pageOptions: {
       type: Object,
-      required: true     
+      required: true
     }
   },
   data () {
@@ -80,12 +88,13 @@ export default {
     this.updateSlidesPerview(this.viewport)
   },
   watch: {
-    data (n) {
+    moments (n) {
       let index = 0
       n.data.map(item => {
         item.index = index++
       })
       this.data = n
+      this.$refs.swiper.swiper.slideTo(this.pageOptions.hasPrevPage ? 1 : 0)
     },
     viewport (n) {
       this.updateSlidesPerview(n)

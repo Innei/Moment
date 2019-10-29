@@ -11,7 +11,7 @@
       <div class="body">{{ user.username + ' posted a ' + data.type }}</div>
     </div>
     <div class="btn next_btn prev_btn" v-else>
-      <font-awesome-icon :icon="data.icon" @click="$emit('slide_btn-clicked')"/>
+      <font-awesome-icon :icon="data.icon"/>
     </div>
   </swiper-slide>
 </template>

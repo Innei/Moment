@@ -1,12 +1,12 @@
 const Mock = require('mockjs')
 
-Mock.mock(/\/moments/, 'get', {
+Mock.mock(/\/moments.*?(page=1)$/, 'get', {
   ok: 1,
   pageOptions: {
     size: 10,
     currentPage: 1,
     totalPage: 2,
-    hasNextPage: false,
+    hasNextPage: true,
     hasPrevPage: false
   },
   data: [
@@ -109,6 +109,61 @@ Mock.mock(/\/moments/, 'get', {
       content: {
         src: 'https://i.loli.net/2019/08/18/vGNB4oOepVA6lPQ.jpg',
         comment: '好漂亮啊！！！！'
+      }
+    }
+  ]
+})
+
+Mock.mock(/\/moments.*?(page=2)$/, 'get', {
+  ok: 1,
+  pageOptions: {
+    size: 4,
+    currentPage: 2,
+    totalPage: 2,
+    hasNextPage: false,
+    hasPrevPage: true
+  },
+  data: [
+    {
+      _id: '@id',
+      createdTime: 1571299457065,
+      modifiedTime: 1571299777065,
+      type: 'moment',
+      content: {
+        title: '诗和远方',
+        body:
+          '人生不只有眼前的苟且, 还有诗和远方',
+        mood: '寒',
+        weather: '晴'
+      }
+    },
+    {
+      _id: '@id',
+      createdTime: 1571299457065,
+      modifiedTime: 1571299457065,
+      type: 'hitokoto',
+      content: {
+        source: 'Hitokoto',
+        body: '我们是如此的担心着未来会发生的事情，因此忘记了慢下来享受现在。'
+      }
+    },
+    {
+      _id: '@id',
+      createdTime: 1571299457065,
+      modifiedTime: 1571299777065,
+      type: 'idea',
+      content: {
+        body: '这是一个想法'
+      }
+    },
+    {
+      _id: '@id',
+      createdTime: 1571299457065,
+      modifiedTime: 1571299777065,
+      type: 'picture',
+      content: {
+        src: 'https://i.loli.net/2019/08/18/vGNB4oOepVA6lPQ.jpg',
+        comment: '日本'
       }
     }
   ]
