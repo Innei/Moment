@@ -183,6 +183,7 @@ export default {
       })).data
       this.pageOptions = moments.pageOptions
       this.moments = moments
+      this.activeItem = 0
     }
   }
 }

@@ -217,8 +217,9 @@ export default {
       font-weight: 800;
       position: absolute;
       font-family: -apple-system, "Microsoft Sans Serif";
-      left: -5px;
-      top: -5px;
+      left: -.5rem;
+      top: -.5rem;
+      line-height: 1.5rem
     }
 
     .source {

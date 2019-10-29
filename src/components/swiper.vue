@@ -95,6 +95,7 @@ export default {
       })
       this.data = n
       this.$refs.swiper.swiper.slideTo(this.pageOptions.hasPrevPage ? 1 : 0)
+      this.activeItem = 0
     },
     viewport (n) {
       this.updateSlidesPerview(n)
