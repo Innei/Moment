@@ -71,17 +71,17 @@ export default {
       require: true
     }
   },
-  data() {
+  data () {
     return {
       show: true,
       data: {}
     };
   },
-  created() {
+  created () {
     this.data = this.content;
   },
   watch: {
-    content(newVal) {
+    content (newVal) {
       this.show = false;
 
       setTimeout(() => {
@@ -91,7 +91,7 @@ export default {
     }
   },
   methods: {
-    parseDate(date) {
+    parseDate (date) {
       const d = new Date(date);
       const dateObj = {
         day: d.getDate(),
@@ -103,7 +103,7 @@ export default {
       };
       return dateObj;
     },
-    handleDisplayImg(src) {
+    handleDisplayImg (src) {
       this.$emit(
         "showImg",
         JSON.stringify({
@@ -112,12 +112,12 @@ export default {
         })
       );
     },
-    parseArticle(body) {
+    parseArticle (body) {
       return body.replace(/\n|\r\n/g, "\n\n");
     }
   },
   computed: {
-    createdTime() {
+    createdTime () {
       return this.parseDate(this.data.createdTime);
     },
     ...mapState({
@@ -169,7 +169,7 @@ export default {
 
       &.moment-wrap::-webkit-scrollbar-thumb {
         background: #eee;
-        border-radius: 12px
+        border-radius: 12px;
       }
 
       &.moment-wrap::-webkit-scrollbar-track:hover {
@@ -211,15 +211,15 @@ export default {
     }
 
     .body::before {
-      content: "“";
+      content: '“';
       color: #fbd2d5;
       font-size: 4rem;
       font-weight: 800;
       position: absolute;
-      font-family: -apple-system, "Microsoft Sans Serif";
-      left: -.5rem;
-      top: -.5rem;
-      line-height: 1.5rem
+      font-family: -apple-system, 'Microsoft Sans Serif';
+      left: -0.5rem;
+      top: -0.5rem;
+      line-height: 1.5rem;
     }
 
     .source {
@@ -228,7 +228,7 @@ export default {
     }
 
     .source::before {
-      content: "-- ";
+      content: '-- ';
     }
   }
 
@@ -268,8 +268,8 @@ export default {
   transition: 0.5s;
 }
 
-.ease-in-enter, .ease-in-leave-to
- {
+.ease-in-enter,
+.ease-in-leave-to {
   transform: translateX(20%);
   opacity: 0;
 }

@@ -2,7 +2,7 @@
   <div class="header" v-if="data.username">
     <div class="left">
       <span class="username">{{ data.username }}</span>
-      <div class="btn" style="padding: .2rem 1rem;display: inline-block;" @click="handleShowItems">
+      <!-- <div class="btn" style="padding: .2rem 1rem;display: inline-block;" @click="handleShowItems">
         <div class="btn-flex">
           <span>
           <font-awesome-icon :icon="['fas','sliders-h']"/>
@@ -23,7 +23,7 @@
             </div>
           </div>
         </transition>
-      </div>
+      </div> -->
     <div class="btn" style="background: none;margin-left: 1rem" @click="$emit('hideSwiper')">
       <font-awesome-icon :icon="['fas','dot-circle']"/>
     </div>
@@ -43,13 +43,16 @@
           </div>
         </div>
 
-        <transition name="slide">
+        <transition name="slide" v-if="!objectIsEmpty(data.userUrl)">
           <div class="items" v-if="options.showUser">
-            <div class="item">
+            <!-- <div class="item">
               <a href="https://github.com/Innei/moment">GitHub</a>
             </div>
             <div class="item">
               <a href="https://shizuri.net">Blog</a>
+            </div> -->
+            <div class="item" v-for="(url, title) in data.userUrl" :key="title">
+              <a :href="url">{{title}}</a>
             </div>
           </div>
         </transition>
@@ -87,6 +90,9 @@
       },
       handleClickUser() {
         this.options.showUser = !this.options.showUser
+      },
+      objectIsEmpty(obj) {
+        return JSON.stringify(obj) === '{}'
       }
     }
   }

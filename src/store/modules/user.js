@@ -3,7 +3,8 @@ const state = {
   avatar: null,
   userId: null,
   nickname: null,
-  githubUrl: null
+  githubUrl: null,
+  userUrl: null
 }
 
 const actions = {
@@ -20,16 +21,17 @@ const getters = {
       nickname: state.nickname,
       githubUrl: state.githubUrl
     }
-  },
+  }
 }
 
 const mutations = {
-  storeData(state, { username, avatar, userId, nickname, githubUrl }) {
+  storeData(state, { username, avatar, userId, nickname, githubUrl, userUrl }) {
     state.username = username
     state.avatar = avatar
     state.userId = userId
     state.nickname = nickname
     state.githubUrl = githubUrl
+    state.userUrl = userUrl
   }
 }
 

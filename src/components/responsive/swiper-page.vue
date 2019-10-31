@@ -1,7 +1,7 @@
 <template>
   <swiper :options="swiperOption" ref="pageSwiper">
     <swiper-slide class="page">
-      <information :skill="skill">
+      <information :skill="skill" :showPostBtn="hideSwiper" @post-new="$emit('post-new')">
         <template v-slot:introduce>
           <p>{{ intro }}</p>
         </template>
@@ -12,69 +12,71 @@
         <slot></slot>
       </div>
     </swiper-slide>
-
   </swiper>
 </template>
 
 <script>
-  import 'swiper/dist/css/swiper.css'
-  import information from '@/components/information'
-  import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css'
+import information from '@/components/information'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
-  export default {
-    props: {
-      skill: {
-        require: true,
-        type: Object
-      },
-      content: {
-        type: Object,
-        require: true
-      },
-      toSec: {
-        type: Boolean,
-        default: false
-      },
-      intro: {}
+export default {
+  props: {
+    skill: {
+      require: true,
+      type: Object
     },
-    components: {
-      swiper,
-      swiperSlide,
-      information
+    content: {
+      type: Object,
+      require: true
     },
-    computed: {
-      swiper() {
-        return this.$refs.pageSwiper.swiper
-      }
+    toSec: {
+      type: Boolean,
+      default: false
     },
-    data() {
-      return {
-        swiperOption: {
-          width: window.innerWidth,
-          observer: true,
-          observeParents: true,
-          on: {
-            resize() {
-              this.params.width = window.innerWidth
-              this.update()
-            },
-          }
-        }
-      }
-    },
-    watch: {
-      toSec(n) {
-        if (n === true) {
-          this.swiper.slideTo(2, 1000, false)
+    intro: {},
+    hideSwiper: {
+      type: Boolean
+    }
+  },
+  components: {
+    swiper,
+    swiperSlide,
+    information
+  },
+  computed: {
+    swiper () {
+      return this.$refs.pageSwiper.swiper
+    }
+  },
+  data () {
+    return {
+      swiperOption: {
+        width: window.innerWidth,
+        observer: true,
+        observeParents: true,
+        on: {
+          resize () {
+            this.params.width = window.innerWidth
+            this.update()
+          },
         }
       }
     }
+  },
+  watch: {
+    toSec (n) {
+      if (n === true) {
+        this.swiper.slideTo(2, 1000, false)
+      }
+    }
   }
+}
 </script>
 
 <style scoped>
 .content {
- height: 100%;
+  height: 100%;
   position: relative;
 }
 </style>

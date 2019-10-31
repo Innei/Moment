@@ -9,7 +9,12 @@
           :style="hideSwiper ? 'height: calc(100vh - 8rem)' : ''"
           v-if="viewport.is1024 || viewport.isDesktop || viewport.is1600 "
         >
-          <information class="i" :skill="information.skill">
+          <information
+            class="i"
+            :skill="information.skill"
+            :showPostBtn="hideSwiper"
+            @post-new="handlePostNew"
+          >
             <template v-slot:introduce>
               <p>{{ information.introduce }}</p>
             </template>
@@ -29,6 +34,8 @@
           :style="hideSwiper ? 'height: calc(100vh - 8rem)' : ''"
         >
           <info-res
+            :hideSwiper="hideSwiper"
+            @post-new="handlePostNew"
             :toSec="toSec"
             :skill="information.skill"
             :content="moments.data[activeItem]"
@@ -66,9 +73,16 @@
         </div>
       </div>
     </transition>
+
+    <!-- full screen components  -->
     <transition name="fade">
       <show-img :src="img.src" :comment="img.comment" @zoomOut="handleZoomOut" v-if="img.src" />
     </transition>
+    <postDialog v-if="dialogs.post" @cancel-post="dialogs.post = false" />
+    <transition name="fade">
+      <overlay v-if="overlay" />
+    </transition>
+    <!-- end -->
   </div>
 </template>
 
@@ -78,8 +92,10 @@ import swiper from '@/components/swiper.vue'
 import information from '@/components/information'
 import showContent from '@/components/showContent.vue'
 import showImg from '@/components/showImg.vue'
-
 import infoRes from '@/components/responsive/swiper-page.vue'
+import overlay from '@/components/overlay.vue'
+import postDialog from '@/components/postDialog.vue'
+
 import momentApi from '@/api/moment'
 import masterApi from '@/api/master'
 
@@ -90,7 +106,9 @@ export default {
     information,
     showContent,
     infoRes,
-    showImg
+    showImg,
+    overlay,
+    postDialog
   },
   data () {
     return {
@@ -110,7 +128,11 @@ export default {
         displayImg: '',
         comment: ''
       },
-      hideSwiper: false
+      hideSwiper: false,
+      overlay: false, // 遮罩
+      dialogs: {
+        post: false
+      }
     }
   },
   async created () {
@@ -184,6 +206,25 @@ export default {
       this.pageOptions = moments.pageOptions
       this.moments = moments
       this.activeItem = 0
+    },
+    async handlePostNew () {
+      this.dialogs.post = true
+    }
+  },
+  watch: {
+    dialogs: {
+      deep: true,
+      handler (val) {
+        let overlay = false
+        for (const flag of Object.values(val)) {
+
+          if (flag === true) {
+            overlay = true
+            break
+          }
+        }
+        this.overlay = overlay
+      }
     }
   }
 }

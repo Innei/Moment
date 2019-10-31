@@ -1,11 +1,15 @@
 const Mock = require('mockjs')
 
 Mock.mock(/\/master\/info/, 'get', {
-  'username': 'Innei',
-  'userId': "@id",
-  'avatar': 'https://q1.qlogo.cn/g?b=qq&nk=1003521738&s=640',
-  'nickname': 'Moment',
-  'githubUrl': 'https://github.com/Innei'
+  username: 'Innei',
+  userId: '@id',
+  avatar: 'https://q1.qlogo.cn/g?b=qq&nk=1003521738&s=640',
+  nickname: 'Moment',
+  githubUrl: 'https://github.com/Innei/moment',
+  userUrl: {
+    GitHub: 'https://github.com/Innei',
+    Blog: 'https://shizuri.net/'
+  }
 })
 
 Mock.mock(/\/master\/introduce/, 'get', {
