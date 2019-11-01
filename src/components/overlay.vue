@@ -2,12 +2,6 @@
   <div class="overlay"></div>
 </template>
 
-<script>
-export default {
-
-}
-</script>
-
 <style scoped>
 .overlay {
   position: fixed;

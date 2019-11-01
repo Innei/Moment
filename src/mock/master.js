@@ -1,6 +1,6 @@
 const Mock = require('mockjs')
 
-Mock.mock(/\/master\/info/, 'get', {
+Mock.mock(/\/master/, 'get', {
   username: 'Innei',
   userId: '@id',
   avatar: 'https://q1.qlogo.cn/g?b=qq&nk=1003521738&s=640',

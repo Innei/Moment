@@ -80,7 +80,8 @@
     </transition>
     <postDialog v-if="dialogs.post" @cancel-post="dialogs.post = false" />
     <transition name="fade">
-      <overlay v-if="overlay" />
+      <!-- TODO handle cancel diglogs methods -->
+      <overlay v-if="overlay"/>
     </transition>
     <!-- end -->
   </div>
@@ -195,9 +196,9 @@ export default {
     async handleSwitchPage (e) {
       let page = this.pageOptions.currentPage
       if (e === 'next') {
-        page + 1 > this.pageOptions.totalPage ? page : page++
+        page + 1 > this.pageOptions.totalPage ? page : ++page
       } else {
-        page === 1 ? 1 : page--
+        page === 1 ? 1 : --page
       }
       const moments = (await momentApi.getRecentlyMoment({
         size: 10,
@@ -296,7 +297,7 @@ main {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s;
+  transition: opacity 0.2s;
 }
 
 .fade-enter,

@@ -5,7 +5,7 @@ const baseUrl = 'master'
 const api = {}
 
 api.getUserInfo = () => {
-  return http.get(`${ baseUrl }/info`)
+  return http.get(`${ baseUrl }`)
 }
 
 api.getUserIntroduce = () => http.get(`${ baseUrl }/introduce`)

@@ -127,7 +127,7 @@ export default {
   min-width: 50vw;
   transition: height 0.5s;
   transform: scale(0.2);
-  animation: scale 0.5s forwards cubic-bezier(0.06, 1.14, 0.36, 1.11);
+  animation: scale 0.2s forwards cubic-bezier(0.06, 1.14, 0.36, 1.11);
 
   .title {
     text-align: center;
