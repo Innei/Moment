@@ -10,9 +10,14 @@ const router = new Router({
       name: 'home',
       path: '/',
       component: Home
+    },
+    {
+      name: 'init',
+      path: '/init',
+      component: () => import('@/views/Init.vue'),
+      meta: { once: true }
     }
   ]
 })
-
 
 export default router
