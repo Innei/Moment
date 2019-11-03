@@ -47,18 +47,12 @@
         </form>
       </transition>
     </main>
-
-    <bubble/>
   </div>
 </template>
 
 <script>
 import masterApi from '@/api/master'
-import Bubble from '@/components/form/bubbleNotice.vue'
 export default {
-  components: {
-    Bubble
-  },
   data () {
     return {
       postUrl: process.env.development ? 'http://localhost:3000/api/master/first_init' : '/api/master/first_init',
@@ -84,15 +78,22 @@ export default {
         this.currentStep++
     },
     checkPass () {
+      if (!this.master.username) {
+        return this.$msg({ msg: '请输入用户名', type: 'error' })
+      }
+      if (this.master.password !== this.master.confirmPass) {
+        return this.$msg({ msg: '两次密码输入不匹配', type: 'error' })
+      }
       masterApi.checkPass(this.master.password).then(res => {
         if (res.ok === 1) {
           this.handleNext()
         }
         else {
-          this
+          this.$msg({ msg: res.data.msg, type: 'warning' })
         }
       })
-    }  },
+    }
+  },
 }
 </script>
 

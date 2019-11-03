@@ -1,31 +1,28 @@
 <template>
   <div class="notice-list">
-    <div class="bubble" :style="{ backgroundColor: color}">
-      <div class="content">{{msg}}</div>
+    <div
+      class="bubble"
+      :style="{ backgroundColor: msg.color}"
+      v-for="(msg, index) in msgList"
+      :key="index"
+    >
+      <div class="content">{{msg.msg}}</div>
     </div>
-    <div class="bubble" :style="{ backgroundColor: color}">
-      <div class="content">{{msg}}</div>
-    </div>
-
-    <slot />
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    msgList: []
-  },
-  data () {
-    return {
-      msg: '我好了',
-      color: '#e3e3e3'
+    msgList: {
+      type: Array,
+      required: true
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
 .notice-list {
   top: 2em;
   left: 0;
@@ -46,9 +43,23 @@ export default {
   pointer-events: auto;
   margin: 0 auto 1em auto;
   box-shadow: 0 5px 5px -2px rgba(0, 0, 0, 0.2);
+  transform: scale(0);
+  animation: scale 0.5s forwards, close 0.5s forwards 2.5s;
+  background-color: #7e7af8;
 }
 .bubble .content {
   padding: 0.5em 1em;
   display: table-cell;
+}
+
+@keyframes scale {
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes close {
+  to {
+    transform: scale(0);
+  }
 }
 </style>
