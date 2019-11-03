@@ -47,12 +47,18 @@
         </form>
       </transition>
     </main>
+
+    <bubble/>
   </div>
 </template>
 
 <script>
 import masterApi from '@/api/master'
+import Bubble from '@/components/form/bubbleNotice.vue'
 export default {
+  components: {
+    Bubble
+  },
   data () {
     return {
       postUrl: process.env.development ? 'http://localhost:3000/api/master/first_init' : '/api/master/first_init',
