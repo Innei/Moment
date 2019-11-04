@@ -9,15 +9,27 @@ const router = new Router({
     {
       name: 'home',
       path: '/',
-      component: Home
+      component: Home,
+      meta: { title: 'Moment' }
     },
     {
       name: 'init',
       path: '/init',
       component: () => import('@/views/Init.vue'),
-      meta: { once: true }
+      meta: { once: true, title: 'おかえりなさいご主人様 -- Moment' }
+    },
+    {
+      name: 'login',
+      path: '/login',
+      component: () => import('@/views/Login.vue'),
+      meta: { title: '登陆 -- Moment' }
     }
   ]
 })
 
+router.afterEach(to => {
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
+})
 export default router
