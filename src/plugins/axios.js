@@ -14,7 +14,8 @@ http.interceptors.response.use(
   err => {
     if (err.response.data.msg) {
       Vue.prototype.$msg({
-        msg: err.response.data.msg
+        msg: err.response.data.msg,
+        type: 'error'
       })
     }
     return Promise.reject(err)

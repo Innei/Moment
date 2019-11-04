@@ -14,7 +14,8 @@ export default {
   data () {
     return {
       msg: '',
-      color: ''
+      color: '',
+      type: ''
     }
   },
   install (Vue) {

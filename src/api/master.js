@@ -16,4 +16,9 @@ api.checkPass = password =>
   })
 
 api.completeInit = master => http.post(`${baseUrl}/init`, { ...master })
+
+api.checkInit = () => http.get(`${baseUrl}/init`)
+
+api.login = master => http.post(`${baseUrl}/login`, { ...master })
+
 export default api

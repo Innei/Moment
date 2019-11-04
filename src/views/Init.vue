@@ -127,6 +127,8 @@ import 'swiper/dist/css/swiper.css'
 
 import masterApi from '@/api/master'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import Vue from 'vue'
+import router from '../router'
 
 const orgin = window.location.href.split('#').slice(0, 2).join('#')
 export default {
@@ -231,6 +233,15 @@ export default {
     checkUrl (URL) {
       return /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- ./?%&=]*)?/.test(URL);
     },
+  },
+  // 路由到达前 检测是否完成初始化
+  async beforeRouteEnter () {
+    const { data } = await masterApi.checkInit()
+    if (data.ok === 0) {
+      // 因为无法获取到 this
+      Vue.prototype.$msg({ type: 'error', msg: data.msg })
+      router.push('/')
+    }
   }
 }
 </script>
@@ -330,14 +341,7 @@ main {
     }
   }
 }
-// .form {
-//   max-width: 70%;
-//   margin-left: auto;
-//   margin-right: auto;
-//   @media (max-width: 578px) {
-//     max-width: 100%;
-//   }
-// }
+
 @keyframes toright {
   0% {
     background-position: -30rem 100%;
