@@ -50,7 +50,7 @@
       </item>
       <div class="nav">
         <input type="submit" value="提交" @click.prevent="handleSubmit" />
-        <input type="reset" value="取消" @click.prevent="$emit('cancel-post')" />
+        <input type="reset" value="取消" @click.prevent="handleCancelOrCompleted" />
       </div>
     </form>
   </div>
@@ -83,11 +83,22 @@ export default {
   },
   methods: {
     handleSubmit () {
-      momentApi.postNewMoment(this.moment).then(res => {
-        // TODO response
-        console.log(res)
+      momentApi.postNewMoment(this.moment).then(({ data }) => {
+        if (data.ok === 1) {
+          // this.$refs.form.classList.add('remove')
+          // setTimeout(() => {
+          //   this.$emit('cancel-post')
+          // }, 250);
+          this.handleCancelOrCompleted()
+        }
       })
-    }
+    },
+    handleCancelOrCompleted () {
+      this.$refs.form.classList.add('remove')
+      setTimeout(() => {
+        this.$emit('cancel-post')
+      }, 400);
+    },
   },
   mounted () {
     this.$watch('moment.type', {
@@ -135,10 +146,14 @@ export default {
   border: 1px #eee solid;
   box-sizing: border-box;
   min-width: 50vw;
-  transition: height 0.5s;
+  transition: height 0.5s, transform 0.2s;
   transform: scale(0.2);
   animation: scale 0.2s forwards cubic-bezier(0.06, 1.14, 0.36, 1.11);
 
+  &.remove {
+    transform: scale(0);
+    animation: none;
+  }
   .title {
     text-align: center;
     font-size: 1.4rem;
