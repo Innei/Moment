@@ -23,6 +23,18 @@ const router = new Router({
       path: '/login',
       component: () => import('@/views/Login.vue'),
       meta: { title: '登陆 -- Moment' }
+    },
+    {
+      name: 'admin',
+      path: '/master',
+      component: () => import('@/views/Admin/index.vue'),
+      children: [
+        {
+          path: '/',
+          component: () => import('@/views/Admin/dashboard.vue'),
+          meta: { title: '仪表盘 -- Moment' }
+        }
+      ]
     }
   ]
 })

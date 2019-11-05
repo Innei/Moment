@@ -1,0 +1,140 @@
+<template>
+  <div class="bg">
+    <div class="wrap">
+      <div class="side-bar">
+        <div class="title">Moment</div>
+        <div class="items">
+          <item
+            :active="index === 0 ? true : false"
+            :item="item"
+            v-for="(item, index) in items"
+            :key="index"
+          />
+        </div>
+        <div class="user">
+          <div class="block">
+            <img :src="user.avatar" />
+            <div class="username" style="transform: translateY(5px)">{{user.username}}</div>
+            <div class="dot">.</div>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <router-view></router-view>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapGetters } from 'vuex'
+
+import item from '@/components/Admin/sidebar/item.vue'
+export default {
+  name: 'admin',
+  computed: {
+    ...mapGetters(['user'])
+  },
+  components: {
+    item
+  },
+  data () {
+    return {
+      items: [{
+        title: 'Dashboard',
+        icon: ['fas', 'tachometer-alt'],
+      },
+      {
+        title: 'Moment',
+        icon: ['far', 'clock']
+      }
+      ]
+    }
+  },
+  methods: {
+
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+@import url(https://fonts.googleapis.com/css?family=McLaren&display=swap);
+$deepBg: #1681e1;
+$shallowbg: #1a9cf3;
+.bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: $deepBg;
+}
+
+.wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 5rem;
+  background: linear-gradient(to bottom, #1188e8, #16aae7);
+  border-radius: 24px;
+  display: grid;
+  grid-template-columns: 17% auto;
+  box-shadow: 5px 24px 133px rgba(0, 0, 0, 0.3);
+
+  .side-bar {
+    $left-margin: 1.5rem;
+    color: #fff;
+    display: grid;
+    grid-template-rows: 6rem auto 6rem;
+
+    > .title {
+      display: flex;
+      font-family: 'Josefin Sans', sans-serif;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.4rem;
+      user-select: none;
+    }
+
+    .items {
+      margin-left: $left-margin;
+      box-sizing: border-box;
+    }
+
+    .user {
+      margin: $left-margin;
+      background: #13afea;
+
+      // background-clip: content-box;
+      border-radius: 12px;
+      position: relative;
+      .block {
+        max-height: 100%;
+        display: grid;
+        grid-template-columns: 50px auto 20px;
+        margin: 0.5rem;
+        user-select: none;
+        * {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .username {
+          font-family: 'Josefin Sans', sans-serif;
+        }
+
+        img {
+          max-width: 30px;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+  .content {
+    background-color: #fff !important;
+    border-radius: 0 24px 24px 0;
+  }
+}
+</style>
