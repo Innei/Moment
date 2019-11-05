@@ -41,6 +41,7 @@
               v-model="master.confirmPass"
               autocomplete="off"
               placeholder=" "
+              @keyup.enter="handleNext"
             />
             <label for="confirmPass">Confirm Password</label>
           </form>
@@ -66,7 +67,14 @@
             />
             <label for="githubUrl">GitHub Url</label>
 
-            <input type="text" name="avatar" id="avatar" v-model="master.avatar" placeholder=" " />
+            <input
+              type="text"
+              name="avatar"
+              id="avatar"
+              v-model="master.avatar"
+              placeholder=" "
+              @keyup.enter="handleNext"
+            />
             <label for="avatar">Avatar Icon Url</label>
           </form>
         </swiper-slide>
@@ -109,10 +117,6 @@
       </swiper>
 
       <div class="nav">
-        <!-- <button
-          class="btn next"
-          @click.prevent="handleNext"
-        >{{currentStep !== totalStep ? 'Next': 'Finish'}}</button>-->
         <button
           class="btn next"
           @click.prevent="handleNext"
