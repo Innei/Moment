@@ -17,7 +17,7 @@
 
 <script>
 import 'swiper/dist/css/swiper.css'
-import information from '@/components/information'
+import information from '@/components/Home/information'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
 export default {

@@ -88,14 +88,14 @@
 </template>
 
 <script>
-import headerNav from '@/components/headerNav.vue'
-import swiper from '@/components/swiper.vue'
-import information from '@/components/information'
-import showContent from '@/components/showContent.vue'
-import showImg from '@/components/showImg.vue'
-import infoRes from '@/components/responsive/swiper-page.vue'
-import overlay from '@/components/overlay.vue'
-import postDialog from '@/components/postDialog.vue'
+import headerNav from '@/components/Home/headerNav.vue'
+import swiper from '@/components/Home/swiper.vue'
+import information from '@/components/Home/information'
+import showContent from '@/components/Home/showContent.vue'
+import showImg from '@/components/Home/showImg.vue'
+import infoRes from '@/components/Home/responsive/swiper-page.vue'
+import overlay from '@/components/Home/overlay.vue'
+import postDialog from '@/components/Home/postDialog.vue'
 
 import momentApi from '@/api/moment'
 import masterApi from '@/api/master'

@@ -3,16 +3,14 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
-import masterApi from '@/api/master'
+import { mapActions } from 'vuex'
 
 export default {
   methods: {
-    ...mapMutations(['storeData'])
+    ...mapActions(['loadUser'])
   },
   async created () {
-    const data = (await masterApi.getUserInfo()).data
-    this.storeData(data)
+    this.loadUser()
   }
 }
 </script>

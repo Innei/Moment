@@ -68,12 +68,12 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-    ...mapState({
-      data: state => state.user
+    ...mapGetters({
+      data: 'user'
     })
   },
   data () {

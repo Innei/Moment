@@ -27,7 +27,7 @@
 import 'swiper/dist/css/swiper.css'
 
 import { swiper } from 'vue-awesome-swiper'
-import cardSlide from '@/components/slide.vue'
+import cardSlide from '@/components/Home/slide.vue'
 
 export default {
   components: {

@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   props: {
@@ -120,9 +120,7 @@ export default {
     createdTime () {
       return this.parseDate(this.data.createdTime);
     },
-    ...mapState({
-      user: state => state.user
-    })
+    ...mapGetters(['user'])
   }
 };
 </script>

@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import skill from '@/components/skill-item.vue'
+import { mapGetters } from 'vuex'
+import skill from '@/components/Home/skill-item.vue'
 
 export default {
   props: {
@@ -47,8 +47,8 @@ export default {
     skill
   },
   computed: {
-    ...mapState({
-      data: state => state.user
+    ...mapGetters({
+      data: 'user'
     })
   },
   methods: {

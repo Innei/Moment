@@ -11,14 +11,14 @@
       <div class="body">{{ user.username + ' posted a ' + data.type }}</div>
     </div>
     <div class="btn next_btn prev_btn" v-else>
-      <font-awesome-icon :icon="data.icon"/>
+      <font-awesome-icon :icon="data.icon" />
     </div>
   </swiper-slide>
 </template>
 
 <script>
 import { swiperSlide } from 'vue-awesome-swiper'
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   props: {
@@ -41,7 +41,7 @@ export default {
     swiperSlide
   },
   computed: {
-    ...mapState({ user: state => state.user })
+    ...mapGetters(['user'])
   }
 }
 </script>
@@ -147,7 +147,7 @@ export default {
   }
 
   &.next_btn.prev_btn:hover::before {
-    opacity: .5;
+    opacity: 0.5;
   }
 }
 </style>

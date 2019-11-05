@@ -25,6 +25,9 @@
       <item :name="'天气'" v-if="moment.type === 'moment'">
         <input type="text" v-model="moment.weather" />
       </item>
+      <item :name="'注释'" v-if="moment.type === 'picture'">
+        <input type="text" v-model="moment.comment" />
+      </item>
       <item :name="'上传图片'" v-if="moment.type === 'picture'">
         <input type="file" name="src" id="picture" accept="image/*" multiple ref="file" />
         <div class="files">
@@ -70,7 +73,10 @@ export default {
         mood: '',
         source: '',
         body: '',
-        weather: ''
+        weather: '',
+        // TODO 多张图片的渲染
+        src: '',
+        comment: ''
       },
       files: []
     }
@@ -94,9 +100,13 @@ export default {
               this.files.push(file.name)
 
               let formdata = new FormData()
-              formdata.append('file', file)
+              formdata.append('pic', file)
 
-              uploadApi.upload(formdata)
+              uploadApi.upload(formdata).then(({ data }) => {
+                const { src } = data
+                this.moment.src = src
+                this.$msg({ msg: '上传成功' })
+              })
             }
           })
         }

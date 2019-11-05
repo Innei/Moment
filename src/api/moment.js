@@ -14,7 +14,7 @@ api.getRecentlyMoment = function({ size, page }) {
 
 api.postNewMoment = momentData => {
   let data
-  const { title, body, mood, weather, source } = momentData
+  const { title, body, mood, weather, source, src, comment } = momentData
   switch (momentData.type) {
     case 'moment':
       data = {
@@ -36,8 +36,10 @@ api.postNewMoment = momentData => {
       }
       break
     case 'picture':
-      // TODO callback response
-      data = {}
+      data = {
+        comment,
+        src
+      }
 
       break
     default:
