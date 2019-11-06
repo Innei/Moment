@@ -34,45 +34,64 @@ import item from '@/components/Admin/sidebar/item.vue'
 export default {
   name: 'admin',
   computed: {
-    ...mapGetters(['user'])
+    ...mapGetters(['user']),
   },
   components: {
     item
   },
+  created () {
+    this.$root.$data.route = '/master'
+  },
+  beforeDestroy () {
+    this.$root.$data.route = null
+    delete this.$root.$data.route
+  },
   data () {
     return {
+      path: '/',
       items: [{
         title: 'Dashboard',
         icon: ['fas', 'tachometer-alt'],
-        subItems: [{
-          title: 'Dashboard',
-          icon: ['fas', 'tachometer-alt'],
-          subItems: [{
-            title: 'Dashboard',
-            icon: ['fas', 'tachometer-alt'],
-          }]
-        },
-        {
-          title: 'Dashboard',
-          icon: ['fas', 'tachometer-alt'],
-          subItems: [{
-            title: 'Dashboard',
-            icon: ['fas', 'tachometer-alt'],
-          }]
-        }]
+        path: '/dashboard'
       },
       {
         title: 'Moment',
-        icon: ['far', 'clock']
+        icon: ['far', 'clock'],
+        path: '/moments'
+      }, {
+        title: '菜单测试',
+        icon: ['fas', 'vial'],
+        path: '/moments1',
+        subItems: [{
+          title: '菜单测试 1',
+          icon: ['fas', 'vial'],
+          path: '/moments',
+          subItems: [{
+            title: '菜单测试 1 - 1',
+            icon: ['fas', 'vial'],
+            path: '/moments',
+            subItems: [{
+              title: '菜单测试 1 - 1 - 1',
+              icon: ['fas', 'vial'],
+              path: '/moments',
+              subItems: [{
+                title: '菜单测试 1 - 1 - 1 - 1',
+                icon: ['fas', 'vial'],
+                path: '/moments',
+              }]
+            }]
+          }]
+        },
+        {
+          title: '菜单测试 2',
+          icon: ['fas', 'vial'],
+          path: '/moments2',
+        }]
       }
       ],
       activeItems: 0
     }
   },
-  methods: {
-
-  },
-
 }
 </script>
 
@@ -107,7 +126,7 @@ $shallowbg: #1a9cf3;
     color: #fff;
     display: grid;
     grid-template-rows: 6rem auto 6rem;
-
+    overflow: hidden;
     > .title {
       display: flex;
       font-family: 'Josefin Sans', sans-serif;
@@ -120,6 +139,7 @@ $shallowbg: #1a9cf3;
     .items {
       margin-left: $left-margin;
       box-sizing: border-box;
+      overflow: scroll;
     }
 
     .user {

@@ -28,11 +28,17 @@ const router = new Router({
       name: 'admin',
       path: '/master',
       component: () => import('@/views/Admin/index.vue'),
+      redirect: '/master/dashboard',
       children: [
         {
-          path: '/',
+          path: 'dashboard',
           component: () => import('@/views/Admin/dashboard.vue'),
           meta: { title: '仪表盘 -- Moment' }
+        },
+        {
+          path: 'moments',
+          component: () => import('@/views/Admin/dashboard.vue'),
+          meta: { title: '管理瞬间 -- Moment' }
         }
       ]
     }

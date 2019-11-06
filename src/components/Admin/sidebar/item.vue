@@ -1,5 +1,5 @@
 <template>
-  <div class="row-item" :class="{active: active}" ref="item">
+  <div class="row-item" :class="{active: active}" ref="row-item">
     <!-- TODO 相应事件 父级相应处理 active -->
     <div class="item" @click="handleClick">
       <div class="icon">
@@ -22,18 +22,8 @@
         :index="index"
         v-for="(item, index) in item.subItems"
         :key="index"
+        ref="item"
       />
-
-      <!-- <div class="item" v-for="i in item.subItems" :key="i.title">
-        <div class="icon">
-          <font-awesome-icon :icon="i.icon" />
-        </div>
-      <div class="title">{{i.title}}</div>-->
-      <!-- TODO 子级中的子级菜单 -->
-      <!-- <div class="down">
-          <font-awesome-icon :icon="['fas','chevron-down']"/>
-      </div>-->
-      <!-- </div> -->
     </div>
   </div>
 </template>
@@ -57,7 +47,8 @@ export default {
   data () {
     return {
       height: 0,
-      activeItems: 0
+      activeItems: 0,
+
     }
   },
   computed: {
@@ -70,9 +61,26 @@ export default {
       this.$parent.activeItems = this.index
       if (this.$parent.activeItems === this.index) {
 
-        this.$refs.item.classList.toggle('hide')
+        this.$refs['row-item'].classList.toggle('hide')
       }
-    }
+      if (!this.hasChild) {
+        let path = this.item.path
+        let item = this.$parent
+        for (; ;) {
+          // path += item.path
+          if (item.item && item.item.path) {
+            path = item.item.path + path
+            item = item.$parent
+          } else break
+        }
+        // console.log(path);
+        path = this.$root.$data.route + path
+        if (path === this.$route.fullPath) {
+          return
+        }
+        this.$router.push(path)
+      }
+    },
   },
   mounted () {
     try {
