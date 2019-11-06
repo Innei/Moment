@@ -101,6 +101,7 @@ export default {
 }
 .row-item.hide .insider {
   max-height: 0 !important;
+  opacity: 0;
 }
 .row-item.active:not(.hide) {
   > .item .down {
@@ -110,7 +111,7 @@ export default {
 .insider {
   overflow: hidden;
   max-height: 0;
-  transition: max-height 0.5s;
+  transition: max-height 0.5s, opacity 0.5s;
 }
 
 .item {
