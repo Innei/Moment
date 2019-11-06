@@ -96,7 +96,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import url(https://fonts.googleapis.com/css?family=McLaren&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Nunito&display=swap);
 $deepBg: #1681e1;
 $shallowbg: #1a9cf3;
 .bg {
@@ -118,7 +118,7 @@ $shallowbg: #1a9cf3;
   background: linear-gradient(to bottom, #1188e8, #16aae7);
   border-radius: 24px;
   display: grid;
-  grid-template-columns: 17% auto;
+  grid-template-columns: 15rem auto;
   box-shadow: 5px 24px 133px rgba(0, 0, 0, 0.3);
 
   .side-bar {
@@ -174,6 +174,7 @@ $shallowbg: #1a9cf3;
   .content {
     background-color: #fff !important;
     border-radius: 0 24px 24px 0;
+    position: relative;
   }
 }
 </style>

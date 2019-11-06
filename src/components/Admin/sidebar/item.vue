@@ -1,6 +1,5 @@
 <template>
   <div class="row-item" :class="{active: active}" ref="row-item">
-    <!-- TODO 相应事件 父级相应处理 active -->
     <div class="item" @click="handleClick">
       <div class="icon">
         <font-awesome-icon :icon="item.icon" />
@@ -116,7 +115,7 @@ export default {
 
 .item {
   * {
-    font-family: 'McLaren', cursive;
+    font-family: 'Nunito', sans-serif;
   }
   display: grid;
   grid-template-columns: 20px auto 30px;
