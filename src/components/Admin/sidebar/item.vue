@@ -1,7 +1,7 @@
 <template>
-  <div class="row-item" :class="{active: isActived}">
+  <div class="row-item" :class="{active: active}" ref="item">
     <!-- TODO 相应事件 父级相应处理 active -->
-    <div class="item" @click="isActived = !isActived">
+    <div class="item" @click="handleClick">
       <div class="icon">
         <font-awesome-icon :icon="item.icon" />
       </div>
@@ -12,42 +12,52 @@
     </div>
     <div
       class="insider"
-      :style="isActived ? 'max-height: '+ height : ''"
+      :style="active ? 'max-height: '+ height : ''"
       ref="insider"
       v-if="hasChild"
     >
-      <!-- <div class="insider" ref="insider"> -->
-      <div class="item" v-for="i in item.subItems" :key="i.title">
+      <item
+        :active="activeItems === index ? true : false"
+        :item="item"
+        :index="index"
+        v-for="(item, index) in item.subItems"
+        :key="index"
+      />
+
+      <!-- <div class="item" v-for="i in item.subItems" :key="i.title">
         <div class="icon">
           <font-awesome-icon :icon="i.icon" />
         </div>
-        <div class="title">{{i.title}}</div>
-        <!-- TODO 子级中的子级菜单 -->
-        <!-- <div class="down">
+      <div class="title">{{i.title}}</div>-->
+      <!-- TODO 子级中的子级菜单 -->
+      <!-- <div class="down">
           <font-awesome-icon :icon="['fas','chevron-down']"/>
-        </div>-->
-      </div>
+      </div>-->
+      <!-- </div> -->
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  name: 'item',
   props: {
     active: Boolean,
     item: {
       type: Object,
       required: true,
       validator (val) {
-        return typeof (val.title) === "string" && val.icon instanceof Array && val.icon.length !== 0
+        return typeof (val.title) === "string"
+          && val.icon instanceof Array
+          && val.icon.length !== 0
       }
-    }
-
+    },
+    index: Number
   },
   data () {
     return {
       height: 0,
-      isActived: false
+      activeItems: 0
     }
   },
   computed: {
@@ -55,34 +65,40 @@ export default {
       return !(JSON.stringify(this.item.subItems) === '{}' || this.item.subItems === undefined)
     }
   },
-  created () {
-    if (this.active) {
-      this.isActived = true
+  methods: {
+    handleClick () {
+      this.$parent.activeItems = this.index
+      if (this.$parent.activeItems === this.index) {
+
+        this.$refs.item.classList.toggle('hide')
+      }
     }
   },
   mounted () {
     try {
       this.height = [...this.$refs.insider.querySelectorAll('.item')].length * 5 + 'rem'
     } catch (e) {
-      e
+      console.log('没有子元素')
     }
-  },
-  methods: {
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .row-item.active {
-  background: rgba(16, 133, 211, 0.8);
-
-  .down {
-    transform: rotate(180deg);
-  }
+  background: rgba(16, 133, 211, 0.5);
 }
 .row-item {
   transition: background 0.5s;
   border-radius: 24px 0 0 24px;
+}
+.row-item.hide .insider {
+  max-height: 0 !important;
+}
+.row-item.active:not(.hide) {
+  > .item .down {
+    transform: rotate(180deg);
+  }
 }
 .insider {
   overflow: hidden;

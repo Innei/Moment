@@ -5,8 +5,9 @@
         <div class="title">Moment</div>
         <div class="items">
           <item
-            :active="index === 0 ? true : false"
+            :active="activeItems === index ? true : false"
             :item="item"
+            :index="index"
             v-for="(item, index) in items"
             :key="index"
           />
@@ -43,17 +44,35 @@ export default {
       items: [{
         title: 'Dashboard',
         icon: ['fas', 'tachometer-alt'],
+        subItems: [{
+          title: 'Dashboard',
+          icon: ['fas', 'tachometer-alt'],
+          subItems: [{
+            title: 'Dashboard',
+            icon: ['fas', 'tachometer-alt'],
+          }]
+        },
+        {
+          title: 'Dashboard',
+          icon: ['fas', 'tachometer-alt'],
+          subItems: [{
+            title: 'Dashboard',
+            icon: ['fas', 'tachometer-alt'],
+          }]
+        }]
       },
       {
         title: 'Moment',
         icon: ['far', 'clock']
       }
-      ]
+      ],
+      activeItems: 0
     }
   },
   methods: {
 
-  }
+  },
+
 }
 </script>
 
