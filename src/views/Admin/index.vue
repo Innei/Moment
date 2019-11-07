@@ -20,6 +20,7 @@
           </div>
         </div>
       </div>
+
       <div class="content">
         <router-view></router-view>
       </div>
@@ -29,15 +30,15 @@
 
 <script>
 import { mapGetters } from 'vuex'
-
 import item from '@/components/Admin/sidebar/item.vue'
+
 export default {
   name: 'admin',
   computed: {
     ...mapGetters(['user']),
   },
   components: {
-    item
+    item,
   },
   created () {
     this.$root.$data.route = '/master'
@@ -97,6 +98,7 @@ export default {
 
 <style lang="scss" scoped>
 @import url(https://fonts.googleapis.com/css?family=Nunito&display=swap);
+
 $deepBg: #1681e1;
 $shallowbg: #1a9cf3;
 .bg {

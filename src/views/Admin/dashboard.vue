@@ -1,6 +1,8 @@
 <template>
   <layout>
-    
+    <v-slot name="main">
+      
+    </v-slot>
   </layout>
 </template>
 
