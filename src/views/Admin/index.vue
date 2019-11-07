@@ -47,6 +47,27 @@ export default {
     this.$root.$data.route = null
     delete this.$root.$data.route
   },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      const path = to.fullPath.replace(vm.$root.$data.route, '').split('/').map(item => '/' + item).slice(1)
+
+      vm.items.forEach((item, index) => {
+        if (item.path === path[0]) {
+          vm.activeItems = index
+          next()
+        }
+      });
+    })
+  },
+  beforeRouteUpdate (to, from, next) {
+    const path = to.fullPath.replace(this.$root.$data.route, '').split('/').map(item => '/' + item).slice(1)
+    this.items.forEach((item, index) => {
+      if (item.path === path[0]) {
+        this.activeItems = index
+        next()
+      }
+    });
+  },
   data () {
     return {
       path: '/',

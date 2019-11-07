@@ -6,7 +6,7 @@
     </header>
     <div class="scroll">
       <main>
-        <slot name="main" />
+       <slot name="main" />
       </main>
 
       <footer></footer>
@@ -36,6 +36,7 @@ export default {
     margin-bottom: 2.5rem;
     .title {
       font-size: 1.5rem;
+      user-select: none;
     }
   }
 

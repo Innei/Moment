@@ -25,6 +25,7 @@
           v-model="master.password"
           autocomplete="off"
           placeholder=" "
+          @keyup.enter="login"
         />
         <label for="password">Password</label>
       </form>
@@ -47,12 +48,20 @@ export default {
       }
     }
   },
+  beforeRouteEnter (to, from, next) {
+    masterApi.checkLogged().then((data) => {
+      if (data.ok === 1) {
+        next({ name: 'admin' })
+      }
+      next()
+    })
+  },
   methods: {
     async login () {
       const { data } = await masterApi.login(this.master)
       if (data.ok === 1) {
         this.$msg({ msg: '登陆成功' })
-        this.$router.push({name: 'home'})
+        this.$router.push({ name: 'admin' })
       }
     }
   }

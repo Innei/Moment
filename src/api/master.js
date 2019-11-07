@@ -21,4 +21,6 @@ api.checkInit = () => http.get(`${baseUrl}/init`)
 
 api.login = master => http.post(`${baseUrl}/login`, { ...master })
 
+api.checkLogged = () => http.get(`${baseUrl}/check_logged`)
+
 export default api
