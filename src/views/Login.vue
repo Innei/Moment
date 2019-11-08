@@ -48,13 +48,13 @@ export default {
       }
     }
   },
-  beforeRouteEnter (to, from, next) {
-    masterApi.checkLogged().then((data) => {
-      if (data.ok === 1) {
-        next({ name: 'admin' })
-      }
-      next()
-    })
+  async beforeRouteEnter (to, from, next) {
+    const { data } = await masterApi.checkLogged()
+
+    if (data.ok === 1) {
+      return next({ name: 'admin' })
+    }
+    next()
   },
   methods: {
     async login () {

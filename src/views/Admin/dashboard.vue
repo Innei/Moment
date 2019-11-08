@@ -28,10 +28,13 @@
             </template>
           </card>
         </div>
+      </div>
+      <!-- end header -->
 
-        <!-- end header -->
-
-        <!-- content card start  -->
+      <!-- body card start  -->
+      <div class="body">
+        <item-card />
+        <item-card />
       </div>
     </template>
   </layout>
@@ -45,12 +48,16 @@ export default {
   },
   components: {
     layout: () => import('@/components/Admin/layout.vue'),
-    card: () => import('@/components/Admin/card.vue')
+    card: () => import('@/components/Admin/card.vue'),
+    itemCard: () => import('@/components/Admin/item-card.vue')
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.header {
+  margin-bottom: 50px;
+}
 .card-wrap {
   display: grid;
   grid-template-columns: 61.8% auto;

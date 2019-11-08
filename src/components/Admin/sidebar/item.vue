@@ -5,8 +5,10 @@
         <font-awesome-icon :icon="item.icon" />
       </div>
       <div class="title">{{item.title}}</div>
-      <div class="down" v-if="hasChild">
-        <font-awesome-icon :icon="['fas','chevron-down']" />
+      <div v-if="hasChild" style="justify-content: right;">
+        <div class="down">
+          <font-awesome-icon :icon="['fas','chevron-down']" />
+        </div>
       </div>
     </div>
     <div
@@ -133,10 +135,10 @@ export default {
   }
 
   .down {
-    justify-content: right;
+    
     opacity: 0;
     transition: opacity 0.5s, transform 0.5s;
-    transform-origin: 8px 10px;
+    // transform-origin: 8px 10px;
   }
 
   &:hover {

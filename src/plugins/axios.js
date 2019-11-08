@@ -4,7 +4,8 @@ const http = axios.create({
   baseURL:
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000/api'
-      : '/api'
+      : '/api',
+  withCredentials: true
 })
 
 http.interceptors.response.use(
