@@ -1,5 +1,9 @@
 <template>
-  <layout></layout>
+  <layout>
+    <template #header>
+      <div class>New Moment</div>
+    </template>
+  </layout>
 </template>
 
 <script>

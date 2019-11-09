@@ -1,5 +1,6 @@
 <template>
   <layout>
+    
     <template #main>
       <!-- header start -->
       <div class="header">

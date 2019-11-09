@@ -23,7 +23,10 @@
               <div
                 class="ctime"
               >创建时间: {{parseDate(this.Time.created)}} {{parseTime(this.Time.created)}}</div>
-              <div class="comment" v-if="type==='picture' && content.comment">注释: {{content.comment}}</div>
+              <div
+                class="comment"
+                v-if="type==='picture' && content.comment"
+              >注释: {{content.comment}}</div>
             </div>
             <div class="icon">
               <div class>
@@ -77,7 +80,7 @@ export default {
         created: null,
         modified: null
       },
-     
+
     }
   },
   created () {
@@ -93,14 +96,16 @@ export default {
     },
     handleImgOnload () {
       console.log('onload')
+      this.updateWrapHeight()
+    },
+    updateWrapHeight () {
       this.overflowHeight = this.$refs.body.offsetHeight + 100
+      this.$refs.inside.setAttribute('style', 'transform: translateY(-' + this.overflowHeight + 'px)')
+      this.$refs.wrap.removeAttribute('style')
     }
   },
   mounted () {
-    this.overflowHeight = this.$refs.body.offsetHeight + 100
-    this.$refs.inside.setAttribute('style', 'transform: translateY(-' + this.overflowHeight + 'px)')
-    this.$refs.wrap.removeAttribute('style')
-
+    this.updateWrapHeight()
   },
   watch: {
     active (val) {

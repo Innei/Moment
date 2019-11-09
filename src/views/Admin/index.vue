@@ -1,8 +1,13 @@
 <template>
   <div class="bg">
-    <div class="wrap">
+    <div class="wrap" ref="wrap">
       <div class="side-bar">
-        <div class="title">Moment</div>
+        <div class="title" @click="$refs.wrap.classList.toggle('full')">
+          Moment
+          <!-- <div class="icon" @click="$refs.wrap.classList.add('full')">
+            <font-awesome-icon :icon="['fas','arrows-alt-v']"></font-awesome-icon>
+          </div> -->
+        </div>
         <div class="items">
           <item
             :active="activeItems === index ? true : false"
@@ -134,7 +139,13 @@ $shallowbg: #1a9cf3;
   right: 0;
   background-color: $deepBg;
 }
-
+.wrap.full {
+  margin: 0;
+  border-radius: 0;
+  .title .icon {
+    display: none;
+  }
+}
 .wrap {
   position: fixed;
   top: 0;
@@ -147,6 +158,7 @@ $shallowbg: #1a9cf3;
   display: grid;
   grid-template-columns: 15rem auto;
   box-shadow: 5px 24px 133px rgba(0, 0, 0, 0.3);
+  transition: margin 0.5s, border-radius 0.4s .1s;
 
   .side-bar {
     $left-margin: 1.5rem;
@@ -161,6 +173,33 @@ $shallowbg: #1a9cf3;
       align-items: center;
       font-size: 1.4rem;
       user-select: none;
+      cursor: pointer;
+      /* position: relative;
+      .icon {
+        position: absolute;
+        right: 25px;
+        transform: rotate(45deg);
+        opacity: 0.8;
+        cursor: pointer;
+        transition: opacity 0.5s;
+      }
+      .icon:hover {
+        opacity: 1;
+      }
+      .icon::before {
+        content: '';
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: -8px;
+        border-radius: 6px;
+        background: rgba(16, 133, 211, 0.5);
+        padding: 10px 15px;
+        position: absolute;
+        box-sizing: border-box;
+        transform: rotate(-45deg);
+        z-index: -1;
+      } */
     }
 
     .items {
@@ -201,7 +240,11 @@ $shallowbg: #1a9cf3;
   .content {
     background-color: #fff !important;
     border-radius: 0 24px 24px 0;
+    transition: border-radius .5s;
     position: relative;
+  }
+  &.full .content {
+    border-radius: 0;
   }
 }
 </style>
