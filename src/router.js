@@ -37,7 +37,7 @@ const router = new Router({
         },
         {
           path: 'moments',
-          component: () => import('@/views/Admin/dashboard.vue'),
+          component: () => import('@/views/Admin/manageMoment.vue'),
           meta: { title: '管理瞬间 -- Moment' }
         }
       ]

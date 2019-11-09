@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import item from '@/components/Admin/sidebar/item.vue'
 
 export default {
@@ -40,8 +40,12 @@ export default {
   components: {
     item,
   },
+  methods: {
+    ...mapActions(['loadRecentlyMoments'])
+  },
   created () {
     this.$root.$data.route = '/master'
+    this.loadRecentlyMoments()
   },
   beforeDestroy () {
     this.$root.$data.route = null

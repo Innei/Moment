@@ -10,7 +10,9 @@
             </template>
             <template #right>
               <div class="text info">欢迎回来主人，{{user.username}} ～</div>
-              <div class="text">重逢大都是暖心的，时隔多年，偌大的城市，人海茫茫，我已不复当初，你却仍然，温暖如故</div>
+              <div
+                class="text"
+              >{{hitokoto.id ? hitokoto.hitokoto + ' ———— ' + hitokoto.from : '请稍后 ...'}}</div>
             </template>
           </card>
           <card
@@ -19,7 +21,7 @@
             <template #left>
               <div class="text info">
                 <div>当前已有</div>
-                <div class="num">5</div>
+                <div class="num">{{total || 'NaN'}}</div>
                 <div>条瞬间</div>
               </div>
             </template>
@@ -33,8 +35,20 @@
 
       <!-- body card start  -->
       <div class="body">
-        <item-card />
-        <item-card />
+        <div class v-for="moment in moments" :key="moment._id">
+          <keep-alive>
+            <item-card
+              :time="{createdTime: moment.createdTime,modifiedTime:moment.modifiedTime}"
+              :type="moment.type"
+              :title="moment.content.title"
+              :content="moment.content"
+            >
+              <pre>
+            <!-- {{moment.content.body}} -->
+          </pre>
+            </item-card>
+          </keep-alive>
+        </div>
       </div>
     </template>
   </layout>
@@ -42,14 +56,36 @@
 
 <script>
 import { mapGetters } from 'vuex'
+// import MomentApi from '@/api/moment'
+
 export default {
+  data () {
+    return {
+      hitokoto: {
+        hitokoto: null,
+        id: null,
+        from: null,
+        creator: null
+      }
+    }
+  },
   computed: {
-    ...mapGetters(['user'])
+    ...mapGetters(['user']),
+    ...mapGetters(['moments']),
+    ...mapGetters(['total'])
   },
   components: {
     layout: () => import('@/components/Admin/layout.vue'),
     card: () => import('@/components/Admin/card.vue'),
     itemCard: () => import('@/components/Admin/item-card.vue')
+  },
+  created () {
+    // get hitokoto
+    import('axios').then(axios => {
+      axios.get('https://v1.hitokoto.cn/').then(res => {
+        this.hitokoto = res.data
+      })
+    })
   }
 }
 </script>

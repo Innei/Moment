@@ -4,7 +4,7 @@
       <div class="time">{{parseDate(this.Time.created)}}</div>
       <div class="title_type">
         <div class="type">{{type}}</div>
-        <div class="title">{{title}}</div>
+        <div class="title">{{title || content.body}}</div>
       </div>
       <div>
         <div class="down" :class="{active: active}">
@@ -14,25 +14,32 @@
     </div>
     <div class="inside card" ref="inside">
       <div class="time">{{parseDate(this.Time.created)}}</div>
-      <div class="body" ref="body">
-        <div class="card white">
+      <div class="body">
+        <div class="card white" ref="body">
           <div class="info">
             <div>
-              <div class="title">标题: {{title}}</div>
+              <div class="title" v-if="type === 'moment'">标题: {{title}}</div>
               <div class="type">类型: {{type}}</div>
               <div
                 class="ctime"
               >创建时间: {{parseDate(this.Time.created)}} {{parseTime(this.Time.created)}}</div>
+              <div class="comment" v-if="type==='picture' && content.comment">注释: {{content.comment}}</div>
             </div>
             <div class="icon">
               <div class>
-                <font-awesome-icon :icon="['far', 'clock']"></font-awesome-icon>
+                <font-awesome-icon :icon="['far', 'clock']" v-if="type === 'moment'"></font-awesome-icon>
+                <font-awesome-icon :icon="['far', 'sun']" v-if="type === 'hitokoto'"></font-awesome-icon>
+                <font-awesome-icon :icon="['far', 'lightbulb']" v-if="type === 'idea'"></font-awesome-icon>
+                <font-awesome-icon :icon="['far', 'image']" v-if="type === 'picture'"></font-awesome-icon>
               </div>
             </div>
           </div>
 
-          <div class="content">
-            <slot />
+          <div class="content" style="position: relative">
+            <pre v-if="type !== 'picture'">
+             {{ content.body }}
+            </pre>
+            <img :src="content.src" v-if="type==='picture'" @load="handleImgOnload" />
           </div>
         </div>
       </div>
@@ -43,21 +50,34 @@
 <script>
 import moment from 'moment'
 export default {
+  props: {
+    time: {
+      type: Object,
+      required: true
+    },
+    type: {
+      type: String,
+      required: true
+    },
+    title: String,
+    content: {}
+  },
   data () {
     return {
-      time: {
-        createdTime: 1573211116082,
-        modifiedTime: 1573211118082,
-      },
-      type: 'moment',
-      title: 'New moment',
+      // time: {
+      //   createdTime: 1573211116082,
+      //   modifiedTime: 1573211118082,
+      // },
+      // type: 'moment',
+      // title: 'New moment',
       // m: moment,
       active: false,
       overflowHeight: null,
       Time: {
         created: null,
         modified: null
-      }
+      },
+     
     }
   },
   created () {
@@ -66,15 +86,21 @@ export default {
   },
   methods: {
     parseDate (date) {
-      return moment(date).format('MMM OD YYYY')
+      return moment(date).format('MMM DD YYYY')
     },
     parseTime (time) {
       return moment(time).format('HH:mm')
+    },
+    handleImgOnload () {
+      console.log('onload')
+      this.overflowHeight = this.$refs.body.offsetHeight + 100
     }
   },
   mounted () {
-    console.log(this.$refs.inside.offsetHeight)
     this.overflowHeight = this.$refs.body.offsetHeight + 100
+    this.$refs.inside.setAttribute('style', 'transform: translateY(-' + this.overflowHeight + 'px)')
+    this.$refs.wrap.removeAttribute('style')
+
   },
   watch: {
     active (val) {
@@ -83,7 +109,7 @@ export default {
         this.$refs.wrap.removeAttribute('style')
       } else {
         this.$refs.wrap.setAttribute('style', 'height: ' + (98 + this.overflowHeight) + 'px')
-        this.$refs.inside.setAttribute('style', 'transform: translateY(0px)')
+        this.$refs.inside.setAttribute('style', 'transform: translateY(0px);height: calc(' + this.$refs.wrap.style.height + ' - 98px)')
       }
     }
   }
@@ -106,7 +132,8 @@ export default {
   display: grid;
   background: #f4f4f7;
   color: #020720;
-  height: 100%;
+  // height: 100%;
+
   width: 100%;
   position: relative;
   transition: 0.5s;
@@ -132,10 +159,17 @@ export default {
   }
 
   .title_type {
+    display: grid;
+    grid-template-columns: 8rem minmax(auto, 20rem);
     justify-content: flex-start;
     font-weight: 100;
     .type {
       margin-right: 3rem;
+    }
+    .title {
+      white-space: nowrap;
+      justify-content: flex-start;
+      overflow: hidden;
     }
   }
   .down {
@@ -147,10 +181,8 @@ export default {
   }
 }
 
-.card.inside {
-  // height: 800px;
+.inside {
   border-radius: 0 0 12px 12px;
-  padding: 3rem 0;
   .time {
     display: flex;
     justify-content: center;
@@ -158,11 +190,12 @@ export default {
     font-size: 0.8rem;
     padding-top: 1rem;
   }
-}
-.inside {
+  .time {
+    padding: 3rem 0;
+  }
   .body {
-    padding: 0 2rem;
-    height: calc(100% - 88px);
+    padding: 3rem 2rem;
+    // height: calc(100% - 88px);
   }
   .info {
     display: grid;
@@ -181,5 +214,12 @@ export default {
     display: grid;
     grid-template-rows: 9rem auto;
   }
+}
+pre {
+  white-space: pre-wrap;
+}
+img {
+  max-width: 100%;
+  border-radius: 12px;
 }
 </style>
