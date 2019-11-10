@@ -77,10 +77,14 @@
         bottom: 1px;
         right: 0;
         left: 0;
-        margin: 0.3rem;
+        // margin: 0.3rem;
         border-radius: 50%;
         background: #379af1;
         z-index: -1;
+        height: 36px;
+        width: 36px;
+        display: flex;
+        margin: auto;
       }
       // line-height: 1.5;
     }

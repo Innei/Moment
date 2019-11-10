@@ -5,7 +5,7 @@
         <font-awesome-icon :icon="item.icon" />
       </div>
       <div class="title">{{item.title}}</div>
-      <div v-if="hasChild" style="justify-content: right;">
+      <div v-if="hasChild" style="justify-content: left;">
         <div class="down">
           <font-awesome-icon :icon="['fas','chevron-down']" />
         </div>

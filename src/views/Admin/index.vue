@@ -6,7 +6,7 @@
           Moment
           <!-- <div class="icon" @click="$refs.wrap.classList.add('full')">
             <font-awesome-icon :icon="['fas','arrows-alt-v']"></font-awesome-icon>
-          </div> -->
+          </div>-->
         </div>
         <div class="items">
           <item
@@ -30,6 +30,13 @@
         <router-view></router-view>
       </div>
     </div>
+    <postDialog
+      v-if="dialogs.post && $route.fullPath === '/master/moments'"
+      @cancel-post="dialogs.post = false"
+    />
+    <transition name="fade">
+      <overlay v-if="overlay" />
+    </transition>
   </div>
 </template>
 
@@ -44,6 +51,8 @@ export default {
   },
   components: {
     item,
+    postDialog: () => import('@/components/Home/postDialog.vue'),
+    overlay: () => import('@/components/Home/overlay.vue')
   },
   methods: {
     ...mapActions(['loadRecentlyMoments'])
@@ -120,9 +129,29 @@ export default {
         }]
       }
       ],
-      activeItems: 0
+      activeItems: 0,
+      overlay: false, // 遮罩
+      dialogs: {
+        post: false
+      }
     }
   },
+  watch: {
+    dialogs: {
+      deep: true,
+      handler (val) {
+        let overlay = false
+        for (const flag of Object.values(val)) {
+
+          if (flag === true) {
+            overlay = true
+            break
+          }
+        }
+        this.overlay = overlay
+      }
+    }
+  }
 }
 </script>
 
@@ -158,7 +187,7 @@ $shallowbg: #1a9cf3;
   display: grid;
   grid-template-columns: 15rem auto;
   box-shadow: 5px 24px 133px rgba(0, 0, 0, 0.3);
-  transition: margin 0.5s, border-radius 0.4s .1s;
+  transition: margin 0.5s, border-radius 0.4s 0.1s;
 
   .side-bar {
     $left-margin: 1.5rem;
@@ -240,11 +269,21 @@ $shallowbg: #1a9cf3;
   .content {
     background-color: #fff !important;
     border-radius: 0 24px 24px 0;
-    transition: border-radius .5s;
+    transition: border-radius 0.5s;
     position: relative;
   }
   &.full .content {
     border-radius: 0;
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

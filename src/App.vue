@@ -44,6 +44,10 @@ a:hover {
   height: 0;
 }
 
+* {
+  scrollbar-width: none;
+}
+
 html {
   font-size: 16px;
 }

@@ -80,7 +80,6 @@
     </transition>
     <postDialog v-if="dialogs.post" @cancel-post="dialogs.post = false" />
     <transition name="fade">
-      <!-- TODO handle cancel diglogs methods -->
       <overlay v-if="overlay"/>
     </transition>
     <!-- end -->
