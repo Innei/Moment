@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import master from '@/api/master'
 
 Vue.use(Router)
 
@@ -27,6 +28,7 @@ const router = new Router({
     {
       name: 'admin',
       path: '/master',
+      meta: { private: true },
       component: () => import('@/views/Admin/index.vue'),
       redirect: '/master/dashboard',
       children: [
@@ -43,6 +45,18 @@ const router = new Router({
       ]
     }
   ]
+})
+
+router.beforeEach(async (to, from, next) => {
+  if (to.meta.private) {
+    const { data } = await master.checkLogged()
+    if (data.ok === 1) {
+      return next()
+    } else {
+      return next({ name: 'login' })
+    }
+  }
+  next()
 })
 
 router.afterEach(to => {

@@ -33,6 +33,7 @@
     <postDialog
       v-if="dialogs.post && $route.fullPath === '/master/moments'"
       @cancel-post="dialogs.post = false"
+      :editData="editData"
     />
     <transition name="fade">
       <overlay v-if="overlay" />
@@ -98,42 +99,13 @@ export default {
         title: 'Moment',
         icon: ['far', 'clock'],
         path: '/moments'
-      }, {
-        title: '菜单测试',
-        icon: ['fas', 'vial'],
-        path: '/moments1',
-        subItems: [{
-          title: '菜单测试 1',
-          icon: ['fas', 'vial'],
-          path: '/moments',
-          subItems: [{
-            title: '菜单测试 1 - 1',
-            icon: ['fas', 'vial'],
-            path: '/moments',
-            subItems: [{
-              title: '菜单测试 1 - 1 - 1',
-              icon: ['fas', 'vial'],
-              path: '/moments',
-              subItems: [{
-                title: '菜单测试 1 - 1 - 1 - 1',
-                icon: ['fas', 'vial'],
-                path: '/moments',
-              }]
-            }]
-          }]
-        },
-        {
-          title: '菜单测试 2',
-          icon: ['fas', 'vial'],
-          path: '/moments2',
-        }]
-      }
-      ],
+      },],
       activeItems: 0,
       overlay: false, // 遮罩
       dialogs: {
         post: false
-      }
+      },
+      editData: null
     }
   },
   watch: {

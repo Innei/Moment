@@ -1,6 +1,5 @@
 <template>
   <layout>
-    
     <template #main>
       <!-- header start -->
       <div class="header">
@@ -43,11 +42,7 @@
               :type="moment.type"
               :title="moment.content.title"
               :content="moment.content"
-            >
-              <pre>
-            <!-- {{moment.content.body}} -->
-          </pre>
-            </item-card>
+            />
           </keep-alive>
         </div>
       </div>

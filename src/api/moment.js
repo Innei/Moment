@@ -48,5 +48,5 @@ export const postNewMoment = momentData => {
     data
   })
 }
-
-export default { getRecentlyMoment, postNewMoment }
+export const deleteOneMoment = id => http.delete(`${baseUrl}/${id}`)
+export default { getRecentlyMoment, postNewMoment, deleteOneMoment }

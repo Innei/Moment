@@ -65,6 +65,9 @@ export default {
   components: {
     item
   },
+  props: {
+    editData: Object
+  },
   data () {
     return {
       moment: {
@@ -81,17 +84,27 @@ export default {
       files: []
     }
   },
+  created () {
+    if (this.editData) {
+      this.moment = Object.assign({}, this.editData.content)
+      this.$set(this.moment, 'type', this.editData.type)
+    }
+  },
   methods: {
     handleSubmit () {
-      momentApi.postNewMoment(this.moment).then(({ data }) => {
-        if (data.ok === 1) {
-          // this.$refs.form.classList.add('remove')
-          // setTimeout(() => {
-          //   this.$emit('cancel-post')
-          // }, 250);
-          this.handleCancelOrCompleted()
-        }
-      })
+      if (!this.editData) {
+        momentApi.postNewMoment(this.moment).then(({ data }) => {
+          if (data.ok === 1) {
+            // this.$refs.form.classList.add('remove')
+            // setTimeout(() => {
+            //   this.$emit('cancel-post')
+            // }, 250);
+            this.handleCancelOrCompleted()
+          }
+        })
+      } else {
+        // TODO PUT 接口
+      }
     },
     handleCancelOrCompleted () {
       this.$refs.form.classList.add('remove')
