@@ -1,9 +1,8 @@
 import http from '../plugins/axios.js'
 
 const baseUrl = 'moments'
-const api = {}
 
-api.getRecentlyMoment = function({ size, page }) {
+export const getRecentlyMoment = function({ size, page }) {
   return http.get(baseUrl, {
     params: {
       size,
@@ -12,7 +11,7 @@ api.getRecentlyMoment = function({ size, page }) {
   })
 }
 
-api.postNewMoment = momentData => {
+export const postNewMoment = momentData => {
   let data
   const { title, body, mood, weather, source, src, comment } = momentData
   switch (momentData.type) {
@@ -50,4 +49,4 @@ api.postNewMoment = momentData => {
   })
 }
 
-export default api
+export default { getRecentlyMoment, postNewMoment }

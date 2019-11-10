@@ -32,6 +32,9 @@
         </div>
       </div>
     </div>
+    <div class="tfooter">
+      <!-- TODO 分页器 -->
+    </div>
   </ps>
 </template>
 
