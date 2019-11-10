@@ -93,6 +93,9 @@ $table-col-gap: 20px;
 
 .table {
   min-height: 10rem;
+  .theader {
+    display: inline-block;
+  }
   .status_bar {
     white-space: nowrap;
     display: inline-block;
@@ -102,12 +105,13 @@ $table-col-gap: 20px;
     font-weight: 800;
   }
   .tbody {
+    display: inline-block;
     .row {
       white-space: nowrap;
       display: inline-block;
       padding: 12px;
       border-bottom: 1px #eee solid;
-      min-width: 100%;
+      // min-width: 100%;
     }
   }
 }
