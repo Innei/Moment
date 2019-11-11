@@ -10,9 +10,11 @@
             </template>
             <template #right>
               <div class="text info">欢迎回来主人，{{user.username}} ～</div>
-              <div
-                class="text"
-              >{{hitokoto.id ? hitokoto.hitokoto + ' ———— ' + hitokoto.from : '请稍后 ...'}}</div>
+              <ps class="text hitokoto">
+                <div
+                  class
+                >{{hitokoto.id ? hitokoto.hitokoto + ' ———— ' + hitokoto.from : '请稍后 ...'}}</div>
+              </ps>
             </template>
           </card>
           <card
@@ -113,5 +115,8 @@ export default {
   &.clock {
     background-image: url('./../../assets/2.svg');
   }
+}
+.hitokoto {
+  max-height: 90px;
 }
 </style>

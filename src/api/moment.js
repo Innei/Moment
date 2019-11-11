@@ -44,8 +44,9 @@ export const postNewMoment = momentData => {
     default:
       break
   }
+  data = Object.assign({}, { content: { ...data } }, { type: momentData.type })
   return http.post(baseUrl, {
-    data
+    ...data
   })
 }
 export const deleteOneMoment = id => http.delete(`${baseUrl}/${id}`)

@@ -99,7 +99,18 @@ export default {
         title: 'Moment',
         icon: ['far', 'clock'],
         path: '/moments'
-      },],
+      },
+      {
+        title: 'Setting',
+        icon: ['fas', 'cogs'],
+        path: '/setting',
+        subItems: [{
+          title: 'Profile',
+          icon: ['fas', 'user-cog'],
+          path: '/profile'
+        }]
+      }
+      ],
       activeItems: 0,
       overlay: false, // 遮罩
       dialogs: {

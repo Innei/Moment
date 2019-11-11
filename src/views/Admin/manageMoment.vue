@@ -22,16 +22,29 @@
 <script>
 import api from '@/api/moment'
 import moment from 'moment'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   components: {
     layout: () => import('@/components/Admin/layout.vue'),
     Table: () => import('@/components/Admin/Table/table.vue')
   },
+  computed: {
+    ...mapGetters(['isPost'])
+  },
   async created () {
     const { data } = await api.getRecentlyMoment({ size: this.size, page: 1 })
     this.data = this.filterData(data)
   },
+  watch: {
+    isPost (val) {
+      if (val) {
+        this.reload()
+        this.resetPost()
+      }
+    }
+  },
   methods: {
+    ...mapActions(['togglePost', 'resetPost']),
     filterData (data) {
       this.oData = data.data // 原始数据挂载 不需要响应式
       this.page = Object.assign({}, data.pageOptions)
@@ -84,6 +97,10 @@ export default {
         const { data } = await api.getRecentlyMoment({ size: this.size, page: this.page.currentPage })
         this.data = this.filterData(data)
       }
+    },
+    async reload () {
+      const { data } = await api.getRecentlyMoment({ size: this.size, page: this.page.currentPage })
+      this.data = this.filterData(data)
     }
   },
   data () {

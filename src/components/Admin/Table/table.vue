@@ -2,7 +2,7 @@
   <ps class="table" v-if="data">
     <div class="theader">
       <div class="status_bar">
-        <div class="col" v-if="options.showID">#</div>
+        <div class="col" style="width: 18px" v-if="options.showID">#</div>
         <div
           class="col"
           v-for="col in cols"
@@ -14,7 +14,7 @@
     </div>
     <div class="tbody">
       <div class="row" v-for="(row, i) in data" :key="row._id">
-        <div class="col" v-show="options.showID" :style="{overflow: 'hidden'}">{{i}}</div>
+        <div class="col" v-show="options.showID" :style="{overflow: 'hidden', width: '18px'}">{{i + 1}}</div>
         <div
           class="col"
           :style="{width: col.width, overflow: 'hidden', textOverflow: 'ellipsis'}"
@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="tfooter">
-      <div class="page_nav" v-if="page">
+      <div class="page_nav" v-if="page && page.totalPage > 1">
         <div class="page_wrap">
           <div
             class="prev btn"
@@ -66,8 +66,7 @@
 </template>
 
 <script>
-import { PerfectScrollbar } from 'vue2-perfect-scrollbar'
-import 'vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css'
+
 export default {
   props: {
     data: {
@@ -90,9 +89,6 @@ export default {
         return null
       }
     }
-  },
-  components: {
-    ps: PerfectScrollbar
   },
   mounted () {
     if (this.cols[this.cols.length - 1].actions) {
@@ -136,13 +132,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import url(https://fonts.googleapis.com/css?family=Overpass+Mono&display=swap);
+// @import url(https://fonts.googleapis.com/css?family=Overpass+Mono&display=swap);
 $table-col-gap: 20px;
 .table {
   overflow: auto;
 }
 * {
-  font-family: 'Overpass Mono', monospace;
+  // font-family: 'Overpass Mono', monospace;
   user-select: none;
 }
 .table::-webkit-scrollbar {

@@ -48,7 +48,8 @@ const router = new Router({
 })
 
 router.beforeEach(async (to, from, next) => {
-  if (to.meta.private) {
+  // 用这种方式去获取父路由的 meta 信息
+  if (to.matched.some(r => r.meta.private)) {
     const { data } = await master.checkLogged()
     if (data.ok === 1) {
       return next()

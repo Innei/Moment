@@ -59,7 +59,9 @@ export default {
   },
   methods: {
     handleClick () {
-      this.$parent.activeItems = this.index
+      // if (!this.item.subItems) {
+        this.$parent.activeItems = this.index
+      // }
       if (this.$parent.activeItems === this.index) {
 
         this.$refs['row-item'].classList.toggle('hide')
@@ -135,7 +137,6 @@ export default {
   }
 
   .down {
-    
     opacity: 0;
     transition: opacity 0.5s, transform 0.5s;
     // transform-origin: 8px 10px;

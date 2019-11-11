@@ -67,13 +67,6 @@ export default {
   },
   data () {
     return {
-      // time: {
-      //   createdTime: 1573211116082,
-      //   modifiedTime: 1573211118082,
-      // },
-      // type: 'moment',
-      // title: 'New moment',
-      // m: moment,
       active: false,
       overflowHeight: null,
       Time: {
@@ -95,8 +88,12 @@ export default {
       return moment(time).format('HH:mm')
     },
     handleImgOnload () {
-      console.log('onload')
-      this.updateWrapHeight()
+      console.log('img onload')
+      try {
+        this.updateWrapHeight()
+      } catch (e) {
+        console.log('已跳过', e)
+      }
     },
     updateWrapHeight () {
       this.overflowHeight = this.$refs.body.offsetHeight + 100
@@ -117,6 +114,9 @@ export default {
         this.$refs.inside.setAttribute('style', 'transform: translateY(0px);height: calc(' + this.$refs.wrap.style.height + ' - 98px)')
       }
     }
+  },
+  destroyed () {
+    this.$off()
   }
 }
 </script>

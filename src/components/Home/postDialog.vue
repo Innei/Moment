@@ -57,6 +57,7 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 import item from './form/form-item.vue'
 
 import uploadApi from '@/api/upload'
@@ -91,15 +92,19 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['togglePost']),
     handleSubmit () {
       if (!this.editData) {
         momentApi.postNewMoment(this.moment).then(({ data }) => {
           if (data.ok === 1) {
-            // this.$refs.form.classList.add('remove')
+            // this.$refs.form.classList.remove('active')
             // setTimeout(() => {
             //   this.$emit('cancel-post')
             // }, 250);
             this.handleCancelOrCompleted()
+            this.$msg({ msg: '提交成功' })
+            this.$emit('submit-ok')
+            this.togglePost()
           }
         })
       } else {
@@ -114,6 +119,8 @@ export default {
     },
   },
   mounted () {
+    this.$refs.form.classList.add('active')
+
     this.$watch('moment.type', {
       deep: true, // 深度监听 对象中属性的变化
       handler (newVal) {
@@ -159,13 +166,11 @@ export default {
   border: 1px #eee solid;
   box-sizing: border-box;
   min-width: 50vw;
-  transition: height 0.5s, transform 0.2s;
+  transition: height 0.5s, transform 0.2s cubic-bezier(0.06, 1.14, 0.36, 1.11);
   transform: scale(0.2);
-  animation: scale 0.2s forwards cubic-bezier(0.06, 1.14, 0.36, 1.11);
-
+  animation: scale 0.2s both cubic-bezier(0.06, 1.14, 0.36, 1.11);
   &.remove {
-    transform: scale(0);
-    animation: none;
+    animation: scaleS 0.2s forwards ease !important;
   }
   .title {
     text-align: center;
@@ -216,6 +221,15 @@ input[type='reset'] {
   }
   to {
     transform: scale(1);
+  }
+}
+
+@keyframes scaleS {
+  0% {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0);
   }
 }
 </style>

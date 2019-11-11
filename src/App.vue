@@ -4,12 +4,18 @@
 
 <script>
 import { mapActions } from 'vuex'
+import api from '@/api/master'
 
 export default {
   methods: {
     ...mapActions(['loadUser'])
   },
   async created () {
+    const { ok } = (await api.checkInit()).data
+
+    if (ok) {
+      return this.$router.push('/init')
+    }
     this.loadUser()
   }
 }
