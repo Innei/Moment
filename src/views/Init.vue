@@ -132,7 +132,8 @@ import 'swiper/dist/css/swiper.css'
 import masterApi from '@/api/master'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import Vue from 'vue'
-import router from '../router'
+import {mapActions} from 'vuex'
+// import router from '../router'
 
 const orgin = window.location.href.split('#').slice(0, 2).join('#')
 export default {
@@ -184,6 +185,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['loadUser']),
     async handleNext () {
       switch (this.currentStep) {
         case 1:
@@ -215,6 +217,7 @@ export default {
         masterApi.completeInit(this.master).then(({ data }) => {
           if (data.ok === 1) {
             this.$msg({ msg: '初始化成功' })
+            this.loadUser()
             this.$router.push({ name: 'login' })
           }
         })
@@ -232,6 +235,9 @@ export default {
       const { data } = await masterApi.checkPass(this.master.password)
       if (data.ok === 1) {
         return
+      } else {
+        this.$msg({ msg: data.msg, type: 'error' })
+        throw new Error(data.msg)
       }
     },
     checkUrl (URL) {
@@ -239,13 +245,14 @@ export default {
     },
   },
   // 路由到达前 检测是否完成初始化
-  async beforeRouteEnter () {
+  async beforeRouteEnter (to, from, next) {
     const { data } = await masterApi.checkInit()
     if (data.ok === 0) {
       // 因为无法获取到 this
       Vue.prototype.$msg({ type: 'error', msg: data.msg })
-      router.push('/')
+      return next('/')
     }
+    next()
   }
 }
 </script>

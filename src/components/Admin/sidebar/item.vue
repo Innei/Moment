@@ -1,5 +1,5 @@
 <template>
-  <div class="row-item" :class="{active: active}" ref="row-item">
+  <div class="row-item" :class="{active: active,extend:extend}" ref="row-item">
     <div class="item" @click="handleClick">
       <div class="icon">
         <font-awesome-icon :icon="item.icon" />
@@ -13,7 +13,7 @@
     </div>
     <div
       class="insider"
-      :style="active ? 'max-height: '+ height : ''"
+      :style="extend ? 'max-height: '+ height : ''"
       ref="insider"
       v-if="hasChild"
     >
@@ -49,7 +49,7 @@ export default {
     return {
       height: 0,
       activeItems: 0,
-
+      extend: false
     }
   },
   computed: {
@@ -59,9 +59,23 @@ export default {
   },
   methods: {
     handleClick () {
-      // if (!this.item.subItems) {
+      if (!this.item.subItems) {
         this.$parent.activeItems = this.index
-      // }
+
+        const activeItems = []
+        for (let i = this; i.$props && i.$props.index > -1; i = i.$parent) {
+          activeItems.push(i.$props.index)
+        }
+        // console.log(activeItems);
+        // console.log(this.$parent.$data);
+
+        for (let vm = this.$parent; vm.$data && vm.$data.activeItems > -1; vm = vm.$parent) {
+          vm.$data.activeItems = activeItems.shift()
+          // console.log(vm.$data.activeItems);
+        }
+      } else {
+        this.extend = !this.extend
+      }
       if (this.$parent.activeItems === this.index) {
 
         this.$refs['row-item'].classList.toggle('hide')
@@ -78,9 +92,11 @@ export default {
         }
         // console.log(path);
         path = this.$root.$data.route + path
+
         if (path === this.$route.fullPath) {
           return
         }
+
         this.$router.push(path)
       }
     },
@@ -96,6 +112,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.row-item.extend:not(.hide) {
+  > .item .down {
+    transform: rotate(180deg);
+  }
+}
+.row-item:not(.extend) {
+  > .item .down {
+    transform: rotate(0) !important;
+  }
+}
 .row-item.active {
   background: rgba(16, 133, 211, 0.5);
 }

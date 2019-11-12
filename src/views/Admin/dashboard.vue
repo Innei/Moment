@@ -23,7 +23,7 @@
             <template #left>
               <div class="text info">
                 <div>当前已有</div>
-                <div class="num">{{total || 'NaN'}}</div>
+                <div class="num">{{total || 0}}</div>
                 <div>条瞬间</div>
               </div>
             </template>

@@ -103,11 +103,34 @@ export default {
       {
         title: 'Setting',
         icon: ['fas', 'cogs'],
-        path: '/setting',
+        path: '',
         subItems: [{
           title: 'Profile',
           icon: ['fas', 'user-cog'],
-          path: '/profile'
+          path: '',
+          subItems: [{
+            title: 'Profile',
+            icon: ['fas', 'user-cog'],
+            path: '/moments'
+          }, {
+            title: 'Profile',
+            icon: ['fas', 'user-cog'],
+            path: '/profile',
+            subItems: [{
+              title: 'Profile',
+              icon: ['fas', 'user-cog'],
+              path: '/profile',
+              subItems: [{
+                title: 'Profile',
+                icon: ['fas', 'user-cog'],
+                path: '/profile'
+              }, {
+                title: 'Profile',
+                icon: ['fas', 'user-cog'],
+                path: '/profile'
+              }]
+            }]
+          }]
         }]
       }
       ],
