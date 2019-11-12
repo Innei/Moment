@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-    <header>
+    <header :style="options.noPadding ? 'padding: 0.5rem 0;' : ''">
       <span class="title">{{$route.meta.title.split('--')[0]}}</span>
       <div class="btn" @click="$emit('btn-click')" v-if="$slots.header">
         <div class="name">
@@ -19,7 +19,18 @@
     <footer></footer>
   </div>
 </template>
-
+<script>
+export default {
+  props: {
+    options: {
+      type: Object,
+      default () {
+        return {}
+      }
+    }
+  }
+}
+</script>
 <style lang="scss" scoped>
 .layout {
   position: absolute;

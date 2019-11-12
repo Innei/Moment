@@ -2,25 +2,41 @@ import http from '@/plugins/axios'
 
 const baseUrl = 'master'
 
-const api = {}
-
-api.getUserInfo = () => {
+export const getUserInfo = () => {
   return http.get(`${baseUrl}`)
 }
 
-api.getUserIntroduce = () => http.get(`${baseUrl}/introduce`)
+export const getUserIntroduce = () => http.get(`${baseUrl}/introduce`)
 
-api.checkPass = password =>
+export const checkPass = password =>
   http.post(`${baseUrl}/check_pass`, {
     password
   })
 
-api.completeInit = master => http.post(`${baseUrl}/init`, { ...master })
+export const completeInit = master =>
+  http.post(`${baseUrl}/init`, { ...master })
 
-api.checkInit = () => http.get(`${baseUrl}/init`)
+export const checkInit = () => http.get(`${baseUrl}/init`)
 
-api.login = master => http.post(`${baseUrl}/login`, { ...master })
+export const login = master => http.post(`${baseUrl}/login`, { ...master })
 
-api.checkLogged = () => http.get(`${baseUrl}/check_logged`)
+export const checkLogged = () => http.get(`${baseUrl}/check_logged`)
 
-export default api
+export const signOut = () => http.get(`${baseUrl}/sign_out`)
+
+export const resetPass = ({ password, oldPassword }) =>
+  http.post(`${baseUrl}/reset_password`, {
+    password,
+    oldPassword
+  })
+
+export default {
+  getUserInfo,
+  getUserIntroduce,
+  checkPass,
+  login,
+  checkLogged,
+  signOut,
+  completeInit,
+  checkInit
+}

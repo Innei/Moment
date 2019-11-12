@@ -132,7 +132,7 @@ import 'swiper/dist/css/swiper.css'
 import masterApi from '@/api/master'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import Vue from 'vue'
-import {mapActions} from 'vuex'
+import { mapActions } from 'vuex'
 // import router from '../router'
 
 const orgin = window.location.href.split('#').slice(0, 2).join('#')
@@ -309,6 +309,7 @@ main {
       cursor: text;
       user-select: none;
       position: relative;
+      pointer-events: none;
     }
     input:focus + label,
     textarea:focus + label {

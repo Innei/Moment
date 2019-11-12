@@ -28,19 +28,35 @@ const router = new Router({
     {
       name: 'admin',
       path: '/master',
-      meta: { private: true },
+      meta: { private: true, title: ' -- Moment' },
       component: () => import('@/views/Admin/index.vue'),
       redirect: '/master/dashboard',
       children: [
         {
           path: 'dashboard',
           component: () => import('@/views/Admin/dashboard.vue'),
-          meta: { title: '仪表盘 -- Moment' }
+          meta: { title: '仪表盘' }
         },
         {
           path: 'moments',
           component: () => import('@/views/Admin/manageMoment.vue'),
-          meta: { title: '管理瞬间 -- Moment' }
+          meta: { title: '管理瞬间' }
+        },
+        {
+          path: 'setting',
+          component: () => import('@/views/Admin/setting/index.vue'),
+          children: [
+            {
+              path: 'profile',
+              meta: { title: '主人信息' },
+              component: () => import('@/views/Admin/setting/profile.vue')
+            },
+            {
+              path: 'reset',
+              meta: { title: '修改密码' },
+              component: () => import('@/views/Admin/setting/reset.vue')
+            }
+          ]
         }
       ]
     }
@@ -61,8 +77,12 @@ router.beforeEach(async (to, from, next) => {
 })
 
 router.afterEach(to => {
+  const titleArr = []
+  to.matched.map(i => titleArr.unshift(i.meta.title))
+
   if (to.meta.title) {
-    document.title = to.meta.title
+    // document.title = to.meta.title
+    document.title = titleArr.join('')
   }
 })
 export default router

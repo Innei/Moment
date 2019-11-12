@@ -118,6 +118,7 @@ main {
       cursor: text;
       user-select: none;
       position: relative;
+      pointer-events: none
     }
     input:focus + label,
     textarea:focus + label {
