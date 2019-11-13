@@ -122,6 +122,11 @@ export default {
         path: '/moments'
       },
       {
+        title: 'Analytics',
+        icon: ['fas', 'chart-line'],
+        path: '/analytics'
+      },
+      {
         title: 'Setting',
         icon: ['fas', 'cogs'],
         path: '/setting',
@@ -247,7 +252,7 @@ $shallowbg: #1a9cf3;
       overflow: scroll;
       height: calc(100vh - 10rem - 12.875rem);
       transition: height 0.5s;
-      border-radius: 24px
+      border-radius: 0 0 24px 24px;
     }
 
     .user {

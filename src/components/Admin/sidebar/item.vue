@@ -149,7 +149,7 @@ export default {
     font-family: 'Nunito', sans-serif;
   }
   display: grid;
-  grid-template-columns: 20px auto 30px;
+  grid-template-columns: 50px auto 30px;
   padding: 1rem 0 1rem 1rem;
   transition: 0.5s;
   line-height: 1.5;
@@ -159,7 +159,7 @@ export default {
   > * {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
   }
 
   .down {

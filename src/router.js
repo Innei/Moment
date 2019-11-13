@@ -43,6 +43,11 @@ const router = new Router({
           meta: { title: '管理瞬间' }
         },
         {
+          path: 'analytics',
+          component: () => import('@/views/Admin/analyse.vue'),
+          meta: { title: '分析数据' }
+        },
+        {
           path: 'setting',
           component: () => import('@/views/Admin/setting/index.vue'),
           children: [
