@@ -1,7 +1,12 @@
 <template>
   <layout @btn-click="$parent.$data.dialogs.post = true;$parent.$data.editData = null">
     <template #header>
-      <div class>New Moment</div>
+      <div class="name">
+        <div class>New Moment</div>
+      </div>
+      <div class="icon">
+        <font-awesome-icon :icon="['fas', 'plus']"></font-awesome-icon>
+      </div>
     </template>
 
     <template #main>
@@ -22,6 +27,8 @@
 <script>
 import api from '@/api/moment'
 import moment from 'moment'
+import { pick } from '@/utils'
+
 import { mapGetters, mapActions } from 'vuex'
 export default {
   components: {
@@ -48,9 +55,6 @@ export default {
     filterData (data) {
       this.oData = data.data // 原始数据挂载 不需要响应式
       this.page = Object.assign({}, data.pageOptions)
-      // const data = data.data
-      const pick = (obj, arr) =>
-        arr.reduce((iter, val) => (val in obj && (iter[val] = obj[val]), iter), {});
 
       const filter = []
 

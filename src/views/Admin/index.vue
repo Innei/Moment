@@ -79,6 +79,11 @@ export default {
       }
     }
   },
+  mounted() {
+    setTimeout(() => {
+      this.$refs.wrap.classList.toggle('full')
+    }, 1000);
+  },
   created () {
     this.$root.$data.route = '/master'
     this.loadRecentlyMoments()
@@ -123,8 +128,17 @@ export default {
       },
       {
         title: 'Analytics',
-        icon: ['fas', 'chart-line'],
-        path: '/analytics'
+        icon: ['fas', 'chart-pie'],
+        path: '/analytics',
+        subItems: [{
+          path: '/chart',
+          title: 'Chart',
+          icon: ['fas', 'chart-line']
+        },{
+          path: '/table',
+          title: 'Table',
+          icon: ['fas', 'chart-bar']
+        }]
       },
       {
         title: 'Setting',

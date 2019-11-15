@@ -3,12 +3,12 @@
     <header :style="options.noPadding ? 'padding: 0.5rem 0;' : ''">
       <span class="title">{{$route.meta.title.split('--')[0]}}</span>
       <div class="btn" @click="$emit('btn-click')" v-if="$slots.header">
-        <div class="name">
           <slot name="header"></slot>
+        <!-- <div class="name">
         </div>
         <div class="add">
           <font-awesome-icon :icon="['fas', 'plus']"></font-awesome-icon>
-        </div>
+        </div> -->
       </div>
     </header>
 
@@ -72,7 +72,7 @@ export default {
       .name {
         margin-right: 2rem;
       }
-      .add {
+      .icon {
         position: absolute;
         top: 0;
         bottom: 0;
@@ -81,7 +81,7 @@ export default {
         padding: 1rem;
         font-size: 16px;
       }
-      .add::before {
+      .icon::before {
         content: '';
         position: absolute;
         top: 1px;

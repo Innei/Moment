@@ -44,8 +44,19 @@ const router = new Router({
         },
         {
           path: 'analytics',
-          component: () => import('@/views/Admin/analyse.vue'),
-          meta: { title: '分析数据' }
+          component: () => import('@/views/Admin/setting/index.vue'),
+          children: [
+            {
+              path: 'chart',
+              meta: { title: '图表' },
+              component: () => import('@/views/Admin/analyse/chart.vue')
+            },
+            {
+              path: 'table',
+              meta: { title: '访客数据' },
+              component: () => import('@/views/Admin/analyse/table.vue')
+            }
+          ]
         },
         {
           path: 'setting',
