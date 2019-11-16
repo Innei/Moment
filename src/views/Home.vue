@@ -80,7 +80,7 @@
     </transition>
     <postDialog v-if="dialogs.post" @cancel-post="dialogs.post = false" />
     <transition name="fade">
-      <overlay v-if="overlay"/>
+      <overlay v-if="overlay" />
     </transition>
     <!-- end -->
   </div>
@@ -98,6 +98,8 @@ import postDialog from '@/components/Home/postDialog.vue'
 
 import momentApi from '@/api/moment'
 import masterApi from '@/api/master'
+
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -226,6 +228,9 @@ export default {
         this.overlay = overlay
       }
     }
+  },
+  computed: {
+    ...mapGetters(['isLogged'])
   }
 }
 </script>

@@ -1,6 +1,8 @@
 <template>
   <layout>
-    <template #main></template>
+    <template #main>
+      
+    </template>
   </layout>
 </template>
 

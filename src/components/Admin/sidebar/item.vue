@@ -52,6 +52,14 @@ export default {
       extend: false
     }
   },
+  watch: {
+    active (val) {
+
+      if (!val) {
+        this.extend = false
+      }
+    }
+  },
   computed: {
     hasChild () {
       return !(JSON.stringify(this.item.subItems) === '{}' || this.item.subItems === undefined)

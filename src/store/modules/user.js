@@ -8,33 +8,37 @@ const state = {
     githubUrl: null,
     userUrl: null
   },
-  token: null
+  token: null,
+  isLogged: false
 }
 
 const actions = {
   loadUser({ commit }) {
     return new Promise(async (r, j) => {
       try {
-        const data = (await masterApi.getUserInfo()).data
+        const { data } = await masterApi.getUserInfo()
         commit('storeData', data)
         r(data)
       } catch (e) {
         j(e)
       }
     })
+  },
+  checkLogged({ commit }) {
+    return new Promise(async (r, j) => {
+      try {
+        const { data } = await masterApi.checkLogged()
+        commit('storeLogged', data.ok ? true : false)
+        r(data)
+      } catch (e) {
+        j(e)
+      }
+    })
+  },
+  setLogged({ commit }, status) {
+    commit('storeLogged', status)
   }
 }
-
-// const getters = {
-//   data: state => {
-//     return {
-//       username: state.username,
-//       avatar: state.avatar,
-//       nickname: state.nickname,
-//       githubUrl: state.githubUrl
-//     }
-//   }
-// }
 
 const mutations = {
   storeData(state, user) {
@@ -42,6 +46,9 @@ const mutations = {
   },
   SET_TOKEN(state, token) {
     state.token = token
+  },
+  storeLogged(state, status) {
+    state.isLogged = status
   }
 }
 

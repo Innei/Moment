@@ -8,7 +8,7 @@ import api from '@/api/master'
 
 export default {
   methods: {
-    ...mapActions(['loadUser'])
+    ...mapActions(['loadUser', 'checkLogged'])
   },
   async created () {
     const { ok } = (await api.checkInit()).data
@@ -17,6 +17,7 @@ export default {
       return this.$router.push('/init')
     }
     this.loadUser()
+    this.checkLogged()
   }
 }
 </script>

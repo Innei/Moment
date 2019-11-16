@@ -43,25 +43,25 @@
       <div class="btn" @click="handleClickUser">
         <div class="btn-flex">
           <img :src="data.avatar" />
-          <div class="btn" style="display: inline-block" v-if="objectIsEmpty(data.userUrl)">
+          <!-- <div class="btn" style="display: inline-block" v-if="objectIsEmpty(data.userUrl)">
             <font-awesome-icon :icon="['fas','chevron-down']" />
-          </div>
+          </div> -->
         </div>
 
-        <transition name="slide" v-if="!objectIsEmpty(data.userUrl)">
+        <!-- <transition name="slide" v-if="!objectIsEmpty(data.userUrl)">
           <div class="items" v-if="options.showUser">
-            <!-- <div class="item">
+            <div class="item">
               <a href="https://github.com/Innei/moment">GitHub</a>
             </div>
             <div class="item">
               <a href="https://shizuri.net">Blog</a>
-            </div>-->
-            <!-- TODO replace item if logined as master -->
+            </div>
+            TODO replace item if logined as master
             <div class="item" v-for="(url, title) in data.userUrl" :key="title">
               <a :href="url">{{title}}</a>
             </div>
           </div>
-        </transition>
+        </transition> -->
       </div>
     </div>
   </div>
@@ -73,7 +73,8 @@ import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
-      data: 'user'
+      data: 'user',
+      isLogged: 'isLogged'
     })
   },
   data () {
@@ -95,7 +96,12 @@ export default {
       this.options.showItems = !this.options.showItems
     },
     handleClickUser () {
-      this.options.showUser = !this.options.showUser
+      if (this.isLogged) {
+        this.$router.push('/master')
+      }
+      else {
+        this.$router.push('/login')
+      }
     },
     objectIsEmpty (obj) {
       return JSON.stringify(obj) === '{}'

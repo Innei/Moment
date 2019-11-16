@@ -38,6 +38,7 @@
 
 <script>
 import masterApi from '@/api/master'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
@@ -62,8 +63,13 @@ export default {
       if (data.ok === 1) {
         this.$msg({ msg: '登陆成功' })
         this.$router.push({ name: 'admin' })
+        this.setLogged(true)
       }
-    }
+    },
+    ...mapActions(['checkLogged', 'setLogged'])
+  },
+  computed: {
+    ...mapGetters(['isLogged'])
   }
 }
 </script>
@@ -118,7 +124,7 @@ main {
       cursor: text;
       user-select: none;
       position: relative;
-      pointer-events: none
+      pointer-events: none;
     }
     input:focus + label,
     textarea:focus + label {

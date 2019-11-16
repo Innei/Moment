@@ -20,7 +20,7 @@
         <skill v-for="(val,name) in skill" :key="name" :name="name" :score="val"></skill>
       </div>
     </div>
-    <div class="post-new" @click="$emit('post-new')" v-if="showPostBtn">
+    <div class="post-new" @click="$emit('post-new')" v-if="showPostBtn && isLogged">
       <font-awesome-icon :icon="['fas', 'edit']" />
     </div>
   </div>
@@ -48,7 +48,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      data: 'user'
+      data: 'user',
+      isLogged: 'isLogged'
     })
   },
   methods: {

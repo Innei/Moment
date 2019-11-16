@@ -62,7 +62,7 @@ import { signOut } from '@/api/master'
 export default {
   name: 'admin',
   computed: {
-    ...mapGetters(['user']),
+    ...mapGetters(['user', 'isLogged']),
   },
   components: {
     item,
@@ -70,16 +70,17 @@ export default {
     overlay: () => import('@/components/Home/overlay.vue')
   },
   methods: {
-    ...mapActions(['loadRecentlyMoments']),
+    ...mapActions(['loadRecentlyMoments', 'setLogged']),
     async handleLogout () {
       const { data } = await signOut()
       if (data.ok === 1) {
         this.$msg({ msg: data.msg })
         this.$router.push('/login')
+        this.setLogged(false)
       }
     }
   },
-  mounted() {
+  mounted () {
     setTimeout(() => {
       this.$refs.wrap.classList.toggle('full')
     }, 1000);
@@ -94,6 +95,10 @@ export default {
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
+       if (!vm.isLogged) {
+        next('/login')
+      }
+
       const path = to.fullPath.replace(vm.$root.$data.route, '').split('/').map(item => '/' + item).slice(1)
 
       vm.items.forEach((item, index) => {
@@ -134,7 +139,7 @@ export default {
           path: '/chart',
           title: 'Chart',
           icon: ['fas', 'chart-line']
-        },{
+        }, {
           path: '/table',
           title: 'Table',
           icon: ['fas', 'chart-bar']

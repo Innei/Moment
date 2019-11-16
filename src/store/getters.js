@@ -3,6 +3,7 @@ const getters = {
   token: state => state.user.token,
   moments: state => state.moments.moments,
   total: state => state.moments.total,
-  isPost: state => state.post.isPost
+  isPost: state => state.post.isPost,
+  isLogged: state => state.user.isLogged
 }
 export default getters

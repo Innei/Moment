@@ -4,7 +4,7 @@
       <small>忘记了什么都不能忘记我哦</small>
 
       <form action method="post" @submit.prevent="submit">
-        <input type="password" name="oldPassword" v-model="master.oldPassword" placeholder=" " id />
+        <input type="password" name="oldPassword" v-model="master.oldPassword" placeholder=" " />
         <label for>原密码</label>
         <input
           type="password"
@@ -12,10 +12,9 @@
           @blur="checkPass"
           v-model="master.password"
           placeholder=" "
-          id
         />
         <label for>重置密码</label>
-        <input type="password" name="confirmPass" v-model="master.confirmPass" placeholder=" " id />
+        <input type="password" name="confirmPass" v-model="master.confirmPass" placeholder=" " />
         <label for>重复一遍</label>
         <div class="btn-nav">
           <div class="btn" @click="submit">提交</div>
