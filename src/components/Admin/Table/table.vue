@@ -1,38 +1,46 @@
 <template>
-  <ps class="table" v-if="data">
-    <div class="theader">
-      <div class="status_bar">
-        <div class="col" style="width: 18px" v-if="options.showID">#</div>
-        <div
-          class="col"
-          v-for="col in cols"
-          :key="col.prop"
-          :style="{width: col.width}"
-        >{{col.name}}</div>
-        <div class="col" v-if="action" :style="{width: action.width}">{{action.name}}</div>
-      </div>
-    </div>
-    <div class="tbody">
-      <div class="row" v-for="(row, i) in data" :key="row._id">
-        <div class="col" v-show="options.showID" :style="{overflow: 'hidden', width: '18px'}">{{i + 1}}</div>
-        <div
-          class="col"
-          :style="{width: col.width, overflow: 'hidden', textOverflow: 'ellipsis'}"
-          v-for="col in cols"
-          :key="col.prop"
-          :title="col.tips ? row[col.prop]: ''"
-        >{{row[col.prop]}}</div>
-        <div class="col" v-if="action" :style="{width: action.width}">
-          <span
-            v-for="action in action.actions"
-            :key="action.name"
-            class="action_btn"
-            @click="$emit(action.alias, i, action.name, row._id)"
-            :style="{color: action.color}"
-          >{{action.name}}</span>
+  <div class="table" v-if="data">
+    <ps style="width: 100%;height: calc(100vh - 13rem)">
+      <div class="theader">
+        <div class="status_bar">
+          <div class="col" style="width: 18px" v-if="options.showID">#</div>
+          <div
+            class="col"
+            v-for="col in cols"
+            :key="col.prop"
+            :style="{width: col.width,flex: col.auto ? '1' : ''}"
+          >{{col.name}}</div>
+          <div class="col" v-if="action" :style="{width: action.width}">{{action.name}}</div>
         </div>
       </div>
-    </div>
+
+      <div class="tbody">
+        <div class="row" v-for="(row, i) in data" :key="row._id">
+          <div
+            class="col"
+            v-show="options.showID"
+            :style="{overflow: 'hidden', width: '18px'}"
+          >{{i + 1}}</div>
+          <div
+            class="col"
+            :style="{width: col.width, overflow: 'hidden', textOverflow: 'ellipsis', flex: col.auto? '1' : ''}"
+            v-for="col in cols"
+            :key="col.prop"
+            :title="col.tips ? row[col.prop]: ''"
+          >{{row[col.prop]}}</div>
+          <div class="col" v-if="action" :style="{width: action.width}">
+            <span
+              v-for="action in action.actions"
+              :key="action.name"
+              class="action_btn"
+              @click="$emit(action.alias, i, action.name, row._id)"
+              :style="{color: action.color}"
+            >{{action.name}}</span>
+          </div>
+        </div>
+      </div>
+    </ps>
+
     <div class="tfooter">
       <div class="page_nav" v-if="page && page.totalPage > 1">
         <div class="page_wrap">
@@ -62,7 +70,7 @@
         </div>
       </div>
     </div>
-  </ps>
+  </div>
 </template>
 
 <script>
@@ -149,6 +157,11 @@ $table-col-gap: 20px;
 .table {
   .theader {
     display: inline-block;
+    min-width: 100%;
+    background: rgba(255, 255, 255, 0.568);
+    backdrop-filter: blur(5px);
+    position: sticky;
+    top: 0;
   }
   .status_bar {
     white-space: nowrap;
@@ -157,15 +170,21 @@ $table-col-gap: 20px;
     border-bottom: 1px #eee solid;
     color: #909399;
     font-weight: 800;
+    width: 100%;
+    display: flex;
+    box-sizing: border-box
   }
   .tbody {
     display: inline-block;
-    min-height: 15rem;
+    height: calc(100vh - 17rem);
+    min-width: 100%;
     .row {
       white-space: nowrap;
-      display: inline-block;
+      // display: inline-block;
       padding: 12px;
       border-bottom: 1px #eee solid;
+      display: flex;
+      align-items: center;
       // min-width: 100%;
     }
   }
@@ -186,8 +205,8 @@ $table-col-gap: 20px;
 }
 
 .tfooter {
-  margin-top: 30px;
-  padding-bottom: 30px;
+  margin-top: 20px;
+  padding-bottom: 20px;
 }
 .page_nav {
   display: flex;

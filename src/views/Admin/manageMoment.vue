@@ -124,6 +124,7 @@ export default {
         name: '描述',
         prop: 'desc',
         width: '500px',
+        auto: true,
         tips: true
       },
       {
@@ -144,6 +145,6 @@ export default {
 
 <style lang="scss" scoped>
 .table {
-  max-height: 60vh;
+  // max-height: 60vh;
 }
 </style>
