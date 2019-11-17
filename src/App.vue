@@ -76,4 +76,9 @@ html {
       justify-content: center;
       align-items: center; */
 }
+
+img[src=''],
+img:not([src]) {
+  opacity: 0;
+}
 </style>

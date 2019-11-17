@@ -5,7 +5,6 @@
       <div class="chart">
         <ve-line :title="title" :loading="loading" :data="PVchartData" :settings="chartSettings" />
       </div>
-
       <!-- <ve-pie :data="WeekChartData"></ve-pie> -->
     </template>
   </layout>
@@ -34,6 +33,7 @@ export default {
     }
   },
   data () {
+    
     return {
       PVchartData: {
         columns: ['day', 'PV', 'IP'],
