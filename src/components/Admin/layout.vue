@@ -39,16 +39,17 @@ export default {
   right: 0;
   left: 0;
   overflow: auto;
-  margin: 2.5rem 3rem 0;
+  margin: 0 3rem 0;
 
   header {
+    
     position: sticky;
     background: rgba($color: #fff, $alpha: 0.3);
     backdrop-filter: blur(5px);
     z-index: 99;
-    padding: 0.5rem 0.8rem;
+    padding: 3rem 0.8rem .5rem;
     border-radius: 0 0 12px 12px;
-    top: 0px;
+    top: 0;
     display: flex;
     justify-content: space-between;
     margin-bottom: 2.5rem;
@@ -100,5 +101,8 @@ export default {
       // line-height: 1.5;
     }
   }
+}
+footer {
+  margin-bottom: 50px;
 }
 </style>

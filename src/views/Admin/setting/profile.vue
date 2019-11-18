@@ -10,7 +10,12 @@
             :src="user.avatar"
             ref="avatar"
           />
-          <div class="add">+</div>
+          <div class="add" @click="handleUpdateAvatar">+</div>
+          <div class="avatar" ref="upload">
+            <label>修改头像地址</label>
+            <!-- TODO 头像上传 -->
+            <input type="text" name="avatar" @blur="$refs.upload.classList.remove('active')" />
+          </div>
         </div>
         <div class="right">
           <form action="#">
@@ -26,7 +31,9 @@
                 name="username"
                 class="master_name"
                 v-model="data.user.username"
+                data-origin="name"
                 @blur="handleBlur"
+                @keyup.enter="handleBlur"
               />
             </div>
             <div class="row">
@@ -40,7 +47,10 @@
                 type="text"
                 name="nickname"
                 class="master_nickname hidden"
+                data-origin="nickname"
                 v-model="data.user.nickname"
+                @blur="handleBlur"
+                @keyup.enter="handleBlur"
               />
             </div>
             <div class="row">
@@ -55,7 +65,10 @@
                   type="text"
                   name="githubUrl"
                   class="github hidden"
+                  data-origin="github"
                   v-model="data.user.githubUrl"
+                  @blur="handleBlur"
+                  @keyup.enter="handleBlur"
                 />
               </div>
             </div>
@@ -68,28 +81,51 @@
       <div class="body grid">
         <div class="left">
           <label>主人介绍</label>
-          <div class="info">{{info.introduce}}</div>
+          <div class="info master input" ref="intro" @click="handleTextarea">{{info.introduce}}</div>
+          <textarea
+            name="introduce"
+            v-model="info.introduce"
+            ref="textarea"
+            data-origin="intro"
+            @blur="handleBlur"
+          ></textarea>
         </div>
         <div class="right">
           <label style="text-align: center">技能总览</label>
           <div class="chart">
             <!-- <pie /> -->
-            <pie :data="skill"></pie>
+            <pie :data="skill" @ready-once="handleRenderChart" />
           </div>
         </div>
       </div>
 
       <div class="skill-wrap">
-        <label>技能树</label>
+        <div class="top">
+          <label>技能树</label>
+          <span @click="$refs.add.classList.toggle('active')">新增</span>
+        </div>
+        <div class="skill-item" v-for="(score, name) in info.skill" :key="name">
+          <div class="skill-top">
+            <div class="skill-name">{{name}}</div>
+            <div class="skill-score">{{score}}</div>
+          </div>
 
-        <div class="skill-item" v-for="(name, score) in data.skill" :key="name">
-          <div class="skill-name">{{name}}</div>
           <div class="process">
             <transition name="move">
-              <span class="up" :style="'right: '+ score"></span>
+              <span class="up" :style="`right: ${100-score}%`"></span>
             </transition>
           </div>
-          <div class="skill-score">{{score}}</div>
+        </div>
+
+        <div class="skill-item add" ref="add">
+          <input class="skill-name" name="add-name" placeholder="name" v-model="add.name" />
+          <input
+            class="skill-score"
+            name="add-score"
+            placeholder="score"
+            v-model="add.score"
+            @keyup.enter="handleAdd"
+          />
         </div>
       </div>
     </template>
@@ -98,7 +134,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import { getUserIntroduce, modifyIntroduce } from '@/api/master'
+import { getUserIntroduce, modifyIntro } from '@/api/master'
 import pie from 'v-charts/lib/pie.common.js'
 
 export default {
@@ -108,7 +144,11 @@ export default {
       data: {
         user: {}
       },
-      skill: {}
+      skill: {},
+      add: {
+        name: null,
+        score: null
+      }
     }
   },
   async created () {
@@ -135,8 +175,57 @@ export default {
       // JSON.stringify({ colums, rows })
       return { columns, rows }
     },
-    handleBlur (e) {
-      console.log(e)
+    async handleBlur (e) {
+      // console.log(e, e.target.dataset, e.target.name)
+
+      const value = e.target.value
+      const name = e.target.name
+      const origin = this.$refs[e.target.dataset['origin']]
+      // console.log(this.data.user[name], value);
+
+      if (value === this.user[name]) {
+        origin.classList.remove('hidden')
+        return
+      }
+      const { data } = await modifyIntro({ [name]: value })
+      if (data.ok) {
+        origin.innerText = value
+        origin.classList.remove('hidden')
+        this.loadUser()
+        this.$msg({ msg: '更新成功~' })
+      }
+    },
+    handleUpdateAvatar () {
+      this.$msg({ msg: '上传接口还未完成, 体谅一下呗~' })
+      this.$refs.upload.classList.add('active')
+    },
+    handleRenderChart (e) {
+      // console.log(e);
+      setTimeout(() => {
+        e.resize()
+      }, 1500);
+    },
+    handleTextarea () {
+      const intro = this.$refs.intro
+      intro.classList.add('hidden')
+      console.log(this.$refs.textarea);
+      // this.$refs.textarea.style = Object.assign({ height: intro.offsetHeight, width: intro.offsetWidth })
+      this.$refs.textarea.setAttribute('style', `height: ${intro.offsetHeight}px;width: ${intro.offsetWidth}px`)
+
+    },
+    async handleAdd (e) {
+      console.log(e);
+      if (this.add.score > 100 || this.add.score < 0)
+        return this.$msg({ msg: '分值需在 0 - 100 之间', type: 'error' })
+      if (this.add.name.length > 30)
+        return this.$msg({ msg: '内容过长', type: 'error' })
+      const { data } = await modifyIntro({ skill: Object.assign(this.info.skill, { [this.add.name]: Number(this.add.score) }) })
+      if (data.ok) {
+        this.info.skill = Object.assign({}, this.info.skill, { [this.add.name]: Number(this.add.score) })
+        this.add = Object.assign({}, { name: null, score: null })
+        this.skill = Object.assign({}, this.parseChart(this.info.skill))
+        this.$refs.add.classList.toggle('active')
+      }
     }
   }
 }
@@ -152,7 +241,7 @@ export default {
 .right {
   position: relative;
 }
-.top {
+.grid.top {
   .left {
     grid-row: 1 / 3;
   }
@@ -206,8 +295,11 @@ img:not([before]) + .add {
 }
 label {
   display: block;
+  color: #333;
+  font-weight: 800;
 }
 input,
+textarea,
 .input {
   position: absolute;
 }
@@ -215,17 +307,20 @@ input,
   visibility: hidden;
 }
 
-.master:not(.hidden) + input {
+.master:not(.hidden) + input,
+.master:not(.hidden) + textarea {
   visibility: hidden;
 }
-.master.hidden + input {
+.master.hidden + input,
+.master.hidden + textarea {
   visibility: visible !important;
 }
 .master {
   cursor: pointer;
 }
 
-input {
+input,
+textarea {
   border-radius: 12px;
   border: 1px solid #eee;
   outline: none;
@@ -234,7 +329,11 @@ input {
   padding: 0.5rem;
   min-width: 18rem;
 }
-input:focus {
+textarea {
+  resize: none;
+}
+input:focus,
+textarea:focus {
   border-color: #00a0d7;
 }
 
@@ -249,21 +348,36 @@ input:focus {
 }
 
 .skill-wrap {
-  display: grid;
-  grid-template-columns: 8rem auto 4rem;
+  margin: 0 auto 0 50px;
+  width: 300px;
+  line-height: 2;
 
-  > * {
+  .top {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    span {
+      opacity: 0;
+      color: #00a0d7;
+      transition: opacity 0.5s;
+    }
+    span:hover {
+      opacity: 1;
+    }
   }
 
+  .skill-top {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+  }
   .process {
     background-color: #c7cbca;
     height: 4px;
     border-radius: 12px;
     position: relative;
     overflow: hidden;
+    margin: 10px 0;
   }
 
   .process .up {
@@ -282,5 +396,34 @@ input:focus {
 }
 .move-enter, .move-leave-to /* move-leave-active below version 2.1.8 */ {
   transform: translateX(-100%);
+}
+.avatar {
+  visibility: hidden;
+  transition: 1s;
+  opacity: 0;
+  transform: translateY(0);
+}
+.avatar.active {
+  visibility: visible;
+  margin-top: 100px;
+  // animation: slide 1s forwards;
+  opacity: 1;
+  transform: translateY(5px);
+}
+.skill-item.add {
+  &.active {
+    visibility: visible;
+  }
+  visibility: hidden;
+  display: grid;
+  grid-template-columns: 50% auto;
+  grid-gap: 20px;
+  position: relative;
+  input {
+    position: relative;
+    // width: 100%;
+    min-width: unset;
+    display: flex;
+  }
 }
 </style>

@@ -72,7 +72,8 @@ export default {
   display: flex;
   align-items: center;
   flex-direction: column;
-  min-height: calc(100vh - 6.875rem);
+  height: calc(100vh - 6.875rem);
+  overflow: scroll;
   position: relative;
 
   .header {
