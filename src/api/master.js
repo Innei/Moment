@@ -30,6 +30,12 @@ export const resetPass = ({ password, oldPassword }) =>
     oldPassword
   })
 
+export const modifyIntro = ({ introduce, skill }) =>
+  http.put(`${baseUrl}/introduce`, {
+    introduce,
+    skill
+  })
+
 export default {
   getUserInfo,
   getUserIntroduce,

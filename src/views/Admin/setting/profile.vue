@@ -16,12 +16,26 @@
           <form action="#">
             <div class="row">
               <label>主人昵称</label>
-              <div class="master input master_name">{{ user.username }}</div>
-              <input type="text" name="username" class="master_name" v-model="data.user.username" />
+              <div
+                class="master input master_name"
+                ref="name"
+                @click="$refs.name.classList.add('hidden')"
+              >{{ user.username }}</div>
+              <input
+                type="text"
+                name="username"
+                class="master_name"
+                v-model="data.user.username"
+                @blur="handleBlur"
+              />
             </div>
             <div class="row">
               <label>主人别名</label>
-              <div class="master input nickname">{{ user.nickname }}</div>
+              <div
+                class="master input nickname"
+                ref="nickname"
+                @click="$refs.nickname.classList.add('hidden')"
+              >{{ user.nickname }}</div>
               <input
                 type="text"
                 name="nickname"
@@ -32,7 +46,11 @@
             <div class="row">
               <div class="has-github" v-if="user.githubUrl">
                 <label>主人的 GitHub 地址</label>
-                <div class="master input">{{ user.githubUrl }}</div>
+                <div
+                  class="master input"
+                  ref="github"
+                  @click="$refs.github.classList.add('hidden')"
+                >{{ user.githubUrl }}</div>
                 <input
                   type="text"
                   name="githubUrl"
@@ -53,11 +71,25 @@
           <div class="info">{{info.introduce}}</div>
         </div>
         <div class="right">
-          <label style="text-align: center">技能</label>
+          <label style="text-align: center">技能总览</label>
           <div class="chart">
             <!-- <pie /> -->
             <pie :data="skill"></pie>
           </div>
+        </div>
+      </div>
+
+      <div class="skill-wrap">
+        <label>技能树</label>
+
+        <div class="skill-item" v-for="(name, score) in data.skill" :key="name">
+          <div class="skill-name">{{name}}</div>
+          <div class="process">
+            <transition name="move">
+              <span class="up" :style="'right: '+ score"></span>
+            </transition>
+          </div>
+          <div class="skill-score">{{score}}</div>
         </div>
       </div>
     </template>
@@ -66,8 +98,9 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import { getUserIntroduce } from '@/api/master'
+import { getUserIntroduce, modifyIntroduce } from '@/api/master'
 import pie from 'v-charts/lib/pie.common.js'
+
 export default {
   data () {
     return {
@@ -98,9 +131,12 @@ export default {
     parseChart (data) {
       const lang = Object.keys(data)
       const columns = ['语言', '分数']
-      const rows = Object.values(data).map((v, i) => Object.assign({}, { '语言': lang[i], '分数': v }))
+      const rows = Object.values(data).map((v, i) => Object.assign({}, { '语言': lang[i], '分数': v, id: i }))
       // JSON.stringify({ colums, rows })
       return { columns, rows }
+    },
+    handleBlur (e) {
+      console.log(e)
     }
   }
 }
@@ -178,6 +214,13 @@ input,
 .hidden {
   visibility: hidden;
 }
+
+.master:not(.hidden) + input {
+  visibility: hidden;
+}
+.master.hidden + input {
+  visibility: visible !important;
+}
 .master {
   cursor: pointer;
 }
@@ -199,8 +242,45 @@ input:focus {
   grid-template-rows: 100px;
   grid-gap: 120px;
   line-height: 2;
+  margin-bottom: 100px;
   .left {
     margin-left: 50px;
   }
+}
+
+.skill-wrap {
+  display: grid;
+  grid-template-columns: 8rem auto 4rem;
+
+  > * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .process {
+    background-color: #c7cbca;
+    height: 4px;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .process .up {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 100%;
+    transition: 1.5s;
+    background-color: #fbd2d5;
+  }
+}
+.move-enter-active,
+.move-leave-active {
+  transition: 0.5s;
+}
+.move-enter, .move-leave-to /* move-leave-active below version 2.1.8 */ {
+  transform: translateX(-100%);
 }
 </style>
