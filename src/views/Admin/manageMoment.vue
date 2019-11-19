@@ -1,5 +1,10 @@
 <template>
-  <layout @btn-click="$parent.$data.dialogs.post = true;$parent.$data.editData = null">
+  <layout
+    @btn-click="
+      $parent.$data.dialogs.post = true
+      $parent.$data.editData = null
+    "
+  >
     <template #header>
       <div class="name">
         <div class>New Moment</div>
@@ -38,12 +43,12 @@ export default {
   computed: {
     ...mapGetters(['isPost'])
   },
-  async created () {
+  async created() {
     const { data } = await api.getRecentlyMoment({ size: this.size, page: 1 })
     this.data = this.filterData(data)
   },
   watch: {
-    isPost (val) {
+    isPost(val) {
       if (val) {
         this.reload()
         this.resetPost()
@@ -52,7 +57,7 @@ export default {
   },
   methods: {
     ...mapActions(['togglePost', 'resetPost']),
-    filterData (data) {
+    filterData(data) {
       this.oData = data.data // 原始数据挂载 不需要响应式
       this.page = Object.assign({}, data.pageOptions)
 
@@ -65,26 +70,27 @@ export default {
       filter.map((item, i) => {
         item.createdTime = this.parseDate(item.createdTime)
         item.modifiedTime = this.parseDate(item.modifiedTime)
-        item.desc = data.data[i].content.body || data.data[i].content.comment || ''
+        item.desc =
+          data.data[i].content.body || data.data[i].content.comment || ''
       })
       return filter
     },
-    parseDate (date) {
+    parseDate(date) {
       return moment(new Date(Number(date))).format('YYYY-MM-DD HH:mm:ss')
     },
-    async handleTo (page) {
+    async handleTo(page) {
       // console.log(page)
       if (!isNaN(page) && page !== this.page.currentPage) {
         const { data } = await api.getRecentlyMoment({ size: this.size, page })
         this.data = this.filterData(data)
       }
     },
-    async handleEdit (i) {
+    async handleEdit(i) {
       // console.log(i, name, id);
       this.$parent.$data.editData = Object.assign({}, this.oData[i])
       this.$parent.$data.dialogs.post = true
     },
-    async handleDel (i, name, id) {
+    async handleDel(i, name, id) {
       // console.log(i, name, id);
       const { data } = await api.deleteOneMoment(id)
       if (data.ok === 1) {
@@ -94,50 +100,64 @@ export default {
           if (this.page.currentPage === 1) {
             return
           }
-          const { data } = await api.getRecentlyMoment({ size: this.size, page: this.page.currentPage - 1 })
+          const { data } = await api.getRecentlyMoment({
+            size: this.size,
+            page: this.page.currentPage - 1
+          })
           this.data = this.filterData(data)
           return
         }
-        const { data } = await api.getRecentlyMoment({ size: this.size, page: this.page.currentPage })
+        const { data } = await api.getRecentlyMoment({
+          size: this.size,
+          page: this.page.currentPage
+        })
         this.data = this.filterData(data)
       }
     },
-    async reload () {
-      const { data } = await api.getRecentlyMoment({ size: this.size, page: this.page.currentPage })
+    async reload() {
+      const { data } = await api.getRecentlyMoment({
+        size: this.size,
+        page: this.page.currentPage
+      })
       this.data = this.filterData(data)
     }
   },
-  data () {
+  data() {
     return {
       size: 10,
       page: null,
       oData: null,
-      cols: [{
-        name: '创建时间',
-        prop: 'createdTime',
-        width: '250px'
-      }, {
-        name: '类型',
-        prop: 'type',
-        width: '100px'
-      }, {
-        name: '描述',
-        prop: 'desc',
-        width: '500px',
-        auto: true,
-        tips: true
-      },
-      {
-        name: '操作',
-        actions: [{ name: '编辑', alias: 'v-edit' }, { name: '删除', color: '#e74c3c', alias: 'v-del' }],
-        width: '80px'
-      }
+      cols: [
+        {
+          name: '创建时间',
+          prop: 'createdTime',
+          width: '250px'
+        },
+        {
+          name: '类型',
+          prop: 'type',
+          width: '100px'
+        },
+        {
+          name: '描述',
+          prop: 'desc',
+          width: '500px',
+          auto: true,
+          tips: true
+        },
+        {
+          name: '操作',
+          actions: [
+            { name: '编辑', alias: 'v-edit' },
+            { name: '删除', color: '#e74c3c', alias: 'v-del' }
+          ],
+          width: '80px'
+        }
       ],
       options: {
         showID: true
       },
-      data: [],
-
+      data: []
     }
   }
 }

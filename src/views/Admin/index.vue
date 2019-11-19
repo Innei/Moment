@@ -20,8 +20,10 @@
         <div class="user">
           <div class="block user-select" @click="$refs.user.classList.toggle('active')">
             <img :src="user.avatar" />
-            <div class="username" style="transform: translateY(5px)">{{user.username}}</div>
-            <div class="dot">.</div>
+            <!-- <div class="username" style="transform: translateY(5px)"> windows 上样式加了偏移并不好看 垃圾windows渲染--> 
+            <div class="username">
+              {{user.username}}</div>
+            <div class="dot" style="cursor: pointer">.</div>
 
             <div class="select-menu" ref="user">
               <div class="i">
@@ -183,6 +185,7 @@ export default {
           }
         }
         this.overlay = overlay
+        this.loadRecentlyMoments()
       }
     }
   }

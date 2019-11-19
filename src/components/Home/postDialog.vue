@@ -14,7 +14,13 @@
         <input type="text" v-model="moment.title" />
       </item>
       <item :name="'内容'" v-if="moment.type !== 'picture'">
-        <textarea name="body" id="body" rows="10" style="resize: vertical;" v-model="moment.body"></textarea>
+        <textarea
+          name="body"
+          id="body"
+          rows="10"
+          style="resize: vertical;"
+          v-model="moment.body"
+        ></textarea>
       </item>
       <item :name="'来源'" v-if="moment.type === 'hitokoto'">
         <input type="text" v-model="moment.hitokoto" />
@@ -29,9 +35,22 @@
         <input type="text" v-model="moment.comment" />
       </item>
       <item :name="'上传图片'" v-if="moment.type === 'picture'">
-        <input type="file" name="src" id="picture" accept="image/*" multiple ref="file" />
+        <input
+          type="file"
+          name="src"
+          id="picture"
+          accept="image/*"
+          multiple
+          ref="file"
+        />
         <div class="files">
-          <button @click.prevent.stop="$refs.file.click()" class="primary" ref="btn">点击上传</button>
+          <button
+            @click.prevent.stop="$refs.file.click()"
+            class="primary"
+            ref="btn"
+          >
+            点击上传
+          </button>
           <ul v-if="files.length !== 0" style="padding: 0;">
             <li
               v-for="file in files"
@@ -40,24 +59,34 @@
               class="file-item"
             >
               <div style="color: #2c3e50">
-                <font-awesome-icon :icon="['fas','file']" style="margin-right: .5rem"></font-awesome-icon>
+                <font-awesome-icon
+                  :icon="['fas', 'file']"
+                  style="margin-right: .5rem"
+                ></font-awesome-icon>
                 {{ file }}
               </div>
-              <font-awesome-icon :icon="['far','check-circle']" style="color: #2ecc71"></font-awesome-icon>
+              <font-awesome-icon
+                :icon="['far', 'check-circle']"
+                style="color: #2ecc71"
+              ></font-awesome-icon>
             </li>
           </ul>
         </div>
       </item>
       <div class="nav">
         <input type="submit" value="提交" @click.prevent="handleSubmit" />
-        <input type="reset" value="取消" @click.prevent="handleCancelOrCompleted" />
+        <input
+          type="reset"
+          value="取消"
+          @click.prevent="handleCancelOrCompleted"
+        />
       </div>
     </form>
   </div>
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import { mapActions } from 'vuex'
 import item from './form/form-item.vue'
 
 import uploadApi from '@/api/upload'
@@ -69,7 +98,7 @@ export default {
   props: {
     editData: Object
   },
-  data () {
+  data() {
     return {
       moment: {
         type: 'moment',
@@ -85,7 +114,7 @@ export default {
       files: []
     }
   },
-  created () {
+  created() {
     if (this.editData) {
       this.moment = Object.assign({}, this.editData.content)
       this.$set(this.moment, 'type', this.editData.type)
@@ -93,7 +122,7 @@ export default {
   },
   methods: {
     ...mapActions(['togglePost']),
-    handleSubmit () {
+    handleSubmit() {
       if (!this.editData) {
         momentApi.postNewMoment(this.moment).then(({ data }) => {
           if (data.ok === 1) {
@@ -111,20 +140,20 @@ export default {
         // TODO PUT 接口
       }
     },
-    handleCancelOrCompleted () {
+    handleCancelOrCompleted() {
       this.$refs.form.classList.add('remove')
       setTimeout(() => {
         this.$emit('cancel-post')
-      }, 400);
-    },
+      }, 400)
+    }
   },
-  mounted () {
+  mounted() {
     this.$refs.form.classList.add('active')
 
     this.$watch('moment.type', {
       deep: true, // 深度监听 对象中属性的变化
-      handler (newVal) {
-        if (newVal === "picture") {
+      handler(newVal) {
+        if (newVal === 'picture') {
           this.$nextTick(() => {
             this.$refs.file.onchange = e => {
               const file = e.target.files[0]
