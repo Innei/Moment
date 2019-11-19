@@ -1,16 +1,18 @@
-# 一瞬, 记录生活美好瞬间
+# 一瞬
 
 一瞬 (Moment), 是我接下来要做的一个项目，目的显而易见，就是希望它能够记录下生活中的美好瞬间。
 
-这个项目是一个未成品，它仅仅是一个前端，所有的数据全部来自于 Mock.js 的接口模拟。但是它将作为一瞬的前端。
+<del>这个项目是一个未成品，它仅仅是一个前端，所有的数据全部来自于 Mock.js 的接口模拟。但是它将作为一瞬的前端。</del>
 
-后端开始开发。开发中..... 咕咕咕咕
+后端开始开发。开发中..... <del>咕咕咕咕</del>
+
+后端使用 Express + MongoDB 开发。存档地址： <https://github.com/Innei/Moment-server>
 
 preview:
 
 ![](https://raw.githubusercontent.com/Innei/img-bed/master/20191020211642.png)
 
-Demo 地址:
+Demo 地址: （Mock.js模拟，或页面已过期，请手动构建）
 
 [Moment](https://preview.shizuri.net/moment)
 
@@ -27,6 +29,10 @@ yarn serve
 
 打开访问 `http://localhost:8080`
 
+要使用开发模式，请 clone 后端配合使用。
+
+[Moment-server](https://github.com/Innei/Moment-server)
+
 ## 接口格式
 
 所有接口格式位于 `mock` 目录中，更为详细的 `json` 位于 `@api`
@@ -34,6 +40,12 @@ yarn serve
 <span style="color=red">接口格式可能有更新!!</span>
 
 所有接口前缀统一为 `api`, 接口地址为 `api/` 加上 `baseUrl`
+
+
+
+**以下接口在后端中已全部实现，更多接口正在开发**
+
+
 
 ### 获取主人信息
 
