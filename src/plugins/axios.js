@@ -9,6 +9,16 @@ const http = axios.create({
   withCredentials: true
 })
 
+http.interceptors.request.use(
+  config => {
+    config.headers.Authorization = localStorage.token
+    return config
+  },
+  err => {
+    console.log(err)
+  }
+)
+
 http.interceptors.response.use(
   res => {
     return res

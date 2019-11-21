@@ -17,13 +17,34 @@
             <label>修改头像地址</label>
             <!-- TODO 头像上传 -->
             <div class="upload_text" style="position: relative;min-width: 18rem;">
-              <input type="text" name="avatar" @blur="$refs.upload.classList.remove('active')" />
-              <div class="image_upload" @click="handleUpdateAvatar">
+              <input
+                type="text"
+                name="avatar"
+                @blur="$refs.upload.classList.remove('active')"
+                v-model="userAvatar"
+                @keydown.enter="handleAvatarUpdate"
+              />
+              <div class="image_upload" id="upload_btn">
                 <font-awesome-icon :icon="['fas','image']"></font-awesome-icon>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- avatar cropper -->
+        <div class="text-center">
+          <avatar-cropper
+            upload-form-name="pic"
+            :upload-headers="{Authorization: token}"
+            @uploaded="handleUploaded"
+            @changed="$refs.upload.classList.add('active')"
+            @uploading="$msg({ msg: '正在上传中', type: 'warning'})"
+            trigger="#upload_btn"
+            :upload-url="avatarUrl"
+          />
+        </div>
+        <!-- end -->
+
         <div class="right">
           <form action="#">
             <div class="row">
@@ -143,7 +164,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import { getUserIntroduce, modifyIntro } from '@/api/master'
 import pie from 'v-charts/lib/pie.common.js'
-
+import AvatarCropper from "vue-avatar-cropper"
 export default {
   data () {
     return {
@@ -155,7 +176,9 @@ export default {
       add: {
         name: null,
         score: null
-      }
+      },
+      userAvatar: '', // 用户头像地址
+      avatarUrl: process.env.NODE_ENV === 'production' ? '/api/upload' : 'http://localhost:3000/api/upload' // 提交接口
     }
   },
   async created () {
@@ -168,10 +191,10 @@ export default {
   },
   components: {
     layout: () => import('@/components/Admin/layout.vue'),
-    pie
+    pie, AvatarCropper
   },
   computed: {
-    ...mapGetters(['user'])
+    ...mapGetters(['user', 'token'])
   },
   methods: {
     ...mapActions(['loadUser']),
@@ -202,10 +225,7 @@ export default {
         this.$msg({ msg: '更新成功~' })
       }
     },
-    handleUpdateAvatar () {
-      this.$msg({ msg: '上传接口还未完成, 体谅一下呗~' })
-      this.$refs.upload.classList.add('active')
-    },
+
     handleRenderChart (e) {
       // console.log(e);
       setTimeout(() => {
@@ -232,6 +252,19 @@ export default {
         this.add = Object.assign({}, { name: null, score: null })
         this.skill = Object.assign({}, this.parseChart(this.info.skill))
         this.$refs.add.classList.toggle('active')
+      }
+    },
+    handleUploaded (resp) {
+      this.$msg({ msg: '上传成功! 在输入框回车确定' })
+      this.userAvatar = resp.src
+    },
+    async handleAvatarUpdate () {
+      const { data } = await modifyIntro({ avatar: this.userAvatar })
+      if (data.ok) {
+        this.loadUser()
+        this.$msg({ msg: '修改成功!' })
+        this.userAvatar = ''
+        this.$refs.upload.classList.remove('active')
       }
     }
   }
@@ -442,5 +475,11 @@ textarea:focus {
   display: flex;
   align-items: center;
   cursor: pointer;
+}
+</style>
+
+<style>
+.avatar-cropper .avatar-cropper-mark {
+  backdrop-filter: blur(3px)
 }
 </style>

@@ -8,7 +8,7 @@ import api from '@/api/master'
 
 export default {
   methods: {
-    ...mapActions(['loadUser', 'checkLogged'])
+    ...mapActions(['loadUser', 'checkLogged', 'setToken'])
   },
   async created () {
     const { ok } = (await api.checkInit()).data
@@ -18,6 +18,7 @@ export default {
     }
     this.loadUser()
     this.checkLogged()
+    this.setToken()
   }
 }
 </script>

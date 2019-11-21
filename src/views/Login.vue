@@ -62,11 +62,13 @@ export default {
       const { data } = await masterApi.login(this.master)
       if (data.ok === 1) {
         this.$msg({ msg: '登陆成功' })
+        localStorage.token = data.token
+        this.setToken()
         this.$router.push({ name: 'admin' })
         this.setLogged(true)
       }
     },
-    ...mapActions(['checkLogged', 'setLogged'])
+    ...mapActions(['checkLogged', 'setLogged', 'setToken'])
   },
   computed: {
     ...mapGetters(['isLogged'])
