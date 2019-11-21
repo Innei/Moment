@@ -10,11 +10,18 @@
             :src="user.avatar"
             ref="avatar"
           />
-          <div class="add" @click="handleUpdateAvatar">+</div>
+          <div class="add" @click="$refs.upload.classList.toggle('active')">
+            <font-awesome-icon :icon="['fas','plus']" style="font-size: .8rem"></font-awesome-icon>
+          </div>
           <div class="avatar" ref="upload">
             <label>修改头像地址</label>
             <!-- TODO 头像上传 -->
-            <input type="text" name="avatar" @blur="$refs.upload.classList.remove('active')" />
+            <div class="upload_text" style="position: relative;min-width: 18rem;">
+              <input type="text" name="avatar" @blur="$refs.upload.classList.remove('active')" />
+              <div class="image_upload" @click="handleUpdateAvatar">
+                <font-awesome-icon :icon="['fas','image']"></font-awesome-icon>
+              </div>
+            </div>
           </div>
         </div>
         <div class="right">
@@ -425,5 +432,15 @@ textarea:focus {
     min-width: unset;
     display: flex;
   }
+}
+
+.image_upload {
+  position: absolute;
+  right: 10px;
+  top: 1rem;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 </style>
