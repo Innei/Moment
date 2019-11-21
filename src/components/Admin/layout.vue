@@ -3,12 +3,12 @@
     <header :style="options.noPadding ? 'padding: 0.5rem 0;' : ''">
       <span class="title">{{$route.meta.title.split('--')[0]}}</span>
       <div class="btn" @click="$emit('btn-click')" v-if="$slots.header">
-          <slot name="header"></slot>
+        <slot name="header"></slot>
         <!-- <div class="name">
         </div>
         <div class="add">
           <font-awesome-icon :icon="['fas', 'plus']"></font-awesome-icon>
-        </div> -->
+        </div>-->
       </div>
     </header>
 
@@ -42,14 +42,13 @@ export default {
   margin: 0 3rem 0;
 
   header {
-    
     position: sticky;
     background: rgba($color: #fff, $alpha: 0.3);
     backdrop-filter: blur(5px);
     z-index: 99;
-    padding: 3rem 0.8rem .5rem;
+    padding: 3rem 0.8rem 0.5rem;
     border-radius: 0 0 12px 12px;
-    top: 0;
+    top: -1rem;
     display: flex;
     justify-content: space-between;
     margin-bottom: 2.5rem;

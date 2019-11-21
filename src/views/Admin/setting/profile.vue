@@ -15,7 +15,6 @@
           </div>
           <div class="avatar" ref="upload">
             <label>修改头像地址</label>
-            <!-- TODO 头像上传 -->
             <div class="upload_text" style="position: relative;min-width: 18rem;">
               <input
                 type="text"
@@ -135,7 +134,24 @@
         <div class="skill-item" v-for="(score, name) in info.skill" :key="name">
           <div class="skill-top">
             <div class="skill-name">{{name}}</div>
-            <div class="skill-score">{{score}}</div>
+            <div class="skill-score-wrap">
+              <div class="skill-score" @click="handleReadyToModifySkill(name)">{{score}}</div>
+              <div class="modify-wrap toggle">
+                <input
+                  type="text"
+                  class="score-text"
+                  :placeholder="score"
+                  @keyup.enter="handleModifySkill(name)"
+                  :ref="'skill-' + name"
+                  @blur="handleBlurSkill(name)"
+                />
+                <font-awesome-icon
+                  class="del icon"
+                  :icon="['fas','trash-alt']"
+                  @click="handleModifySkill(name, true)"
+                ></font-awesome-icon>
+              </div>
+            </div>
           </div>
 
           <div class="process">
@@ -240,8 +256,7 @@ export default {
       this.$refs.textarea.setAttribute('style', `height: ${intro.offsetHeight}px;width: ${intro.offsetWidth}px`)
 
     },
-    async handleAdd (e) {
-      console.log(e);
+    async handleAdd () {
       if (this.add.score > 100 || this.add.score < 0)
         return this.$msg({ msg: '分值需在 0 - 100 之间', type: 'error' })
       if (this.add.name.length > 30)
@@ -252,6 +267,38 @@ export default {
         this.add = Object.assign({}, { name: null, score: null })
         this.skill = Object.assign({}, this.parseChart(this.info.skill))
         this.$refs.add.classList.toggle('active')
+      }
+    },
+    handleReadyToModifySkill (name) {
+      const ref = this.$refs[`skill-${name}`][0]
+      ref.parentNode.classList.add('active');
+      ref.parentNode.parentNode.querySelector('.skill-score').style = 'visibility: hidden;';
+      setTimeout(() => {
+        ref.focus()
+      }, 1000);
+    },
+    handleBlurSkill (name) {
+      const ref = this.$refs[`skill-${name}`][0]
+      ref.parentNode.classList.remove('active');
+      ref.parentNode.parentNode.querySelector('.skill-score').style = '';
+    },
+    async handleModifySkill (name, del = false) {
+      // console.log(name, del, this.$refs[`skill-${name}`][0].value);
+      const ref = this.$refs[`skill-${name}`][0]
+      if (!del) {
+        const score = ref.value
+
+        if (score > 100 || score < 0)
+          return this.$msg({ msg: '分值需在 0 - 100 之间', type: 'error' })
+        this.info.skill[name] = score
+      } else {
+        delete this.info.skill[name]
+      }
+      ref.parentNode.classList.remove('active')
+      ref.parentNode.parentNode.querySelector('.skill-score').style = 'visibility: visible;'
+      const { data } = await modifyIntro({ skill: this.info.skill })
+      if (data.ok) {
+        this.skill = Object.assign({}, this.parseChart(this.info.skill))
       }
     },
     handleUploaded (resp) {
@@ -386,12 +433,41 @@ textarea:focus {
     margin-left: 50px;
   }
 }
+.toggle {
+  opacity: 0;
+  visibility: hidden;
+  &.active {
+    opacity: 1;
+    visibility: visible;
+  }
+}
 
 .skill-wrap {
   margin: 0 auto 0 50px;
   width: 300px;
   line-height: 2;
+  transition: 0.5s;
+  .skill-score {
+    cursor: pointer;
+  }
 
+  .score-text {
+    position: absolute;
+    min-width: unset;
+    width: 3rem;
+    top: 0;
+    right: 1.3rem;
+  }
+  .del.icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateY(50%);
+    color: #e74c3c;
+    cursor: pointer;
+
+    // margin-left: 12px
+  }
   .top {
     display: flex;
     justify-content: space-between;
@@ -480,6 +556,6 @@ textarea:focus {
 
 <style>
 .avatar-cropper .avatar-cropper-mark {
-  backdrop-filter: blur(3px)
+  backdrop-filter: blur(3px);
 }
 </style>
