@@ -24,21 +24,29 @@ const actions = {
       }
     })
   },
-  checkLogged({ commit }) {
-    return new Promise(async (r, j) => {
-      try {
-        const { data } = await masterApi.checkLogged()
-        commit('storeLogged', data.ok ? true : false)
-        r(data)
-      } catch (e) {
-        j(e)
-      }
-    })
+  checkLogged({ commit, state }) {
+    // return new Promise(async (r, j) => {
+    //   try {
+    //     // const { data } = await masterApi.checkLogged()
+    //     // commit('storeLogged', data.ok ? true : false)
+    //     // r(data)
+
+    //   } catch (e) {
+    //     j(e)
+    //   }
+    // })
+    if (state.token) {
+      commit('storeLogged', true)
+      return true
+    } else {
+      commit('storeLogged', false)
+      return false
+    }
   },
   setLogged({ commit }, status) {
     commit('storeLogged', status)
   },
-  setToken ({ commit }, token) {
+  setToken({ commit }, token) {
     commit('SET_TOKEN', token)
   }
 }

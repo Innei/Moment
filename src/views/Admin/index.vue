@@ -71,13 +71,16 @@ export default {
     overlay: () => import('@/components/Home/overlay.vue')
   },
   methods: {
-    ...mapActions(['loadRecentlyMoments', 'setLogged']),
+    ...mapActions(['loadRecentlyMoments', 'setLogged', 'setToken']),
     async handleLogout () {
       const { data } = await signOut()
       if (data.ok === 1) {
         this.$msg({ msg: data.msg })
-        this.$router.push('/login')
+        localStorage.clear()
+        this.setToken(null)
+
         this.setLogged(false)
+        this.$router.push('/login')
       }
     }
   },

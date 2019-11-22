@@ -22,6 +22,10 @@ export const login = master => http.post(`${baseUrl}/login`, { ...master })
 
 export const checkLogged = () => http.get(`${baseUrl}/check_logged`)
 
+export const checkToken = () => http.post(`${baseUrl}/check_token`, {
+  token: localStorage.token
+})
+
 export const signOut = () => http.get(`${baseUrl}/sign_out`)
 
 export const resetPass = ({ password, oldPassword }) =>
@@ -40,5 +44,6 @@ export default {
   checkLogged,
   signOut,
   completeInit,
-  checkInit
+  checkInit,
+  checkToken
 }

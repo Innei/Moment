@@ -18,7 +18,7 @@ export default {
     }
     this.loadUser()
     this.checkLogged()
-    this.setToken(localStorage.token || '')
+    this.setToken(localStorage.token || null)
   }
 }
 </script>

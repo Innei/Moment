@@ -50,7 +50,7 @@ export default {
     }
   },
   async beforeRouteEnter (to, from, next) {
-    const { data } = await masterApi.checkLogged()
+    const { data } = await masterApi.checkToken()
 
     if (data.ok === 1) {
       return next({ name: 'admin' })
