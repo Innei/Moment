@@ -1,6 +1,19 @@
 <template>
   <layout>
     <template #main>
+      <!-- avatar cropper -->
+      <div class="text-center">
+        <avatar-cropper
+          upload-form-name="pic"
+          :upload-headers="{Authorization: token}"
+          @uploaded="handleUploaded"
+          @changed="$refs.upload.classList.add('active')"
+          @uploading="$msg({ msg: '正在上传中', type: 'warning'})"
+          trigger="#upload_btn"
+          :upload-url="avatarUrl"
+        />
+      </div>
+      <!-- end -->
       <div class="grid top">
         <div class="left">
           <img
@@ -29,20 +42,6 @@
             </div>
           </div>
         </div>
-
-        <!-- avatar cropper -->
-        <div class="text-center">
-          <avatar-cropper
-            upload-form-name="pic"
-            :upload-headers="{Authorization: token}"
-            @uploaded="handleUploaded"
-            @changed="$refs.upload.classList.add('active')"
-            @uploading="$msg({ msg: '正在上传中', type: 'warning'})"
-            trigger="#upload_btn"
-            :upload-url="avatarUrl"
-          />
-        </div>
-        <!-- end -->
 
         <div class="right">
           <form action="#">

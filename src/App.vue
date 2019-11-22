@@ -17,8 +17,8 @@ export default {
       return this.$router.push('/init')
     }
     this.loadUser()
-    this.checkLogged()
     this.setToken(localStorage.token || null)
+    this.checkLogged()
   }
 }
 </script>

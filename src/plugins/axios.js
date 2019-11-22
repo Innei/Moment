@@ -11,7 +11,9 @@ const http = axios.create({
 
 http.interceptors.request.use(
   config => {
-    config.headers.Authorization = localStorage.token
+    if (localStorage.token) {
+      config.headers.Authorization = localStorage.token
+    }
     return config
   },
   err => {
