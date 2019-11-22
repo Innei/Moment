@@ -8,9 +8,6 @@ import 'vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css'
 Vue.component('ps', PerfectScrollbar)
 Vue.use(msg)
 
-if (process.env.NODE_ENV !== 'development') {
-  require('@/mock')
-}
 // https://www.jianshu.com/p/1191388be882
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
