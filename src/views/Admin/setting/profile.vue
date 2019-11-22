@@ -551,6 +551,24 @@ textarea:focus {
   align-items: center;
   cursor: pointer;
 }
+
+@import '@/scss/_viewport.scss';
+@media (max-width: $small) {
+  .grid {
+    grid-template-columns: auto;
+  }
+  .grid.top {
+    grid-template-rows: repeat(2, 100px);
+
+    .right {
+      margin: 5rem 5rem 0 50px;
+    }
+  }
+  .skill-wrap {
+    margin: 0 50px;
+    width: unset;
+  }
+}
 </style>
 
 <style>

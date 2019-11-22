@@ -1,5 +1,5 @@
 <template>
-  <layout :options="{noPadding: true}">
+  <layout>
     <template #main>
       <small>忘记了什么都不能忘记我哦</small>
 

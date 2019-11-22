@@ -11,9 +11,7 @@
             <template #right>
               <div class="text info">欢迎回来主人，{{user.username}} ～</div>
               <ps class="text hitokoto">
-                <div
-                  class
-                >{{hitokoto.id ? hitokoto.hitokoto + ' ———— ' + hitokoto.from : '请稍后 ...'}}</div>
+                <div>{{hitokoto.id ? hitokoto.hitokoto + ' ———— ' + hitokoto.from : '请稍后 ...'}}</div>
               </ps>
             </template>
           </card>
@@ -21,7 +19,7 @@
             :mStyle="'grid-template-columns: 60% auto;background: #4D63BC;color: #fff!important'"
           >
             <template #left>
-              <div class="text info">
+              <div class="text info" style="margin-top: 15px;">
                 <div>当前已有</div>
                 <div class="num">{{total || 0}}</div>
                 <div>条瞬间</div>
@@ -96,6 +94,7 @@ export default {
   display: grid;
   grid-template-columns: 61.8% auto;
   grid-gap: 20px;
+  height: 150px;
 }
 
 .bg.svg {
@@ -118,5 +117,14 @@ export default {
 }
 .hitokoto {
   max-height: 90px;
+}
+@import '@/scss/_viewport.scss';
+@media (max-width: $small) {
+  .card-wrap {
+    grid-template-columns: auto;
+    grid-template-rows: repeat(2, 133px);
+    grid-gap: 20px;
+    height: unset
+  }
 }
 </style>

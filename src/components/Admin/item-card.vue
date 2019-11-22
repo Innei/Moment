@@ -1,6 +1,6 @@
 <template>
   <div class="wrap" ref="wrap">
-    <div class="outside card" @click="active = !active">
+    <div class="outside card" @click="active = !active;updateWrapHeight()">
       <div class="time">{{parseDate(this.Time.created)}}</div>
       <div class="title_type">
         <div class="type">{{type}}</div>
@@ -92,7 +92,7 @@ export default {
       try {
         this.updateWrapHeight()
       } catch (e) {
-        console.log('已跳过', e)
+        e
       }
     },
     updateWrapHeight () {
@@ -226,5 +226,22 @@ pre {
 img {
   max-width: 100%;
   border-radius: 12px;
+}
+
+@import '@/scss/_viewport.scss';
+@media (max-width: $small) {
+  .card {
+    .info {
+      .icon {
+        display: none;
+      }
+    }
+  }
+  .inside.card {
+    display: flex;
+    .time {
+      display: none;
+    }
+  }
 }
 </style>

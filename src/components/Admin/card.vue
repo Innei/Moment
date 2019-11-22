@@ -1,10 +1,14 @@
 <template>
   <div class="card" :style="mStyle">
-    <div class="left" :style="lStyle">
-      <slot name="left" />
+    <div class="con">
+      <div class="left" :style="lStyle">
+        <slot name="left" />
+      </div>
     </div>
-    <div class="right" :style="rStyle">
-      <slot name="right" />
+    <div class="con">
+      <div class="right" :style="rStyle">
+        <slot name="right" />
+      </div>
     </div>
   </div>
 </template>
@@ -18,8 +22,13 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.card {
+.con {
+  height: 100%;
+  width: 100%;
   position: relative;
+}
+.card {
+  
   border-radius: 12px;
   display: grid;
   grid-template-columns: 40% auto;
@@ -33,11 +42,12 @@ export default {
     background-size: cover;
     background-repeat: no-repeat;
     background-size: 100%;
-    position: relative;
+    position: absolute;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
+    box-sizing: border-box;
   }
 
   .text {
@@ -45,7 +55,7 @@ export default {
       font-size: 3rem;
       display: inline;
       padding: 0 0.5em;
-      font-weight: 800
+      font-weight: 800;
     }
     .num ~ * {
       display: inline-block;

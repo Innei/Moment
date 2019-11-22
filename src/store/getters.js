@@ -4,6 +4,7 @@ const getters = {
   moments: state => state.moments.moments,
   total: state => state.moments.total,
   isPost: state => state.post.isPost,
-  isLogged: state => state.user.isLogged
+  isLogged: state => state.user.isLogged,
+  sidebar: state => state.options.sidebar
 }
 export default getters

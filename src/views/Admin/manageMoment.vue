@@ -131,7 +131,7 @@ export default {
         {
           name: '创建时间',
           prop: 'createdTime',
-          width: '250px'
+          width: '200px'
         },
         {
           name: '类型',

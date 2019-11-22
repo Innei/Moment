@@ -1,7 +1,7 @@
 <template>
   <div class="bg">
     <div class="wrap" ref="wrap">
-      <div class="side-bar">
+      <div class="side-bar" :class="{active: sidebar}">
         <div class="title" @click="$refs.wrap.classList.toggle('full')">
           Moment
           <!-- <div class="icon" @click="$refs.wrap.classList.add('full')">
@@ -63,7 +63,7 @@ import { signOut } from '@/api/master'
 export default {
   name: 'admin',
   computed: {
-    ...mapGetters(['user', 'isLogged']),
+    ...mapGetters(['user', 'isLogged', 'sidebar']),
   },
   components: {
     item,
@@ -242,32 +242,6 @@ $shallowbg: #1a9cf3;
       font-size: 1.4rem;
       user-select: none;
       cursor: pointer;
-      /* position: relative;
-      .icon {
-        position: absolute;
-        right: 25px;
-        transform: rotate(45deg);
-        opacity: 0.8;
-        cursor: pointer;
-        transition: opacity 0.5s;
-      }
-      .icon:hover {
-        opacity: 1;
-      }
-      .icon::before {
-        content: '';
-        top: 0;
-        bottom: 0;
-        right: 0;
-        left: -8px;
-        border-radius: 6px;
-        background: rgba(16, 133, 211, 0.5);
-        padding: 10px 15px;
-        position: absolute;
-        box-sizing: border-box;
-        transform: rotate(-45deg);
-        z-index: -1;
-      } */
     }
 
     .items {
@@ -282,8 +256,6 @@ $shallowbg: #1a9cf3;
     .user {
       margin: $left-margin;
       background: #13afea;
-
-      // background-clip: content-box;
       border-radius: 12px;
       position: relative;
       .block {
@@ -367,6 +339,33 @@ $shallowbg: #1a9cf3;
   }
 }
 
+// 响应式
+@import '@/scss/_viewport.scss';
+@media (max-width: $small) {
+  .wrap {
+    display: flex;
+    .side-bar {
+      // display: none;
+      left: 0;
+      width: 175px;
+      position: fixed;
+      left: 0;
+      z-index: 4;
+      background: linear-gradient(to bottom, #1188e8, #16aae7);
+      transform: translateX(-100%);
+      transition: transform 0.5s;
+      &.active {
+        box-shadow: 1px 1px 43px -9px #000;
+        transform: translateX(0);
+      }
+    }
+
+    .content {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.2s;
