@@ -63,7 +63,7 @@ export default {
       if (data.ok === 1) {
         this.$msg({ msg: '登陆成功' })
         localStorage.token = data.token
-        this.setToken()
+        this.setToken(data.token)
         this.$router.push({ name: 'admin' })
         this.setLogged(true)
       }

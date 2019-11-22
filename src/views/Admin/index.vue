@@ -20,9 +20,8 @@
         <div class="user">
           <div class="block user-select" @click="$refs.user.classList.toggle('active')">
             <img :src="user.avatar" />
-            <!-- <div class="username" style="transform: translateY(5px)"> windows 上样式加了偏移并不好看 垃圾windows渲染--> 
-            <div class="username">
-              {{user.username}}</div>
+            <!-- <div class="username" style="transform: translateY(5px)"> windows 上样式加了偏移并不好看 垃圾windows渲染-->
+            <div class="username">{{user.username}}</div>
             <div class="dot" style="cursor: pointer">.</div>
 
             <div class="select-menu" ref="user">
@@ -97,8 +96,8 @@ export default {
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
-       if (!vm.isLogged) {
-        next('/login')
+      if (!vm.isLogged) {
+        return next('/login')
       }
 
       const path = to.fullPath.replace(vm.$root.$data.route, '').split('/').map(item => '/' + item).slice(1)
@@ -116,7 +115,7 @@ export default {
     this.items.forEach((item, index) => {
       if (item.path === path[0]) {
         this.activeItems = index
-        next()
+        return next()
       }
     });
   },

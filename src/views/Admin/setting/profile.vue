@@ -275,7 +275,7 @@ export default {
       ref.parentNode.parentNode.querySelector('.skill-score').style = 'visibility: hidden;';
       setTimeout(() => {
         ref.focus()
-      }, 1000);
+      }, 300);
     },
     handleBlurSkill (name) {
       const ref = this.$refs[`skill-${name}`][0]

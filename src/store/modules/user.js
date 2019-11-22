@@ -38,8 +38,7 @@ const actions = {
   setLogged({ commit }, status) {
     commit('storeLogged', status)
   },
-  setToken ({ commit }) {
-    const token = localStorage.token
+  setToken ({ commit }, token) {
     commit('SET_TOKEN', token)
   }
 }
