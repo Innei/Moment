@@ -284,7 +284,7 @@ export default {
       // console.log(name, del, this.$refs[`skill-${name}`][0].value);
       const ref = this.$refs[`skill-${name}`][0]
       if (!del) {
-        const score = ref.value
+        const score = Number(ref.value)
 
         if (score > 100 || score < 0)
           return this.$msg({ msg: '分值需在 0 - 100 之间', type: 'error' })
@@ -437,6 +437,7 @@ textarea:focus {
   &.active {
     opacity: 1;
     visibility: visible;
+    display: block;
   }
 }
 
