@@ -8,6 +8,15 @@
 
 后端仓库地址： <https://github.com/Innei/Moment-server>
 
+即刻体验：<http://34.92.147.140/#/>
+
+后台： <http://34.92.147.140/#/master>
+
+用户名： `Innei`
+
+密码： `qaz123..qqaa`
+
+
 preview: 
 
 ![](https://raw.githubusercontent.com/Innei/img-bed/master/20191020211642.png)
@@ -111,6 +120,8 @@ nginx -s reload
 ```
 Chrome >= 76
 Firefox >= 70
+Safari >= 12
+etc.
 ```
 
 ## 做出贡献
