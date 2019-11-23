@@ -82,4 +82,7 @@ img[src=''],
 img:not([src]) {
   opacity: 0;
 }
+button {
+  border: 0;
+}
 </style>

@@ -3,21 +3,34 @@
     <template #main>
       <!-- <h1>最近 7 天 访客数据</h1> -->
       <div class="chart">
-        <ve-line :title="title" :loading="loading" :data="PVchartData" :settings="chartSettings" />
+        <ve-line
+        @ready-once="handleRenderChart"
+          :title="{text: '最近 7 天 访客数据'}"
+          :loading="loading"
+          :data="PVchartData"
+          :settings="chartSettings"
+        />
       </div>
       <!-- <ve-pie :data="WeekChartData"></ve-pie> -->
+      <div class="chart">
+        <ve-line
+        @ready-once="handleRenderChart"
+          :title="{text: '今天 访客数据'}"
+          :loading="loading"
+          :data="dayChartData"
+          :settings="chartSettings"
+        />
+      </div>
     </template>
   </layout>
 </template>
 
 <script>
 import VeLine from 'v-charts/lib/line.common'
-// import echarts from 'echarts/lib/echarts'
 import 'echarts/lib/component/title'
 import 'v-charts/lib/style.css'
 
 import { getAnalytics } from '@/api/options'
-// import VePie from 'v-charts/lib/pie.common'
 export default {
   components: {
     layout: () => import('@/components/Admin/layout.vue'),
@@ -26,17 +39,27 @@ export default {
   async created () {
     const { data } = await getAnalytics()
     if (data.ok === 1) {
-      // const today = Date.now()
       this.PVchartData.rows = data.weekNum
+      this.dayChartData.rows = data.dayNum
       this.loading = false
-      // this.WeekChartData.rows = [{'本周 PV': data.week, '全年 PV': data.year}]
     }
   },
+  methods: {
+    handleRenderChart (e) {
+      // console.log(e);
+      setTimeout(() => {
+        e.resize()
+      }, 1500);
+    },
+  },
   data () {
-    
     return {
       PVchartData: {
         columns: ['day', 'PV', 'IP'],
+        rows: []
+      },
+      dayChartData: {
+        columns: ['hour', 'PV', 'IP'],
         rows: []
       },
       chartSettings: {
@@ -46,24 +69,8 @@ export default {
           IP: 'IP'
         }
       },
-      title: {
-        text: '最近 7 天 访客数据',
-        // left: 'center'
-      },
       loading: true
     }
   }
 }
 </script>
-
-<style scoped>
-/* h1 {
-  text-align: center;
-  font-weight: 400;
-  font-size: 1.2rem;
-} */
-/* .chart {
-  display: flex;
-  justify-content: center;
-} */
-</style>

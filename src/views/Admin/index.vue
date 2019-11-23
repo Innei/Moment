@@ -353,16 +353,24 @@ $shallowbg: #1a9cf3;
       z-index: 4;
       background: linear-gradient(to bottom, #1188e8, #16aae7);
       transform: translateX(-100%);
-      transition: transform 0.5s;
+      transition: transform 0.5s, box-shadow 0.5s;
+      height: 500px;
+      border-radius: 0 0 24px 0;
       &.active {
         box-shadow: 1px 1px 43px -9px #000;
         transform: translateX(0);
+        display: flex;
+        flex-direction: column;
+      }
+      .title {
+        padding: 2rem 0;
       }
     }
 
     .content {
       width: 100%;
       height: 100%;
+      border-radius: 24px;
     }
   }
 }

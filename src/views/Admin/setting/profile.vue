@@ -240,7 +240,6 @@ export default {
         this.$msg({ msg: '更新成功~' })
       }
     },
-
     handleRenderChart (e) {
       // console.log(e);
       setTimeout(() => {
@@ -567,6 +566,9 @@ textarea:focus {
   .skill-wrap {
     margin: 0 50px;
     width: unset;
+  }
+  .avatar.active {
+    margin-left: 50px;
   }
 }
 </style>

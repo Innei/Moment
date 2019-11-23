@@ -142,10 +142,11 @@ footer {
     position: fixed;
     top: 0;
     left: 0;
-    height: 20px;
-    width: 20px;
+    height: 30px;
+    width: 30px;
     z-index: 9;
     padding: 12px;
+    border-radius:  0 0 12px 0;
     box-sizing: border-box;
     background: #1188e8;
     color: #fff;

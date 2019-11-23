@@ -243,5 +243,10 @@ img {
       display: none;
     }
   }
+  .outside.card {
+    .type {
+      display: none
+    }
+  }
 }
 </style>

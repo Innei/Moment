@@ -31,11 +31,15 @@ export default {
       cols: [{
         name: '访问时间',
         prop: 'formatTime',
-        width: '250px'
+        width: '10rem'
       }, {
         name: '方式',
         prop: 'method',
-        width: '100px'
+        width: '4rem'
+      }, {
+        name: 'IP',
+        prop: 'ip',
+        width: '8rem'
       }, {
         name: '路径',
         prop: 'path',
@@ -45,17 +49,17 @@ export default {
       {
         name: '浏览器',
         prop: 'browser',
-        width: '200px',
+        width: '8rem',
       },
       {
         name: '访客系统',
         prop: 'os',
-        width: '200px',
+        width: '8rem',
       },
       {
         name: '用户代理',
         prop: 'userAgent',
-        width: '500px',
+        // width: '15rem',
         tips: true
       }],
       options: {
@@ -76,12 +80,12 @@ export default {
       const filter = []
 
       for (const d of data.data) {
-        filter.push(pick(d, ['formatTime', 'method', 'path', '_id']))
+        filter.push(pick(d, ['ip', 'formatTime', 'method', 'path', '_id']))
       }
 
       filter.map((item, i) => {
         if (data.data[i].userAgent) {
-          item.userAgent =  data.data[i].userAgent.source 
+          item.userAgent = data.data[i].userAgent.source
           item.browser = data.data[i].userAgent.browser
           item.os = data.data[i].userAgent.os
         }
