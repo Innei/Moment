@@ -172,7 +172,7 @@ $table-col-gap: 20px;
     font-weight: 800;
     width: 100%;
     display: flex;
-    box-sizing: border-box
+    box-sizing: border-box;
   }
   .tbody {
     display: inline-block;
@@ -190,7 +190,8 @@ $table-col-gap: 20px;
   }
 }
 .col {
-  display: inline-block;
+  display: flex;
+  align-items: flex-end;
   margin-right: $table-col-gap;
 }
 
