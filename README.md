@@ -8,9 +8,9 @@
 
 后端仓库地址： <https://github.com/Innei/Moment-server>
 
-即刻体验：<http://34.92.147.140/#/>
+即刻体验：<http://111.229.4.42/#/>
 
-后台： <http://34.92.147.140/#/master>
+后台： <http://111.229.4.42/#/master>
 
 用户名： `Innei`
 
@@ -62,6 +62,7 @@ cd ~/moment
 mkdir -p /home/wwwroot/www
 yarn build --modern
 cd ~/moment-server
+cp .env.example .env
 yarn prod
 ```
 
