@@ -186,8 +186,8 @@ export default {
   box-sizing: border-box;
   min-width: 50vw;
   transition: height 0.5s, transform 0.2s cubic-bezier(0.06, 1.14, 0.36, 1.11);
-  transform: scale(0.2);
-  animation: scale 0.2s both cubic-bezier(0.06, 1.14, 0.36, 1.11);
+  // transform: scale(0.2);
+  animation: IGCoreModalShow .1s ease-out;
   &.remove {
     animation: scaleS 0.2s forwards ease !important;
   }
@@ -249,6 +249,14 @@ input[type='reset'] {
   }
   to {
     transform: scale(0);
+  }
+}
+
+@keyframes IGCoreModalShow {
+  0% {
+    transform: scale(1.2)
+  } to {
+    transform: scale(1)
   }
 }
 </style>

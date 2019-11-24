@@ -1,11 +1,17 @@
 [production]
+chrome >= 70
+last 10 firefox version
+last 2 Safari version
+
+[modern]
 chrome > 75
 last 5 firefox version
 last 1 Safari version
 
-[modern]
-last 1 chrome version
-last 1 firefox version
+[development]
+chrome > 75
+last 5 firefox version
+Safari >= 12
 
 [ssr]
 node 12
