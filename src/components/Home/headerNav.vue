@@ -42,26 +42,13 @@
 
       <div class="btn" @click="handleClickUser">
         <div class="btn-flex">
-          <img :src="data.avatar" />
+          <div class="img">
+            <img :src="data.avatar" />
+          </div>
           <!-- <div class="btn" style="display: inline-block" v-if="objectIsEmpty(data.userUrl)">
             <font-awesome-icon :icon="['fas','chevron-down']" />
-          </div> -->
+          </div>-->
         </div>
-
-        <!-- <transition name="slide" v-if="!objectIsEmpty(data.userUrl)">
-          <div class="items" v-if="options.showUser">
-            <div class="item">
-              <a href="https://github.com/Innei/moment">GitHub</a>
-            </div>
-            <div class="item">
-              <a href="https://shizuri.net">Blog</a>
-            </div>
-            TODO replace item if logined as master
-            <div class="item" v-for="(url, title) in data.userUrl" :key="title">
-              <a :href="url">{{title}}</a>
-            </div>
-          </div>
-        </transition> -->
       </div>
     </div>
   </div>
@@ -91,6 +78,7 @@ export default {
     handleSearch () {
       this.options.showSearchBar = !this.options.showSearchBar
       this.search = ''
+      this.$msg({ msg: '接口未完成' })
     },
     handleShowItems () {
       this.options.showItems = !this.options.showItems
@@ -170,6 +158,13 @@ export default {
   max-width: 30px;
   margin-right: 1rem;
   user-select: none;
+}
+
+.img {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
 }
 
 .right .search-bar {

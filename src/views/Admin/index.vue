@@ -19,7 +19,9 @@
         </div>
         <div class="user">
           <div class="block user-select" @click="$refs.user.classList.toggle('active')">
-            <img :src="user.avatar" />
+            <div class="img">
+              <img :src="user.avatar" />
+            </div>
             <!-- <div class="username" style="transform: translateY(5px)"> windows 上样式加了偏移并不好看 垃圾windows渲染-->
             <div class="username">{{user.username}}</div>
             <div class="dot" style="cursor: pointer">.</div>
@@ -272,7 +274,12 @@ $shallowbg: #1a9cf3;
         .username {
           font-family: 'Josefin Sans', sans-serif;
         }
-
+        .img {
+          width: 30px;
+          height: 30px;
+          overflow: hidden;
+          position: relative;
+        }
         img {
           max-width: 30px;
           border-radius: 50%;
