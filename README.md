@@ -8,6 +8,15 @@
 
 后端仓库地址： <https://github.com/Innei/Moment-server>
 
+即刻体验：<http://111.229.4.42/#/>
+
+后台： <http://111.229.4.42/#/master>
+
+用户名： `Innei`
+
+密码： `qaz123..qqaa`
+
+
 preview: 
 
 ![](https://raw.githubusercontent.com/Innei/img-bed/master/20191020211642.png)
@@ -53,6 +62,7 @@ cd ~/moment
 mkdir -p /home/wwwroot/www
 yarn build --modern
 cd ~/moment-server
+cp .env.example .env
 yarn prod
 ```
 
@@ -111,6 +121,8 @@ nginx -s reload
 ```
 Chrome >= 76
 Firefox >= 70
+Safari >= 12
+etc.
 ```
 
 ## 做出贡献
