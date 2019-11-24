@@ -11,7 +11,26 @@ export const getRecentlyMoment = function({ size, page }) {
   })
 }
 
-export const postNewMoment = momentData => {
+export const postNewMoment = momentData =>
+  http.post(baseUrl, {
+    ...pickContent(momentData)
+  })
+
+export const deleteOneMoment = id => http.delete(`${baseUrl}/${id}`)
+
+export const modifyOneMoment = (id, data) =>
+  http.put(`${baseUrl}/${id}`, {
+    ...pickContent(data)
+  })
+
+export default {
+  getRecentlyMoment,
+  postNewMoment,
+  deleteOneMoment,
+  modifyOneMoment
+}
+
+function pickContent(momentData) {
   let data
   const { title, body, mood, weather, source, src, comment } = momentData
   switch (momentData.type) {
@@ -44,11 +63,5 @@ export const postNewMoment = momentData => {
     default:
       break
   }
-  data = Object.assign({}, { content: { ...data } }, { type: momentData.type })
-  return http.post(baseUrl, {
-    ...data
-  })
+  return Object.assign({}, { content: { ...data } }, { type: momentData.type })
 }
-export const deleteOneMoment = id => http.delete(`${baseUrl}/${id}`)
-
-export default { getRecentlyMoment, postNewMoment, deleteOneMoment }
