@@ -45,6 +45,7 @@ const router = new Router({
         {
           path: 'analytics',
           component: () => import('@/views/Admin/setting/index.vue'),
+          redirect: '/master/analytics/chart',
           children: [
             {
               path: 'chart',
@@ -61,6 +62,7 @@ const router = new Router({
         {
           path: 'setting',
           component: () => import('@/views/Admin/setting/index.vue'),
+          redirect: '/master/setting/profile',
           children: [
             {
               path: 'profile',
