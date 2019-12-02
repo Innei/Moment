@@ -66,10 +66,30 @@
       <!--    show img  -->
       <div class="message" v-else key="page2">
         <div id="loader-wrapper">
-          <div id="loader"></div>
-          <div class="loader-section section-left"></div>
-          <div class="loader-section section-right"></div>
-          <div class="load_title">数据正在加载中...</div>
+          <div class="loader-container">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              style="margin:auto;display:block;visibility: unset"
+              width="78px"
+              height="78px"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="xMidYMid"
+            >
+              <circle cx="50" cy="33.847" r="15" fill="#e15b64">
+                <animate
+                  attributeName="cy"
+                  dur="0.9803921568627451s"
+                  repeatCount="indefinite"
+                  calcMode="spline"
+                  keySplines="0.45 0 0.9 0.55;0 0.45 0.55 0.9"
+                  keyTimes="0;0.5;1"
+                  values="25;75;25"
+                />
+              </circle>
+            </svg>
+            <div class="loader-title">数据正在加载中...</div>
+          </div>
         </div>
       </div>
     </transition>
