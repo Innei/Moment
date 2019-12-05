@@ -98,7 +98,7 @@
     <transition name="fade">
       <show-img :src="img.src" :comment="img.comment" @zoomOut="handleZoomOut" v-if="img.src" />
     </transition>
-    <postDialog v-if="dialogs.post" @cancel-post="dialogs.post = false" />
+    <postDialog v-if="dialogs.post" @cancel-post="dialogs.post = false" @submit-ok="handleSubmit" />
     <transition name="fade">
       <overlay v-if="overlay" />
     </transition>
@@ -213,6 +213,12 @@ export default {
     },
     handleHideSwiper () {
       this.hideSwiper = !this.hideSwiper
+    },
+    async handleSubmit () {
+      this.moments = (await momentApi.getRecentlyMoment({
+        size: 10,
+        page: this.pageOptions.currentPage
+      })).data
     },
     async handleSwitchPage (e) {
       let page = this.pageOptions.currentPage

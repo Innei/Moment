@@ -17,7 +17,7 @@
       <slot name="introduce"></slot>
       <div class="skill" v-if="!ObjectIsEmpty(skill)">
         <p class="title">Skill</p>
-        <skill v-for="(val,name) in skill" :key="name" :name="name" :score="val"></skill>
+        <skill v-for="(val,name) in skill" :key="name" :name="name" :score="Number(val)"></skill>
       </div>
     </div>
     <div class="post-new" @click="$emit('post-new')" v-if="showPostBtn && isLogged">

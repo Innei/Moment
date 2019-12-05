@@ -8,7 +8,7 @@ const state = {
     githubUrl: null,
     userUrl: null
   },
-  token: null,
+  token: localStorage.token || null,
   isLogged: false
 }
 
@@ -24,7 +24,7 @@ const actions = {
       }
     })
   },
-  checkLogged({ commit, state }) {
+  async checkLogged({ commit, state }) {
     // return new Promise(async (r, j) => {
     //   try {
     //     // const { data } = await masterApi.checkLogged()
@@ -36,8 +36,14 @@ const actions = {
     //   }
     // })
     if (state.token) {
-      commit('storeLogged', true)
-      return true
+      if ((await masterApi.checkToken()).data.ok === 1) {
+        commit('storeLogged', true)
+        return true
+      } else {
+        delete localStorage.token
+        state.token = null
+        return false
+      }
     } else {
       commit('storeLogged', false)
       return false
