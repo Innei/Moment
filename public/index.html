@@ -1,20 +1,64 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <style>
+      #loader-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 99;
+        display: flex;
+        align-items: center;
+      }
+      #loader-wrapper .loader-container {
+        text-align: center;
+        width: 100%;
+      }
+    </style>
     <title>Moment</title>
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but moment doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong
+        >We're sorry but moment doesn't work properly without JavaScript
+        enabled. Please enable it to continue.</strong
+      >
     </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
+    <div id="app">
+      <div id="loader-wrapper">
+        <div class="loader-container">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            style="margin:auto;display:block;visibility: unset"
+            width="78px"
+            height="78px"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="xMidYMid"
+          >
+            <circle cx="50" cy="33.847" r="15" fill="#e15b64">
+              <animate
+                attributeName="cy"
+                dur="0.9803921568627451s"
+                repeatCount="indefinite"
+                calcMode="spline"
+                keySplines="0.45 0 0.9 0.55;0 0.45 0.55 0.9"
+                keyTimes="0;0.5;1"
+                values="25;75;25"
+              />
+            </circle>
+          </svg>
+          <div class="loader-title">数据正在加载中...</div>
+        </div>
+      </div>
+      <!-- built files will be auto injected -->
+    </div>
     <div class="notice-list"></div>
-  </div>
   </body>
 </html>
