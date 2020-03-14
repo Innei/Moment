@@ -8276,10 +8276,10 @@ vm-browserify@^1.0.1:
   resolved "https://registry.npm.taobao.org/vm-browserify/download/vm-browserify-1.1.0.tgz#bd76d6a23323e2ca8ffa12028dc04559c75f9019"
   integrity sha1-vXbWojMj4sqP+hICjcBFWcdfkBk=
 
-vue-avatar-cropper@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/vue-avatar-cropper/-/vue-avatar-cropper-1.0.5.tgz#c4be274d61bd699bfe2510deb053e2e49032cfb2"
-  integrity sha512-NNIZrc2CKZx8iIeVHom6PTxPgNtPolrmTkE0nlSokcf7shSse7XpiIXvJmBI/P3Jy2k4a31iroSYc31wn93sMg==
+vue-avatar-cropper@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/vue-avatar-cropper/-/vue-avatar-cropper-1.0.6.tgz#8db7aef5857f050475a01237cfa39dabb9fec5e4"
+  integrity sha512-rZXhpbjW6F8Bx0+Yy510p+C/imO3DWzj7RXFfLGicit9fmzMLpQIGAZ/E35RuSEh7g2iIS1efkYUOJlOLjOsAw==
 
 vue-awesome-swiper@^3.1.3:
   version "3.1.3"
