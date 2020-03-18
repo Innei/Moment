@@ -3114,12 +3114,12 @@ echarts-wordcloud@^1.1.3:
   resolved "https://registry.yarnpkg.com/echarts-wordcloud/-/echarts-wordcloud-1.1.3.tgz#07b140c8ba76b19c317b43c310f3d5dc99289ff2"
   integrity sha512-Et8D5xEAoYkidmHun+hEH+2lF9dhCt6D0JJ390vlr2r/1zwhhZAbcL01CEvG93QcMcJpSvSPK8vRiGkTbMHRxg==
 
-echarts@^4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/echarts/-/echarts-4.4.0.tgz#d5260566cef0b98f5a00baf1b5010e92c1c23661"
-  integrity sha512-zJD1YaONA2Ib6rKCpkU9rT/K+OFJ/F0/3Mj5FamGLXytBV5g36gsQGv8sYL7fVs/BFj/sn3wemyctlgIHMCA5w==
+echarts@^4.7.0:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/echarts/-/echarts-4.7.0.tgz#5b3875a4c2f91e3929425fabab9eace7e4098b3f"
+  integrity sha512-NlOTdUcAsIyCCG+N4uh0ZEvXtrPW2jvcuqf03RyqYeCKzyPbiOQ4I3MdKXMhxG3lBdqQNdNXVT71SB4KTQjN0A==
   dependencies:
-    zrender "4.1.1"
+    zrender "4.3.0"
 
 ee-first@1.1.1:
   version "1.1.1"
@@ -8740,7 +8740,7 @@ yorkie@^2.0.0:
     normalize-path "^1.0.0"
     strip-indent "^2.0.0"
 
-zrender@4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/zrender/-/zrender-4.1.1.tgz#201e58a55cf1a7e973e1dbad3c15596ef8779f54"
-  integrity sha512-epy1rl82dP/JKxhZl+JRfwcZjobKOoynxBzvBZJBPjmDMAxBE4grLjDryx8BHkHlKyWsUkis4XEL2wN61w5l4w==
+zrender@4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/zrender/-/zrender-4.3.0.tgz#9f056121b20bbae44414d287bf6a119ff7042661"
+  integrity sha512-Dii6j2bDsPkxQayuVf2DXJeruIB/mKVxxcGRZQ9GExiBd4c3w7+oBuvo1O/JGHeFeA1nCmSDVDs/S7yKZG1nrA==
