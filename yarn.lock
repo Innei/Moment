@@ -2,12 +2,12 @@
 # yarn lockfile v1
 
 
-"@babel/code-frame@^7.0.0", "@babel/code-frame@^7.5.5":
-  version "7.5.5"
-  resolved "https://registry.npm.taobao.org/@babel/code-frame/download/@babel/code-frame-7.5.5.tgz#bc0782f6d69f7b7d49531219699b988f669a8f9d"
-  integrity sha1-vAeC9tafe31JUxIZaZuYj2aaj50=
+"@babel/code-frame@^7.0.0", "@babel/code-frame@^7.5.5", "@babel/code-frame@^7.8.3":
+  version "7.8.3"
+  resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.8.3.tgz#33e25903d7481181534e12ec0a25f16b6fcf419e"
+  integrity sha512-a9gxpmdXtZEInkCSHUJDLHZVBgb1QS0jhss4cPP93EW7s+uC5bikET2twEF3KV+7rDblJcmNvTR7VJejqd2C2g==
   dependencies:
-    "@babel/highlight" "^7.0.0"
+    "@babel/highlight" "^7.8.3"
 
 "@babel/core@^7.7.4":
   version "7.7.7"
@@ -29,22 +29,22 @@
     semver "^5.4.1"
     source-map "^0.5.0"
 
-"@babel/generator@^7.6.3":
-  version "7.6.4"
-  resolved "https://registry.npm.taobao.org/@babel/generator/download/@babel/generator-7.6.4.tgz?cache=0&sync_timestamp=1570717897603&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fgenerator%2Fdownload%2F%40babel%2Fgenerator-7.6.4.tgz#a4f8437287bf9671b07f483b76e3bb731bc97671"
-  integrity sha1-pPhDcoe/lnGwf0g7duO7cxvJdnE=
-  dependencies:
-    "@babel/types" "^7.6.3"
-    jsesc "^2.5.1"
-    lodash "^4.17.13"
-    source-map "^0.5.0"
-
-"@babel/generator@^7.7.4", "@babel/generator@^7.7.7":
+"@babel/generator@^7.7.7":
   version "7.7.7"
   resolved "https://registry.yarnpkg.com/@babel/generator/-/generator-7.7.7.tgz#859ac733c44c74148e1a72980a64ec84b85f4f45"
   integrity sha512-/AOIBpHh/JU1l0ZFS4kiRCBnLi6OTHzh0RPk3h9isBxkkqELtQNFi1Vr/tiG9p1yfoUdKVwISuXWQR+hwwM4VQ==
   dependencies:
     "@babel/types" "^7.7.4"
+    jsesc "^2.5.1"
+    lodash "^4.17.13"
+    source-map "^0.5.0"
+
+"@babel/generator@^7.9.5":
+  version "7.9.5"
+  resolved "https://registry.yarnpkg.com/@babel/generator/-/generator-7.9.5.tgz#27f0917741acc41e6eaaced6d68f96c3fa9afaf9"
+  integrity sha512-GbNIxVB3ZJe3tLeDm1HSn2AhuD/mVcyLDpgtLXa5tplmWrJdF/elxB56XNqCuD6szyNkDi6wuoKXln3QeBmCHQ==
+  dependencies:
+    "@babel/types" "^7.9.5"
     jsesc "^2.5.1"
     lodash "^4.17.13"
     source-map "^0.5.0"
@@ -110,15 +110,6 @@
     "@babel/traverse" "^7.7.4"
     "@babel/types" "^7.7.4"
 
-"@babel/helper-function-name@^7.1.0":
-  version "7.1.0"
-  resolved "https://registry.npm.taobao.org/@babel/helper-function-name/download/@babel/helper-function-name-7.1.0.tgz#a0ceb01685f73355d4360c1247f582bfafc8ff53"
-  integrity sha1-oM6wFoX3M1XUNgwSR/WCv6/I/1M=
-  dependencies:
-    "@babel/helper-get-function-arity" "^7.0.0"
-    "@babel/template" "^7.1.0"
-    "@babel/types" "^7.0.0"
-
 "@babel/helper-function-name@^7.7.4":
   version "7.7.4"
   resolved "https://registry.yarnpkg.com/@babel/helper-function-name/-/helper-function-name-7.7.4.tgz#ab6e041e7135d436d8f0a3eca15de5b67a341a2e"
@@ -128,12 +119,14 @@
     "@babel/template" "^7.7.4"
     "@babel/types" "^7.7.4"
 
-"@babel/helper-get-function-arity@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.npm.taobao.org/@babel/helper-get-function-arity/download/@babel/helper-get-function-arity-7.0.0.tgz#83572d4320e2a4657263734113c42868b64e49c3"
-  integrity sha1-g1ctQyDipGVyY3NBE8QoaLZOScM=
+"@babel/helper-function-name@^7.9.5":
+  version "7.9.5"
+  resolved "https://registry.yarnpkg.com/@babel/helper-function-name/-/helper-function-name-7.9.5.tgz#2b53820d35275120e1874a82e5aabe1376920a5c"
+  integrity sha512-JVcQZeXM59Cd1qanDUxv9fgJpt3NeKUaqBqUEvfmQ+BCOKq2xUgaWZW2hr0dkbyJgezYuplEoh5knmrnS68efw==
   dependencies:
-    "@babel/types" "^7.0.0"
+    "@babel/helper-get-function-arity" "^7.8.3"
+    "@babel/template" "^7.8.3"
+    "@babel/types" "^7.9.5"
 
 "@babel/helper-get-function-arity@^7.7.4":
   version "7.7.4"
@@ -141,6 +134,13 @@
   integrity sha512-QTGKEdCkjgzgfJ3bAyRwF4yyT3pg+vDgan8DSivq1eS0gwi+KGKE5x8kRcbeFTb/673mkO5SN1IZfmCfA5o+EA==
   dependencies:
     "@babel/types" "^7.7.4"
+
+"@babel/helper-get-function-arity@^7.8.3":
+  version "7.8.3"
+  resolved "https://registry.yarnpkg.com/@babel/helper-get-function-arity/-/helper-get-function-arity-7.8.3.tgz#b894b947bd004381ce63ea1db9f08547e920abd5"
+  integrity sha512-FVDR+Gd9iLjUMY1fzE2SR0IuaJToR4RkCDARVfsBBPSP53GEqSFjD8gNyxg246VUyc/ALRxFaAK8rVG7UT7xRA==
+  dependencies:
+    "@babel/types" "^7.8.3"
 
 "@babel/helper-hoist-variables@^7.7.4":
   version "7.7.4"
@@ -230,19 +230,24 @@
     "@babel/template" "^7.7.4"
     "@babel/types" "^7.7.4"
 
-"@babel/helper-split-export-declaration@^7.4.4":
-  version "7.4.4"
-  resolved "https://registry.npm.taobao.org/@babel/helper-split-export-declaration/download/@babel/helper-split-export-declaration-7.4.4.tgz#ff94894a340be78f53f06af038b205c49d993677"
-  integrity sha1-/5SJSjQL549T8GrwOLIFxJ2ZNnc=
-  dependencies:
-    "@babel/types" "^7.4.4"
-
 "@babel/helper-split-export-declaration@^7.7.4":
   version "7.7.4"
   resolved "https://registry.yarnpkg.com/@babel/helper-split-export-declaration/-/helper-split-export-declaration-7.7.4.tgz#57292af60443c4a3622cf74040ddc28e68336fd8"
   integrity sha512-guAg1SXFcVr04Guk9eq0S4/rWS++sbmyqosJzVs8+1fH5NI+ZcmkaSkc7dmtAFbHFva6yRJnjW3yAcGxjueDug==
   dependencies:
     "@babel/types" "^7.7.4"
+
+"@babel/helper-split-export-declaration@^7.8.3":
+  version "7.8.3"
+  resolved "https://registry.yarnpkg.com/@babel/helper-split-export-declaration/-/helper-split-export-declaration-7.8.3.tgz#31a9f30070f91368a7182cf05f831781065fc7a9"
+  integrity sha512-3x3yOeyBhW851hroze7ElzdkeRXQYQbFIb7gLK1WQYsw2GWDay5gAJNw1sWJ0VFP6z5J1whqeXH/WCdCjZv6dA==
+  dependencies:
+    "@babel/types" "^7.8.3"
+
+"@babel/helper-validator-identifier@^7.9.0", "@babel/helper-validator-identifier@^7.9.5":
+  version "7.9.5"
+  resolved "https://registry.yarnpkg.com/@babel/helper-validator-identifier/-/helper-validator-identifier-7.9.5.tgz#90977a8e6fbf6b431a7dc31752eee233bf052d80"
+  integrity sha512-/8arLKUFq882w4tWGj9JYzRpAlZgiWUJ+dtteNTDqrRBz9Iguck9Rn3ykuBDoUwh2TO4tSAJlrxDUOXWklJe4g==
 
 "@babel/helper-wrap-function@^7.7.4":
   version "7.7.4"
@@ -263,24 +268,19 @@
     "@babel/traverse" "^7.7.4"
     "@babel/types" "^7.7.4"
 
-"@babel/highlight@^7.0.0":
-  version "7.5.0"
-  resolved "https://registry.npm.taobao.org/@babel/highlight/download/@babel/highlight-7.5.0.tgz?cache=0&sync_timestamp=1562245140883&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fhighlight%2Fdownload%2F%40babel%2Fhighlight-7.5.0.tgz#56d11312bd9248fa619591d02472be6e8cb32540"
-  integrity sha1-VtETEr2SSPphlZHQJHK+boyzJUA=
+"@babel/highlight@^7.8.3":
+  version "7.9.0"
+  resolved "https://registry.yarnpkg.com/@babel/highlight/-/highlight-7.9.0.tgz#4e9b45ccb82b79607271b2979ad82c7b68163079"
+  integrity sha512-lJZPilxX7Op3Nv/2cvFdnlepPXDxi29wxteT57Q965oc5R9v86ztx0jfxVrTcBk8C2kcPkkDa2Z4T3ZsPPVWsQ==
   dependencies:
+    "@babel/helper-validator-identifier" "^7.9.0"
     chalk "^2.0.0"
-    esutils "^2.0.2"
     js-tokens "^4.0.0"
 
-"@babel/parser@^7.0.0", "@babel/parser@^7.6.0", "@babel/parser@^7.6.3":
-  version "7.6.4"
-  resolved "https://registry.npm.taobao.org/@babel/parser/download/@babel/parser-7.6.4.tgz?cache=0&sync_timestamp=1570718702664&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fparser%2Fdownload%2F%40babel%2Fparser-7.6.4.tgz#cb9b36a7482110282d5cb6dd424ec9262b473d81"
-  integrity sha1-y5s2p0ghECgtXLbdQk7JJitHPYE=
-
-"@babel/parser@^7.7.4", "@babel/parser@^7.7.7":
-  version "7.7.7"
-  resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.7.7.tgz#1b886595419cf92d811316d5b715a53ff38b4937"
-  integrity sha512-WtTZMZAZLbeymhkd/sEaPD8IQyGAhmuTuvTzLiCFM7iXiVdY0gc0IaI+cW0fh1BnSMbJSzXX6/fHllgHKwHhXw==
+"@babel/parser@^7.7.0", "@babel/parser@^7.7.4", "@babel/parser@^7.7.7", "@babel/parser@^7.8.6", "@babel/parser@^7.9.0":
+  version "7.9.4"
+  resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.9.4.tgz#68a35e6b0319bbc014465be43828300113f2f2e8"
+  integrity sha512-bC49otXX6N0/VYhgOMh4gnP26E9xnDZK3TmbNpxYzzz9BQLBosQwfyOe9/cXUU3txYhTzLCbcqd5c8y/OmCjHA==
 
 "@babel/plugin-proposal-async-generator-functions@^7.7.4":
   version "7.7.4"
@@ -729,15 +729,6 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@babel/template@^7.1.0":
-  version "7.6.0"
-  resolved "https://registry.npm.taobao.org/@babel/template/download/@babel/template-7.6.0.tgz#7f0159c7f5012230dad64cca42ec9bdb5c9536e6"
-  integrity sha1-fwFZx/UBIjDa1kzKQuyb21yVNuY=
-  dependencies:
-    "@babel/code-frame" "^7.0.0"
-    "@babel/parser" "^7.6.0"
-    "@babel/types" "^7.6.0"
-
 "@babel/template@^7.7.4":
   version "7.7.4"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.7.4.tgz#428a7d9eecffe27deac0a98e23bf8e3675d2a77b"
@@ -747,51 +738,36 @@
     "@babel/parser" "^7.7.4"
     "@babel/types" "^7.7.4"
 
-"@babel/traverse@^7.0.0":
-  version "7.6.3"
-  resolved "https://registry.npm.taobao.org/@babel/traverse/download/@babel/traverse-7.6.3.tgz#66d7dba146b086703c0fb10dd588b7364cec47f9"
-  integrity sha1-ZtfboUawhnA8D7EN1Yi3NkzsR/k=
+"@babel/template@^7.8.3":
+  version "7.8.6"
+  resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.8.6.tgz#86b22af15f828dfb086474f964dcc3e39c43ce2b"
+  integrity sha512-zbMsPMy/v0PWFZEhQJ66bqjhH+z0JgMoBWuikXybgG3Gkd/3t5oQ1Rw2WQhnSrsOmsKXnZOx15tkC4qON/+JPg==
   dependencies:
-    "@babel/code-frame" "^7.5.5"
-    "@babel/generator" "^7.6.3"
-    "@babel/helper-function-name" "^7.1.0"
-    "@babel/helper-split-export-declaration" "^7.4.4"
-    "@babel/parser" "^7.6.3"
-    "@babel/types" "^7.6.3"
+    "@babel/code-frame" "^7.8.3"
+    "@babel/parser" "^7.8.6"
+    "@babel/types" "^7.8.6"
+
+"@babel/traverse@^7.7.0", "@babel/traverse@^7.7.4":
+  version "7.9.5"
+  resolved "https://registry.yarnpkg.com/@babel/traverse/-/traverse-7.9.5.tgz#6e7c56b44e2ac7011a948c21e283ddd9d9db97a2"
+  integrity sha512-c4gH3jsvSuGUezlP6rzSJ6jf8fYjLj3hsMZRx/nX0h+fmHN0w+ekubRrHPqnMec0meycA2nwCsJ7dC8IPem2FQ==
+  dependencies:
+    "@babel/code-frame" "^7.8.3"
+    "@babel/generator" "^7.9.5"
+    "@babel/helper-function-name" "^7.9.5"
+    "@babel/helper-split-export-declaration" "^7.8.3"
+    "@babel/parser" "^7.9.0"
+    "@babel/types" "^7.9.5"
     debug "^4.1.0"
     globals "^11.1.0"
     lodash "^4.17.13"
 
-"@babel/traverse@^7.7.4":
-  version "7.7.4"
-  resolved "https://registry.yarnpkg.com/@babel/traverse/-/traverse-7.7.4.tgz#9c1e7c60fb679fe4fcfaa42500833333c2058558"
-  integrity sha512-P1L58hQyupn8+ezVA2z5KBm4/Zr4lCC8dwKCMYzsa5jFMDMQAzaBNy9W5VjB+KAmBjb40U7a/H6ao+Xo+9saIw==
+"@babel/types@^7.0.0", "@babel/types@^7.7.0", "@babel/types@^7.7.4", "@babel/types@^7.8.3", "@babel/types@^7.8.6", "@babel/types@^7.9.5":
+  version "7.9.5"
+  resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.9.5.tgz#89231f82915a8a566a703b3b20133f73da6b9444"
+  integrity sha512-XjnvNqenk818r5zMaba+sLQjnbda31UfUURv3ei0qPQw4u+j2jMyJ5b11y8ZHYTRSI3NnInQkkkRT4fLqqPdHg==
   dependencies:
-    "@babel/code-frame" "^7.5.5"
-    "@babel/generator" "^7.7.4"
-    "@babel/helper-function-name" "^7.7.4"
-    "@babel/helper-split-export-declaration" "^7.7.4"
-    "@babel/parser" "^7.7.4"
-    "@babel/types" "^7.7.4"
-    debug "^4.1.0"
-    globals "^11.1.0"
-    lodash "^4.17.13"
-
-"@babel/types@^7.0.0", "@babel/types@^7.4.4", "@babel/types@^7.6.0", "@babel/types@^7.6.3":
-  version "7.6.3"
-  resolved "https://registry.npm.taobao.org/@babel/types/download/@babel/types-7.6.3.tgz#3f07d96f854f98e2fbd45c64b0cb942d11e8ba09"
-  integrity sha1-PwfZb4VPmOL71FxksMuULRHougk=
-  dependencies:
-    esutils "^2.0.2"
-    lodash "^4.17.13"
-    to-fast-properties "^2.0.0"
-
-"@babel/types@^7.7.4":
-  version "7.7.4"
-  resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.7.4.tgz#516570d539e44ddf308c07569c258ff94fde9193"
-  integrity sha512-cz5Ji23KCi4T+YIE/BolWosrJuSmoZeN1EFnRtBwF+KKLi8GG/Z2c2hOJJeCXPk4mwk4QFvTmwIodJowXgttRA==
-  dependencies:
-    esutils "^2.0.2"
+    "@babel/helper-validator-identifier" "^7.9.5"
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
@@ -1642,15 +1618,15 @@ axios@^0.19.2:
   dependencies:
     follow-redirects "1.5.10"
 
-babel-eslint@^10.0.1:
-  version "10.0.3"
-  resolved "https://registry.npm.taobao.org/babel-eslint/download/babel-eslint-10.0.3.tgz#81a2c669be0f205e19462fed2482d33e4687a88a"
-  integrity sha1-gaLGab4PIF4ZRi/tJILTPkaHqIo=
+babel-eslint@^10.1.0:
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/babel-eslint/-/babel-eslint-10.1.0.tgz#6968e568a910b78fb3779cdd8b6ac2f479943232"
+  integrity sha512-ifWaTHQ0ce+448CYop8AdrQiBsGrnC+bMgfyKFdi6EsPLTAWG+QfyDeM6OH+FmWnKvEq5NnBMLvlBUPKQZoDSg==
   dependencies:
     "@babel/code-frame" "^7.0.0"
-    "@babel/parser" "^7.0.0"
-    "@babel/traverse" "^7.0.0"
-    "@babel/types" "^7.0.0"
+    "@babel/parser" "^7.7.0"
+    "@babel/traverse" "^7.7.0"
+    "@babel/types" "^7.7.0"
     eslint-visitor-keys "^1.0.0"
     resolve "^1.12.0"
 
